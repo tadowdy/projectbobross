@@ -34,8 +34,8 @@ class _MyHomePageState extends State<MyHomePage> {
     Widget build(BuildContext context) {
       return new Scaffold(
         appBar: new AppBar(
-          title: new Text('Jacoby Art Center'),
-
+          title: new Image(image: new AssetImage('images/full_logo.png')),
+          // title: new Text('Jacoby Art Center'),
           // new Image.asset('assets/full_logo.png', fit: BoxFit.cover),
           actions: <Widget>[
             new IconButton(
