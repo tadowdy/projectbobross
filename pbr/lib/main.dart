@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+
 void main() {
   runApp(new MyApp());
 }
@@ -8,8 +9,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-      title: 'Generated App',
+      title: 'PBR',
       theme: new ThemeData(
+        
         brightness:Brightness.dark,
         primarySwatch: Colors.blue,
         primaryColor: const Color(0xFF212121),
@@ -33,14 +35,26 @@ class _MyHomePageState extends State<MyHomePage> {
       return new Scaffold(
         appBar: new AppBar(
           title: new Text('Jacoby Art Center'),
-          
-          ),
+
+          // new Image.asset('assets/full_logo.png', fit: BoxFit.cover),
+          actions: <Widget>[
+            new IconButton(
+              icon: new Icon(Icons.camera_alt),
+              tooltip: 'QR scan',
+              onPressed: () {
+                  /////go to camera
+              },
+            ),
+            
+          ],
+        ),
         body:
           new Column(
             mainAxisAlignment: MainAxisAlignment.start,
             mainAxisSize: MainAxisSize.max,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
+              
               new Text(
               "Welcome!",
                 style: new TextStyle(fontSize:30.0,
@@ -56,6 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 fontWeight: FontWeight.w400,
                 fontFamily: "Roboto"),
               ),   
+              
               new Text(
               " - Upcoming",
                 style: new TextStyle(fontSize:20.0,
@@ -79,28 +94,33 @@ class _MyHomePageState extends State<MyHomePage> {
                 fontWeight: FontWeight.w200,
                 fontFamily: "Roboto"),
               ),
-    
-              
-    
               new TextField(
                 style: new TextStyle(fontSize:12.0,
                 color: const Color(0xFFffffff),
                 fontWeight: FontWeight.w200,
                 fontFamily: "Roboto"),
               ),
-    
-              new RaisedButton(key:null, onPressed:buttonPressed,
-                color: const Color(0xFFe0e0e0),
-                child:
-                  new Text(
-                  "Sign up",
-                    style: new TextStyle(fontSize:16.0,
-                    color: const Color(0xFFffffff),
-                    fontWeight: FontWeight.w300,
-                    fontFamily: "Roboto"),
-                  )
+              ButtonTheme(
+                minWidth: 50.0,
+                height: 30.0,
+                child: RaisedButton(
+                  onPressed: () {
+                    // add email to db
+                  },
+                  child: new Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Padding(padding: const EdgeInsets.only(right:6.0),
+                      child: Text(
+                        'Sign up',
+                        style: TextStyle(fontSize: 16.0),
+                      ),
+                      ),
+                    ],
+                  ),
                 ),
-    
+              ),
+              
               new Text(
                 " ",
                 style: new TextStyle(fontSize:50.0,
@@ -120,37 +140,40 @@ class _MyHomePageState extends State<MyHomePage> {
     
           ),
     
-        bottomNavigationBar: new BottomNavigationBar(
+        bottomNavigationBar: BottomNavigationBar(
+          currentIndex: 0,
           items: [
             new BottomNavigationBarItem(
               icon: const Icon(Icons.home),
-              title: new Text('Home'),
+              title: Text('Home'),
             ),
     
             new BottomNavigationBarItem(
               icon: const Icon(Icons.image),
-              title: new Text('Galleries'),
+              title: Text('Gallery')
             ),
     
-            new BottomNavigationBarItem(
-              icon: const Icon(Icons.school),
-              title: new Text('Classes'),
+            BottomNavigationBarItem(
+              icon: const Icon(Icons.today),
+              title: Text('Classes'),
             ),
     
-            new BottomNavigationBarItem(
+            BottomNavigationBarItem(
               icon: const Icon(Icons.monetization_on),
-              title: new Text('Donate'),
+              title: Text('Donate'),
             ),
     
-            new BottomNavigationBarItem(
+            BottomNavigationBarItem(
               icon: const Icon(Icons.account_circle),
-              title: new Text('Account'),
+              title: Text('Account'),
             )
-          ]
+          ],
     
         ),
       );
     }
-    void buttonPressed(){}
+    void signup(){
+      ///add to email to DB for news letter
+    }
     
 }
