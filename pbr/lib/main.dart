@@ -11,12 +11,10 @@ class MyApp extends StatelessWidget {
     return new MaterialApp(
       title: 'PBR',
       theme: new ThemeData(
-        
-        brightness:Brightness.dark,
-        primarySwatch: Colors.blue,
-        primaryColor: const Color(0xFF212121),
-        accentColor: const Color(0xFF64ffda),
-        canvasColor: const Color(0xFF303030),
+        primarySwatch: Colors.blueGrey,
+        primaryColor: Colors.blueGrey,
+        accentColor: Colors.orange,
+        canvasColor: const Color(0xFFfafafa),
       ),
       home: new MyHomePage(),
     );
@@ -58,7 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
               new Text(
               "Welcome!",
                 style: new TextStyle(fontSize:30.0,
-                color: const Color(0xFFffffff),
+                color: const Color(0xFF080808),
                 fontWeight: FontWeight.w600,
                 fontFamily: "Roboto"),
               ),
@@ -66,7 +64,7 @@ class _MyHomePageState extends State<MyHomePage> {
               new Text(
               " - Current Gallery",
                 style: new TextStyle(fontSize:20.0,
-                color: const Color(0xFFffffff),
+                color: const Color(0xFF080808),
                 fontWeight: FontWeight.w400,
                 fontFamily: "Roboto"),
               ),   
@@ -74,7 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
               new Text(
               " - Upcoming",
                 style: new TextStyle(fontSize:20.0,
-                color: const Color(0xFFffffff),
+                color: const Color(0xFF080808),
                 fontWeight: FontWeight.w400,
                 fontFamily: "Roboto"),
               ),
@@ -82,7 +80,7 @@ class _MyHomePageState extends State<MyHomePage> {
               new Text(
                 " ",
                 style: new TextStyle(fontSize:50.0,
-                color: const Color(0xFFffffff),
+                color: const Color(0xFF080808),
                 fontWeight: FontWeight.w200,
                 fontFamily: "Roboto"),
               ),
@@ -90,16 +88,21 @@ class _MyHomePageState extends State<MyHomePage> {
               new Text(
               "Sign up to receive our newsletter",
                 style: new TextStyle(fontSize:15.0,
-                color: const Color(0xFFffffff),
+                color: const Color(0xFF080808),
                 fontWeight: FontWeight.w200,
                 fontFamily: "Roboto"),
               ),
               new TextField(
-                style: new TextStyle(fontSize:12.0,
-                color: const Color(0xFFffffff),
+                decoration: const InputDecoration(
+                  hintText: "Enter e-mail here.",
+                ),
+                textAlign: TextAlign.center,
+                style: new TextStyle(fontSize:16.0,
+                color: const Color(0xFF080808),
                 fontWeight: FontWeight.w200,
                 fontFamily: "Roboto"),
               ),
+
               ButtonTheme(
                 minWidth: 50.0,
                 height: 30.0,
@@ -124,52 +127,81 @@ class _MyHomePageState extends State<MyHomePage> {
               new Text(
                 " ",
                 style: new TextStyle(fontSize:50.0,
-                color: const Color(0xFFffffff),
+                color: const Color(0xFF080808),
                 fontWeight: FontWeight.w200,
                 fontFamily: "Roboto"),
               ),
     
               new Text(
-              "Help us out and take a survey",
+              "Help us out and take a survey!",
                 style: new TextStyle(fontSize:15.0,
-                color: const Color(0xFFffffff),
+                color: const Color(0xFF080808),
                 fontWeight: FontWeight.w200,
                 fontFamily: "Roboto"),
-              )
+              ),
+              ButtonTheme(
+                minWidth: 50.0,
+                height: 30.0,
+                child: RaisedButton(
+                  onPressed: () {
+                    // add email to db
+                  },
+                  child: new Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Padding(padding: const EdgeInsets.only(right:6.0),
+                      child: Text(
+                        'Survey',
+                        style: TextStyle(fontSize: 16.0),
+                      ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ]
     
           ),
-    
-        bottomNavigationBar: BottomNavigationBar(
-          currentIndex: 0,
-          items: [
-            new BottomNavigationBarItem(
-              icon: const Icon(Icons.home),
-              title: Text('Home'),
-            ),
-    
-            new BottomNavigationBarItem(
-              icon: const Icon(Icons.image),
-              title: Text('Gallery')
-            ),
-    
-            BottomNavigationBarItem(
-              icon: const Icon(Icons.today),
-              title: Text('Classes'),
-            ),
-    
-            BottomNavigationBarItem(
-              icon: const Icon(Icons.monetization_on),
-              title: Text('Donate'),
-            ),
-    
-            BottomNavigationBarItem(
-              icon: const Icon(Icons.account_circle),
-              title: Text('Account'),
-            )
-          ],
-    
-        ),
+
+        bottomNavigationBar: new Theme(
+          data: Theme.of(context).copyWith(
+            canvasColor: Colors.blueGrey,
+            primaryColor: Colors.orange,
+            textTheme: Theme
+              .of(context)
+              .textTheme
+              .copyWith(caption: new TextStyle(color: Colors.orange[100]))),
+          child: new BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
+            currentIndex: 0,
+            items: [
+              BottomNavigationBarItem(
+                icon: new Icon(Icons.home),
+                title: new Text('Home'),
+              ),
+      
+              BottomNavigationBarItem(
+                icon: new Icon(Icons.image),
+                title: new Text('Gallery'),
+              ),
+      
+              BottomNavigationBarItem(
+                icon: new Icon(Icons.today),
+                title: new Text('Events'),
+              ),
+
+              BottomNavigationBarItem(
+                icon: new Icon(Icons.monetization_on),
+                title: new Text('Donate'),
+              ),
+      
+              BottomNavigationBarItem(
+                icon: new Icon(Icons.account_circle),
+                title: new Text('Account'),
+              )
+            ],
+          ),
+          )
       );
     }
     void signup(){
