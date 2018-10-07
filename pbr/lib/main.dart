@@ -28,6 +28,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  int _currentTab = 0;  // for the current state of the nav bar
     @override
     Widget build(BuildContext context) {
       return new Scaffold(
@@ -46,7 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
             
           ],
         ),
-        body:
+        body: 
           new Column(
             mainAxisAlignment: MainAxisAlignment.start,
             mainAxisSize: MainAxisSize.max,
@@ -162,6 +163,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ]
     
           ),
+        
 
         bottomNavigationBar: new Theme(
           data: Theme.of(context).copyWith(
@@ -173,7 +175,10 @@ class _MyHomePageState extends State<MyHomePage> {
               .copyWith(caption: new TextStyle(color: Colors.orange[100]))),
           child: new BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
-            currentIndex: 0,
+            currentIndex: _currentTab,
+            onTap: (int index){
+              setState(() => _currentTab = index);
+            },
             items: [
               BottomNavigationBarItem(
                 icon: new Icon(Icons.home),
