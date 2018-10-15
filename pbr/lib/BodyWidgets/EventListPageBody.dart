@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-class Donations extends StatelessWidget {
-  Donations();
+class EventListPageBody extends StatelessWidget {
+  EventListPageBody();
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -14,7 +15,7 @@ class Donations extends StatelessWidget {
           children: <Widget>[
             
             new Text(
-            "Sample",
+            "Put the List of Events Here",
               style: new TextStyle(fontSize:30.0,
               color: const Color(0xFF080808),
               fontWeight: FontWeight.w600,

@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 
-class Events extends StatelessWidget {
-  Events();
+class DonatePageBody extends StatelessWidget {
+  DonatePageBody();
+
+  void _switchViewToCheckoutDetailsPage(/*Cart cart*/) {
+    // TODO: create new CheckoutDetailsPage w. artwork..
+    // TODO: build and push the ArtworkDetailsPage onto the nav stack..
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -14,7 +20,7 @@ class Events extends StatelessWidget {
           children: <Widget>[
             
             new Text(
-            "Sample",
+            "Put the Donation Details Here..",
               style: new TextStyle(fontSize:30.0,
               color: const Color(0xFF080808),
               fontWeight: FontWeight.w600,
