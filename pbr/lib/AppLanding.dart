@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'Home_page_body.dart';
-import 'Gallery_page_body.dart';
-import 'Events_page_body.dart';
-import 'Donation_page_body.dart';
-import 'Membership_page_body.dart';
+import 'package:pbr/BodyWidgets/HomePageBody.dart';
+import 'package:pbr/BodyWidgets/GalleryListPageBody.dart';
+import 'package:pbr/BodyWidgets/EventListPageBody.dart';
+import 'package:pbr/BodyWidgets/DonatePageBody.dart';
+import 'package:pbr/BodyWidgets/AccountPageBody.dart';
 
 class Home extends StatefulWidget{
 @override
@@ -14,12 +14,11 @@ State<StatefulWidget> createState() {
 class _HomeState extends State<Home> {
   int _currentIndex = 0;
   final List<Widget> _children = [
-    HomePage(),
-    GalleryList(),
-    Events(),
-    Donations(),
-    Membership()
-
+    HomePageBody(),
+    GalleryListPageBody(),
+    EventListPageBody(),
+    DonatePageBody(),
+    AccountPageBody()
   ];
  @override
  Widget build(BuildContext context) {

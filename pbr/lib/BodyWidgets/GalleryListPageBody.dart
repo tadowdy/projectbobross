@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-class GalleryList extends StatelessWidget {
-  GalleryList();
+class GalleryListPageBody extends StatelessWidget {
+  GalleryListPageBody();
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -14,7 +15,7 @@ class GalleryList extends StatelessWidget {
           children: <Widget>[
             
             new Text(
-            "Sample",
+            "Put the List of Galleries Here..",
               style: new TextStyle(fontSize:30.0,
               color: const Color(0xFF080808),
               fontWeight: FontWeight.w600,
