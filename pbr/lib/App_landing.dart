@@ -40,19 +40,18 @@ class _HomeState extends State<Home> {
       ],
     ),
      body: _children[_currentIndex],
-     bottomNavigationBar: new Theme(
-       data: Theme.of(context).copyWith(
-         canvasColor: Colors.blueGrey,
-         primaryColor: Colors.orange,
-         textTheme: Theme
-         .of(context)
-         .textTheme
-         .copyWith(caption: new TextStyle(color: Colors.orange[100]))
-       ),
-  
-      child: new BottomNavigationBar(
-       onTap: onTabTapped,
-       currentIndex: _currentIndex, // this will be set when a new tab is tapped
+      bottomNavigationBar: new Theme(
+        data: Theme.of(context).copyWith(
+          canvasColor: Colors.blueGrey,
+          primaryColor: Colors.orange,
+          textTheme: Theme
+          .of(context)
+          .textTheme
+          .copyWith(caption: new TextStyle(color: Colors.orange[100]))
+          ),
+        child: new BottomNavigationBar(
+          onTap: onTabTapped,
+          currentIndex: _currentIndex, // this will be set when a new tab is tapped
             items: [
               BottomNavigationBarItem(
                 icon: new Icon(Icons.home),
@@ -70,8 +69,8 @@ class _HomeState extends State<Home> {
               ),
 
               BottomNavigationBarItem(
-                icon: new Icon(Icons.monetization_on),
-                title: new Text('Donate'),
+                icon: new Icon(Icons.shopping_cart),
+                title: new Text('Cart'),
               ),
       
               BottomNavigationBarItem(
@@ -79,7 +78,10 @@ class _HomeState extends State<Home> {
                 title: new Text('Account'),
               )
             ],
-      ),)
+            type: BottomNavigationBarType.fixed,
+            iconSize: 30.0,
+        ),
+      )
    );
  }
  void onTabTapped(int index){
