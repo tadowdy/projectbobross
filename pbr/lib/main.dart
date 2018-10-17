@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'App_landing.dart';
+import 'AppLanding.dart';
 
 void main() {
-  runApp(new MyApp());
+  runApp(new JACApp());
 }
-class MyApp extends StatelessWidget {
+class JACApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {

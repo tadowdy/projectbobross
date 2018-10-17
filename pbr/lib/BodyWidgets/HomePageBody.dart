@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:pbr/Pages/SurveyDetailsPage.dart';
 
-class HomePage extends StatelessWidget {
+class HomePageBody extends StatelessWidget {
 
-  HomePage();
+  HomePageBody();
 
   @override
    Widget build(BuildContext context) {
@@ -106,7 +107,10 @@ class HomePage extends StatelessWidget {
                 height: 30.0,
                 child: RaisedButton(
                   onPressed: () {
-                    // add email to db
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => SurveyDetailsPage())
+                    );
                   },
                   child: new Row(
                     mainAxisSize: MainAxisSize.min,
@@ -126,5 +130,4 @@ class HomePage extends StatelessWidget {
           ),
    );
  }
-
 }
