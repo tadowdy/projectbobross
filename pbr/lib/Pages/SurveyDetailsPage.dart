@@ -13,7 +13,64 @@ class SurveyDetailsPage extends StatelessWidget {
           title: new Text('Survey Details')
       ),
       body: Center(
-        child: Text('Put the Survey Here..'),
+        child: new SingleChildScrollView(
+          child: new Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget> [
+                new Container(
+                  padding: const EdgeInsets.all(5.0),
+                  child: new Column(
+                      children: <Widget> [
+                        new Text("What's your age?"),
+                        new CheckboxListTile(value: false, onChanged: null, title: new Text("0-19")),
+                        new CheckboxListTile(value: false, onChanged: null, title: new Text("20-39")),
+                        new CheckboxListTile(value: false, onChanged: null, title: new Text("40-59")),
+                        new CheckboxListTile(value: false, onChanged: null, title: new Text("60-79")),
+                        new CheckboxListTile(value: false, onChanged: null, title: new Text("80+")),
+
+                      ]
+                  ),
+                ),
+                new Container(
+                  padding: const EdgeInsets.all(5.0),
+                  child: new Column(
+                      children: <Widget> [
+                        new Text("What race are you?"),
+                        new CheckboxListTile(value: false, onChanged: null, title: new Text("Caucasian")),
+                        new CheckboxListTile(value: false, onChanged: null, title: new Text("African-American")),
+                        new CheckboxListTile(value: false, onChanged: null, title: new Text("Native-American")),
+                        new CheckboxListTile(value: false, onChanged: null, title: new Text("Asian")),
+                        new CheckboxListTile(value: false, onChanged: null, title: new Text("Other (Please Specify)")),
+                        new TextField(
+                          decoration: InputDecoration(
+                              fillColor: Colors.grey,
+                              border: new OutlineInputBorder()
+                          ),
+                        ),
+                      ]
+                  ),
+                ),
+                new Container(
+                    padding: const EdgeInsets.all(5.0),
+                    child: new Column(
+                        children: <Widget> [
+                          new Text("What is your gender?"),
+                          new CheckboxListTile(value: false, onChanged: null, title: new Text("Male")),
+                          new CheckboxListTile(value: false, onChanged: null, title: new Text("Female")),
+                          new CheckboxListTile(value: false, onChanged: null, title: new Text("Other (Please Specify)")),
+                          new TextField(
+                            decoration: InputDecoration(
+                                fillColor: Colors.grey,
+                                border: new OutlineInputBorder()
+                            ),
+                          ),
+                        ]
+                    )
+                )
+              ]
+          ),
+        ),
       ),
     );
   }
