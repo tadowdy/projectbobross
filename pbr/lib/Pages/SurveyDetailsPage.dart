@@ -10,9 +10,11 @@ class SurveyDetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: new AppBar(
-          title: new Text('Survey Details')
+          title: new Text('Tell us about yourself!')
       ),
-      body: Center(
+      body: Container(
+        padding: const EdgeInsets.all(32.0),
+        child: new Center(
         child: new SingleChildScrollView(
           child: new Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -22,7 +24,7 @@ class SurveyDetailsPage extends StatelessWidget {
                   padding: const EdgeInsets.all(5.0),
                   child: new Column(
                       children: <Widget> [
-                        new Text("What's your age?"),
+                        new Text("What is your age?", style: TextStyle(fontSize: 16.0)),
                         new CheckboxListTile(value: false, onChanged: null, title: new Text("0-19")),
                         new CheckboxListTile(value: false, onChanged: null, title: new Text("20-39")),
                         new CheckboxListTile(value: false, onChanged: null, title: new Text("40-59")),
@@ -36,7 +38,7 @@ class SurveyDetailsPage extends StatelessWidget {
                   padding: const EdgeInsets.all(5.0),
                   child: new Column(
                       children: <Widget> [
-                        new Text("What race are you?"),
+                        new Text("What race are you?", style: TextStyle(fontSize: 16.0)),
                         new CheckboxListTile(value: false, onChanged: null, title: new Text("Caucasian")),
                         new CheckboxListTile(value: false, onChanged: null, title: new Text("African-American")),
                         new CheckboxListTile(value: false, onChanged: null, title: new Text("Native-American")),
@@ -55,7 +57,7 @@ class SurveyDetailsPage extends StatelessWidget {
                     padding: const EdgeInsets.all(5.0),
                     child: new Column(
                         children: <Widget> [
-                          new Text("What is your gender?"),
+                          new Text("What is your gender?", style: TextStyle(fontSize: 16.0)),
                           new CheckboxListTile(value: false, onChanged: null, title: new Text("Male")),
                           new CheckboxListTile(value: false, onChanged: null, title: new Text("Female")),
                           new CheckboxListTile(value: false, onChanged: null, title: new Text("Other (Please Specify)")),
@@ -66,11 +68,32 @@ class SurveyDetailsPage extends StatelessWidget {
                             ),
                           ),
                         ]
-                    )
-                )
+                    ),
+                ),
+                ButtonTheme(
+                  minWidth: 50.0,
+                  height: 30.0,
+                  child: RaisedButton(
+                    onPressed: () {
+
+                    },
+                    child: new Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Padding(padding: const EdgeInsets.only(right:6.0),
+                          child: Text(
+                            'Submit',
+                            style: TextStyle(fontSize: 16.0),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               ]
           ),
         ),
+      ),
       ),
     );
   }
