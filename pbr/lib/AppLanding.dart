@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pbr/BodyWidgets/HomePageBody.dart';
 import 'package:pbr/BodyWidgets/GalleryListPageBody.dart';
 import 'package:pbr/BodyWidgets/EventListPageBody.dart';
-import 'package:pbr/BodyWidgets/DonatePageBody.dart';
+import 'package:pbr/BodyWidgets/CartPageBody.dart';
 import 'package:pbr/BodyWidgets/AccountPageBody.dart';
 
 class Home extends StatefulWidget{
@@ -17,7 +17,7 @@ class _HomeState extends State<Home> {
     HomePageBody(),
     GalleryListPageBody(),
     EventListPageBody(),
-    DonatePageBody(),
+    CartPageBody(),
     AccountPageBody()
   ];
  @override
