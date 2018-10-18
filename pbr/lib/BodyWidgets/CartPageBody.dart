@@ -86,7 +86,7 @@ class CartPageBody extends StatelessWidget {
   }
 
   Widget _cartHeader(BuildContext context, List<ArtInfo> _cartItems) {
-    double total = 0;
+    double total = 0.00;
     String roundedTotal;
     for (ArtInfo item in _cartItems) {
       total += item.price;
