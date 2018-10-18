@@ -26,7 +26,7 @@ InkWell makeCard (context){
     MaterialPageRoute(
       builder: (context) => new Scaffold(
         appBar: new AppBar(
-          title: new Text('Class Title')
+          title: new Text('Event Name')
         ),
         body: new EventDetailsPage(), // go to new page
       )
@@ -60,7 +60,7 @@ final makeListTile = ListTile(
 
   subtitle: Row(
     children: <Widget>[
-      Text(" Artist", style: TextStyle(color: Colors.white)),
+      Text(" Date/Time", style: TextStyle(color: Colors.white)),
       Text(" Price", style: TextStyle(color: Colors.white)),
 
     ],

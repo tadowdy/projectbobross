@@ -15,12 +15,11 @@ class EventDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: new AppBar(
-          title: new Text('Event Details')
-      ),
-      body: Center(
-        child: Text('Put the Event Details Here..'),
-      ),
+      
     );
   }
 }
+
+final buildBody = new Container(
+  
+);
