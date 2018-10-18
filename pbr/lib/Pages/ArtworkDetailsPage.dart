@@ -168,7 +168,7 @@ class ArtworkDetailsPage extends StatelessWidget {
 class MyImageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var assetsImage = new AssetImage('assets/sunflowers.jpg');
+    var assetsImage = new AssetImage('images/sunflowers.jpg');
     var image = new Image(image: assetsImage, width: 200.0, height: 200.0);
     return new Container(child: image);
   }
