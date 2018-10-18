@@ -18,20 +18,24 @@ class AccountPageBody extends StatelessWidget {
       //This is where the code for the body of your page will go
       child:
       new Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          mainAxisSize: MainAxisSize.max,
-          crossAxisAlignment: CrossAxisAlignment.center,
+          // mainAxisAlignment: MainAxisAlignment.start,
+          // mainAxisSize: MainAxisSize.max,
+          // crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-
-            new Text(
-              "Put the Account Details Here..",
-              style: new TextStyle(fontSize:30.0,
-                  color: const Color(0xFF080808),
-                  fontWeight: FontWeight.w600,
-                  fontFamily: "Roboto"),
-            ),
+            Center(child: profilePicture),
           ]
       ),
     );
   }
 }
+
+final profilePicture = new Container(
+  width: 300.0,
+  height: 300.0,
+  decoration:
+    new BoxDecoration(
+      color: Colors.orange,
+      shape: BoxShape.circle,
+    )
+
+);
