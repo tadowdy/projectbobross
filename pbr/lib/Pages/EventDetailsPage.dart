@@ -14,12 +14,57 @@ class EventDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      
-    );
+    return buildBody;
   }
 }
 
-final buildBody = new Container(
-  
+final buildBody = new Scaffold(
+  body: new Stack(
+    fit: StackFit.expand,
+    children: [addTimeDate, addDescription,]
+  )
+);
+
+final addTimeDate = new SingleChildScrollView(
+  child: new Container(
+    margin: const EdgeInsets.symmetric(vertical: 20.0,horizontal: 10.0),
+    child: new Row(
+      children: <Widget>[
+              new Expanded(child: new Text("Location", style: new TextStyle(fontSize: 30.0))),
+              new Text("Date/Time", style: new TextStyle(fontSize: 25.0),),
+            ],
+    ),
+    
+  ),
+);
+
+final addDescription = new SingleChildScrollView(
+  child: new Container(
+    margin: const EdgeInsets.symmetric(vertical: 60.0,horizontal: 10.0),
+    child: new Column(children: <Widget>[
+        new Text("Description", style: new TextStyle(fontSize: 25.0, ),),
+        new Text("Short description stating what the class is about and who it is intended for."),
+        ButtonTheme(
+                minWidth: 50.0,
+                height: 30.0,
+                child: RaisedButton(
+                  onPressed: () {
+                    // add email to db
+                  },
+                  child: new Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Padding(padding: const EdgeInsets.only(right:6.0),
+                      child: Text(
+                        'Buy Tickets',
+                        style: TextStyle(fontSize: 16.0),
+                      ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+      ]
+    )
+  )
 );
