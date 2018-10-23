@@ -101,7 +101,7 @@ class CartPageBody extends StatelessWidget {
         ),
         new Container(width: 20.0),
         new RaisedButton(
-          child: const Text("Donate to Jacoby Arts Center"),
+          child: const Text("Donate to Jacoby Arts"),
           color: Theme.of(context).accentColor,
           elevation: 4.0,
           onPressed: () {
