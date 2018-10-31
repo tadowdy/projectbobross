@@ -50,11 +50,11 @@ class Member {
   }
 
   void setMemberSince(DateTime memberSince) {
-    _memberSince = memberSince;
+    _memberSince = (memberSince == null) ? DateTime.now() : memberSince;
   }
 
   void setMembershipSince(DateTime membershipSince) {
-    _membershipSince = membershipSince;
+    _membershipSince = (membershipSince == null) ? DateTime.now() : membershipSince;
   }
 
   void setProfileIcon(Icon profileIcon) {
