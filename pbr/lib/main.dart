@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'AppLanding.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:pbr/Auxiliary/uiComponents.dart';
 
 void main() {
   runApp(new JACApp());
 }
-class JACApp extends StatelessWidget {
 
+class JACApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
@@ -14,7 +15,7 @@ class JACApp extends StatelessWidget {
       theme: new ThemeData(
         primarySwatch: Colors.blueGrey,
         primaryColor: Colors.blueGrey,
-        accentColor: Colors.orange,
+        accentColor: Colors.amber,
         canvasColor: const Color(0xFFfafafa),
       ),
       home: Home(),

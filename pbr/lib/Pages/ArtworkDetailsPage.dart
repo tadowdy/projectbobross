@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:pbr/Auxiliary/uiComponents.dart';
 
 const verticalTextPadding = 5.0;
 const horizontalTextPadding = 5.0;
 const verticalWidgetPadding = 15.0;
 
 class ArtworkDetailsPage extends StatelessWidget {
-
   void _addArtworkToCart(/*Artwork artwork, Cart cart*/) {
     // TODO: add the artwork to the cart.
     // TODO: notify the user whether the artwork was added to the cart using a popup.
@@ -20,7 +20,8 @@ class ArtworkDetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: new AppBar(
-          title: new Text('Sunflowers')
+        title: new Text('Sunflowers'),
+        backgroundColor: themeColor,
       ),
       body: Center(
         child: new SingleChildScrollView(
@@ -37,16 +38,14 @@ class ArtworkDetailsPage extends StatelessWidget {
                         new Container(
                           padding: const EdgeInsets.all(horizontalTextPadding),
                           child: new Text('Name: ',
-                              style: new TextStyle(
-                                  fontWeight: FontWeight.bold)
-                          ),
+                              style:
+                                  new TextStyle(fontWeight: FontWeight.bold)),
                         ),
                         new Container(
                           padding: const EdgeInsets.all(horizontalTextPadding),
                           child: new Text('Sunflowers'),
                         ),
-                      ]
-                  ),
+                      ]),
                 ),
                 new Container(
                   padding: const EdgeInsets.all(verticalTextPadding),
@@ -57,16 +56,14 @@ class ArtworkDetailsPage extends StatelessWidget {
                         new Container(
                           padding: const EdgeInsets.all(horizontalTextPadding),
                           child: new Text('Artist: ',
-                              style: new TextStyle(
-                                  fontWeight: FontWeight.bold)
-                          ),
+                              style:
+                                  new TextStyle(fontWeight: FontWeight.bold)),
                         ),
                         new Container(
                           padding: const EdgeInsets.all(horizontalTextPadding),
                           child: new Text('Vincent Van Gogh'),
                         ),
-                      ]
-                  ),
+                      ]),
                 ),
                 new Container(
                   padding: const EdgeInsets.all(verticalTextPadding),
@@ -77,9 +74,8 @@ class ArtworkDetailsPage extends StatelessWidget {
                         new Container(
                           padding: const EdgeInsets.all(horizontalTextPadding),
                           child: new Text('Price: ',
-                              style: new TextStyle(
-                                  fontWeight: FontWeight.bold)
-                          ),
+                              style:
+                                  new TextStyle(fontWeight: FontWeight.bold)),
                         ),
                         new Container(
                           padding: const EdgeInsets.all(horizontalTextPadding),
@@ -90,7 +86,8 @@ class ArtworkDetailsPage extends StatelessWidget {
                           child: new SizedBox(
                             width: 100.0,
                             height: 20.0,
-                            child: new RaisedButton(onPressed: () {},
+                            child: new RaisedButton(
+                                onPressed: () {},
                                 color: Colors.yellow,
                                 splashColor: Colors.grey,
                                 disabledColor: Colors.red,
@@ -102,8 +99,7 @@ class ArtworkDetailsPage extends StatelessWidget {
                                 child: new Text("Buy It!")),
                           ),
                         ),
-                      ]
-                  ),
+                      ]),
                 ),
                 new Container(
                   padding: const EdgeInsets.only(top: verticalWidgetPadding),
@@ -112,15 +108,12 @@ class ArtworkDetailsPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: <Widget>[
                         new Text('Description:',
-                            style: new TextStyle(fontWeight: FontWeight.bold)
-                        ),
-                      ]
-                  ),
+                            style: new TextStyle(fontWeight: FontWeight.bold)),
+                      ]),
                 ),
                 new Container(
                     child: new Text(
-                        '''This is a famous painting by Vincent Van Gogh which can be viewed at the Van Gogh museum in Amsterdam, Netherlands. Van Gogh is a artist from the late 17th century. He was born in the Netherlands''')
-                ),
+                        '''This is a famous painting by Vincent Van Gogh which can be viewed at the Van Gogh museum in Amsterdam, Netherlands. Van Gogh is a artist from the late 17th century. He was born in the Netherlands''')),
                 new Container(
                   padding: const EdgeInsets.only(top: verticalWidgetPadding),
                   child: new Row(
@@ -128,8 +121,7 @@ class ArtworkDetailsPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       new Text('Questions about the piece? Ask Away!',
-                          style: new TextStyle(fontWeight: FontWeight.bold)
-                      ),
+                          style: new TextStyle(fontWeight: FontWeight.bold)),
                     ],
                   ),
                 ),
@@ -137,15 +129,15 @@ class ArtworkDetailsPage extends StatelessWidget {
                   child: new TextField(
                     decoration: InputDecoration(
                         fillColor: Colors.grey,
-                        border: new OutlineInputBorder()
-                    ),
+                        border: new OutlineInputBorder()),
                   ),
                 ),
                 new Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      new RaisedButton(onPressed: null,
+                      new RaisedButton(
+                          onPressed: null,
                           color: Colors.greenAccent,
                           splashColor: Colors.grey,
                           disabledColor: Colors.grey,
@@ -155,10 +147,8 @@ class ArtworkDetailsPage extends StatelessWidget {
                           textColor: Colors.black,
                           disabledTextColor: Colors.black,
                           child: new Text("Submit")),
-                    ]
-                )
-              ]
-          ),
+                    ])
+              ]),
         ),
       ),
     );
