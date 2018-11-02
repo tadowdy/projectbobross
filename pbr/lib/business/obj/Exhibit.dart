@@ -1,6 +1,6 @@
 // Author       : Logan Waldron
-// Date Created : 11/1/18
-// Last Modified: 11/1/18
+// Date Created : 11/01/18
+// Last Modified: 11/01/18
 // About        : A class used to represent an exhibit at JAC
 
 import 'package:flutter/material.dart';
@@ -13,8 +13,7 @@ class Exhibit {
 
   Image _image;
 
-/* CONSTRUCTORS************************************************/
-
+  /*CONSTRUCTORS***************************************************************/
   Exhibit() {
     _exhibitId = 0;
 
@@ -23,8 +22,7 @@ class Exhibit {
     _image = new Image(image: null);
   }
 
-/*SETTERS**********************************************/
-
+  /*SETTERS********************************************************************/
   void setExhibitId(int exhibitId) {
     _exhibitId = (exhibitId >= 0) ? exhibitId : 0;
   }
@@ -37,7 +35,7 @@ class Exhibit {
     _image = image;
   }
 
-/*GETTERS**************************************************/
+  /*GETTERS********************************************************************/
   int getExhibitId() {
     return _exhibitId;
   }
@@ -50,7 +48,6 @@ class Exhibit {
     return _image;
   }
 
-
-/*UTILITY***************************************************/
+  /*UTILITY********************************************************************/
 
 }

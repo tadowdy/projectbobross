@@ -1,11 +1,12 @@
-//Author      : Logan Waldron
-//Date Created: 11/1/18
-//Last Modified: 11/1/18
-//About         : A class used to represent the JAC newsletter
+// Author       : Logan Waldron
+// Date Created : 11/01/18
+// Last Modified: 11/01/18
+// About        : A class used to represent the JAC newsletter
 
 import 'package:flutter/material.dart';
 
 class Newsletter {
+
   int _newsletterId;
 
   String _title;
@@ -18,8 +19,7 @@ class Newsletter {
 
   Image _image;
 
-  /*CONSTRUCTORS******************************************/
-
+  /*CONSTRUCTORS***************************************************************/
   Newsletter() {
     _newsletterId = 0;
 
@@ -34,7 +34,7 @@ class Newsletter {
     _image = new Image(image: null);
   }
 
-/*SETTERS**************************************************/
+  /*SETTERS********************************************************************/
 
   void setEventId(int newsletterId) {
     _newsletterId = (newsletterId >= 0) ? 0: newsletterId;
@@ -63,7 +63,7 @@ class Newsletter {
     _image = image;
   }
 
-/*GETTERS******************************************************/
+  /*GETTERS********************************************************************/
 
   int getEventId() {
     return _newsletterId;
@@ -93,5 +93,6 @@ class Newsletter {
     return _image;
   }
 
-/*UTILITY********************************************/
+  /*UTILITY********************************************************************/
+
 }

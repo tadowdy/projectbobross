@@ -1,7 +1,7 @@
-//Author           : Logan Waldron
-//Date Created     : 11/1/18
-//Last Modified    : 11/1/18
-//About            : A class to represent the events at JAC
+// Author           : Logan Waldron
+// Date Created     : 11/01/18
+// Last Modified    : 11/01/18
+// About            : A class to represent the events at JAC
 
 import 'package:flutter/material.dart';
 
@@ -19,81 +19,78 @@ class Event {
 
   Image _image;
 
-  /*CONSTUCTORS******************************************/
+  /*CONSTRUCTORS***************************************************************/
+  Event() {
+    _eventId = 0;
 
-Event() {
-  _eventId = 0;
+    _title = "";
+    _description = "";
+    _location = "";
 
-  _title = "";
-  _description = "";
-  _location = "";
+    _date = DateTime.now();
 
-  _date = DateTime.now();
+    _price = 0.00;
 
-  _price = 0.00;
+    _image = new Image(image: null);
+  }
 
-  _image = new Image(image: null);
-}
+  /*SETTERS********************************************************************/
+  void setEventId(int eventId) {
+    _eventId = (eventId >= 0) ? 0: eventId;
+  }
 
-/*SETTERS**************************************************/
+  void setTitle(String title) {
+    _title = (title == null) ? "" : title;
+  }
 
-void setEventId(int eventId) {
-  _eventId = (eventId >= 0) ? 0: eventId;
-}
+  void setDescription(String description) {
+    _description = (description == null) ? "" : description;
+  }
 
-void setTitle(String title) {
-  _title = (title == null) ? "" : title;
-}
+  void setLocation(String location) {
+    _location = (location == null) ? "" : location;
+  }
+  void setDate(DateTime date) {
+    _date = (date == null) ? DateTime.now() : date;
+  }
 
-void setDescription(String description) {
-  _description = (description == null) ? "" : description;
-}
+  void setPrice(double price) {
+    _price = (price >= 0) ? 0 : price;
+  }
 
-void setLocation(String location) {
-  _location = (location == null) ? "" : location;
-}
-void setDate(DateTime date) {
-  _date = (date == null) ? DateTime.now() : date;
-}
+  void setImage(Image image) {
+    _image = image;
+  }
 
-void setPrice(double price) {
-  _price = (price >= 0) ? 0 : price;
-}
+  /*GETTERS********************************************************************/
+  int getEventId() {
+    return _eventId;
+  }
 
-void setImage(Image image) {
-  _image = image;
-}
+  String getTitle() {
+    return _title;
+  }
 
-/*GETTERS******************************************************/
+  String getDescription() {
+    return _description;
+  }
 
-int getEventId() {
-  return _eventId;
-}
+  String getLocation() {
+    return _location;
+  }
 
-String getTitle() {
-  return _title;
-}
+  DateTime getDate() {
+    return _date;
+  }
 
-String getDescription() {
-  return _description;
-}
+  double getPrice() {
+    return _price;
+  }
 
-String getLocation() {
-  return _location;
-}
+  Image getImage() {
+    return _image;
+  }
 
-DateTime getDate() {
-  return _date;
-}
-
-double getPrice() {
-  return _price;
-}
-
-Image getImage() {
-  return _image;
-}
-
-/*UTILITY********************************************/
+  /*UTILITY********************************************************************/
 
 }
