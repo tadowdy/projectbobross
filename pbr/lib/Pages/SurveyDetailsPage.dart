@@ -38,7 +38,7 @@ class SurveyDetailsPage extends StatelessWidget {
                   padding: const EdgeInsets.all(5.0),
                   child: new Column(
                       children: <Widget> [
-                        new Text("What race are you?", style: TextStyle(fontSize: 16.0)),
+                        new Text("What ethnicity are you?", style: TextStyle(fontSize: 16.0)),
                         new CheckboxListTile(value: false, onChanged: null, title: new Text("Caucasian")),
                         new CheckboxListTile(value: false, onChanged: null, title: new Text("African-American")),
                         new CheckboxListTile(value: false, onChanged: null, title: new Text("Native-American")),

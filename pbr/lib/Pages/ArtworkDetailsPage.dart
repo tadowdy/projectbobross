@@ -36,13 +36,13 @@ class ArtworkDetailsPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: <Widget>[
                         new Container(
-                          padding: const EdgeInsets.all(horizontalTextPadding),
+                          padding: const EdgeInsets.all(horizontalPadding),
                           child: new Text('Name: ',
                               style:
                                   new TextStyle(fontWeight: FontWeight.bold)),
                         ),
                         new Container(
-                          padding: const EdgeInsets.all(horizontalTextPadding),
+                          padding: const EdgeInsets.all(horizontalPadding),
                           child: new Text('Sunflowers'),
                         ),
                       ]),
@@ -159,7 +159,7 @@ class MyImageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var assetsImage = new AssetImage('images/sunflowers.jpg');
-    var image = new Image(image: assetsImage, width: 200.0, height: 200.0);
-    return new Container(child: image);
+    var image = new Image(image: assetsImage, width: 400.0, height: 500.0);
+    return new Container(child: image, margin: EdgeInsets.symmetric(vertical: topPadding),);
   }
 }
