@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:pbr/Auxiliary/uiComponents.dart';
 
 const verticalTextPadding = 5.0;
-const horizontalTextPadding = 5.0;
-const verticalWidgetPadding = 15.0;
+// const horizontalTextPadding = 5.0;
+// const verticalWidgetPadding = 15.0;
 
 class ArtworkDetailsPage extends StatelessWidget {
   void _addArtworkToCart(/*Artwork artwork, Cart cart*/) {
@@ -37,13 +37,14 @@ class ArtworkDetailsPage extends StatelessWidget {
                       children: <Widget>[
                         new Container(
                           padding: const EdgeInsets.all(horizontalPadding),
-                          child: new Text('Name: ',
-                              style:
-                                  new TextStyle(fontWeight: FontWeight.bold)),
+                          child: new Text('Name: ', style: headingTwoBold),
                         ),
                         new Container(
                           padding: const EdgeInsets.all(horizontalPadding),
-                          child: new Text('Sunflowers'),
+                          child: new Text(
+                            'Sunflowers',
+                            style: headingThree,
+                          ),
                         ),
                       ]),
                 ),
@@ -54,14 +55,15 @@ class ArtworkDetailsPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: <Widget>[
                         new Container(
-                          padding: const EdgeInsets.all(horizontalTextPadding),
-                          child: new Text('Artist: ',
-                              style:
-                                  new TextStyle(fontWeight: FontWeight.bold)),
+                          padding: const EdgeInsets.all(horizontalPadding),
+                          child: new Text('Artist: ', style: headingTwoBold),
                         ),
                         new Container(
-                          padding: const EdgeInsets.all(horizontalTextPadding),
-                          child: new Text('Vincent Van Gogh'),
+                          padding: const EdgeInsets.all(horizontalPadding),
+                          child: new Text(
+                            'Vincent Van Gogh',
+                            style: headingThree,
+                          ),
                         ),
                       ]),
                 ),
@@ -72,23 +74,24 @@ class ArtworkDetailsPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: <Widget>[
                         new Container(
-                          padding: const EdgeInsets.all(horizontalTextPadding),
-                          child: new Text('Price: ',
-                              style:
-                                  new TextStyle(fontWeight: FontWeight.bold)),
+                          padding: const EdgeInsets.all(horizontalPadding),
+                          child: new Text('Price: ', style: headingTwoBold),
                         ),
                         new Container(
-                          padding: const EdgeInsets.all(horizontalTextPadding),
-                          child: new Text('Priceless'),
+                          padding: const EdgeInsets.all(horizontalPadding),
+                          child: new Text(
+                            'Priceless',
+                            style: headingThree,
+                          ),
                         ),
                         new Container(
-                          padding: const EdgeInsets.all(horizontalTextPadding),
+                          padding: const EdgeInsets.all(horizontalPadding),
                           child: new SizedBox(
                             width: 100.0,
-                            height: 20.0,
+                            height: 25.0,
                             child: new RaisedButton(
                                 onPressed: () {},
-                                color: Colors.yellow,
+                                color: Colors.amberAccent,
                                 splashColor: Colors.grey,
                                 disabledColor: Colors.red,
                                 elevation: 2.0,
@@ -96,24 +99,35 @@ class ArtworkDetailsPage extends StatelessWidget {
                                 disabledElevation: 0.0,
                                 textColor: Colors.black,
                                 disabledTextColor: Colors.black,
-                                child: new Text("Buy It!")),
+                                child: new Text(
+                                  "Buy It!",
+                                  style: headingThree,
+                                )),
                           ),
                         ),
                       ]),
                 ),
                 new Container(
-                  padding: const EdgeInsets.only(top: verticalWidgetPadding),
+                  padding: const EdgeInsets.only(
+                      top: verticalWidgetPadding,
+                      left: horizontalPadding,
+                      right: horizontalPadding),
                   child: new Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: <Widget>[
-                        new Text('Description:',
-                            style: new TextStyle(fontWeight: FontWeight.bold)),
+                        new Text('Description:', style: headingTwoBold),
                       ]),
                 ),
                 new Container(
+                    padding: const EdgeInsets.only(
+                        top: verticalWidgetPadding,
+                        left: horizontalPadding,
+                        right: horizontalPadding),
                     child: new Text(
-                        '''This is a famous painting by Vincent Van Gogh which can be viewed at the Van Gogh museum in Amsterdam, Netherlands. Van Gogh is a artist from the late 17th century. He was born in the Netherlands''')),
+                      '''This is a famous painting by Vincent Van Gogh which can be viewed at the Van Gogh museum in Amsterdam, Netherlands. Van Gogh is a artist from the late 17th century. He was born in the Netherlands''',
+                      style: contentText,
+                    )),
                 new Container(
                   padding: const EdgeInsets.only(top: verticalWidgetPadding),
                   child: new Row(
@@ -121,11 +135,15 @@ class ArtworkDetailsPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       new Text('Questions about the piece? Ask Away!',
-                          style: new TextStyle(fontWeight: FontWeight.bold)),
+                          style: headingThreeBold),
                     ],
                   ),
                 ),
                 new Container(
+                  padding: const EdgeInsets.only(
+                      top: verticalWidgetPadding,
+                      left: horizontalPadding,
+                      right: horizontalPadding),
                   child: new TextField(
                     decoration: InputDecoration(
                         fillColor: Colors.grey,
@@ -138,9 +156,9 @@ class ArtworkDetailsPage extends StatelessWidget {
                     children: <Widget>[
                       new RaisedButton(
                           onPressed: null,
-                          color: Colors.greenAccent,
-                          splashColor: Colors.grey,
-                          disabledColor: Colors.grey,
+                          // color: Colors.greenAccent,
+                          // splashColor: Colors.grey,
+                          // disabledColor: Colors.grey,
                           elevation: 2.0,
                           highlightElevation: 8.0,
                           disabledElevation: 0.0,
@@ -159,7 +177,14 @@ class MyImageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var assetsImage = new AssetImage('images/sunflowers.jpg');
-    var image = new Image(image: assetsImage, width: 400.0, height: 500.0);
-    return new Container(child: image, margin: EdgeInsets.symmetric(vertical: topPadding),);
+    var image = new Image(
+      image: assetsImage,
+      width: imgWidth,
+      height: imgHeight,
+    );
+    return new Container(
+      child: image,
+      margin: EdgeInsets.symmetric(vertical: topPadding),
+    );
   }
 }
