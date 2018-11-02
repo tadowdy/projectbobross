@@ -11,14 +11,46 @@ final font = "Roboto";
 // padding constants
 const topPadding = 15.0;
 const horizontalPadding = 5.0;
+const verticalWidgetPadding = 15.0;
+const cardPadding = 6.0;
 const imgWidth = 400.0;
 const imgHeight = 500.0;
 
-// text constants
-const headingOne = 25.0;
-const headingTwo = 20.0;
-const headingThree = 15.0;
-const contentTextSize = 10.0;
+// text size constants
+const headingOneSize = 27.0;
+const headingTwoSize = 22.0;
+const headingThreeSize = 20.0;
+const contentTextSize = 13.0;
+
+// text Styles
+final headingOneBold = new TextStyle(
+  fontSize: headingOneSize,
+  fontWeight: FontWeight.bold,
+);
+final headingOne = new TextStyle(
+  fontSize: headingOneSize,
+  fontWeight: FontWeight.normal,
+);
+final headingTwoBold = new TextStyle(
+  fontSize: headingTwoSize,
+  fontWeight: FontWeight.bold,
+);
+final headingTwo = new TextStyle(
+  fontSize: headingTwoSize,
+  fontWeight: FontWeight.normal,
+);
+final headingThreeBold = new TextStyle(
+  fontSize: headingThreeSize,
+  fontWeight: FontWeight.bold,
+);
+final headingThree = new TextStyle(
+  fontSize: headingThreeSize,
+  fontWeight: FontWeight.normal,
+);
+final contentText = new TextStyle(
+  fontSize: contentTextSize,
+  fontWeight: FontWeight.normal,
+);
 
 // static components
 final topAppBar = new AppBar(
