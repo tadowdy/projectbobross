@@ -4,7 +4,7 @@
   
   <h3> Branch Naming Conventions </h3>
     <ul><li>use description(ex: feature/)</li>
-      <li>Use a hash (len 5) before the branch name, but after the description</li>
+      <li>Use the YouTrack 5 character issue tag</li>
       <li>EX: testing/12345_testingsomething </li>
     </ul>
     <h3> Commit Conventions </h3>
