@@ -26,14 +26,14 @@ final buildBody = new Scaffold(
 
 final addTimeDate = new SingleChildScrollView(
   child: new Container(
-    margin: const EdgeInsets.symmetric(vertical: topPadding, horizontal: 10.0),
+    margin: const EdgeInsets.only(
+        top: topPadding, left: horizontalPadding, right: horizontalPadding, bottom: verticalWidgetPadding),
     child: new Row(
       children: <Widget>[
-        new Expanded(
-            child: new Text("Location", style: new TextStyle(fontSize: 30.0))),
+        new Expanded(child: new Text("Location", style: headingOneBold)),
         new Text(
           "Date/Time",
-          style: new TextStyle(fontSize: 25.0),
+          style: headingOneBold,
         ),
       ],
     ),
@@ -42,32 +42,36 @@ final addTimeDate = new SingleChildScrollView(
 
 final addDescription = new SingleChildScrollView(
     child: new Container(
-        margin: const EdgeInsets.symmetric(vertical: 60.0, horizontal: 10.0),
+        margin: const EdgeInsets.only(
+            top: verticalWidgetPadding,
+            left: horizontalPadding,
+            right: horizontalPadding),
         child: new Column(children: <Widget>[
-          new Text("Price", style: new TextStyle(fontSize: 25.0)),
+          new Text("Price", style: headingTwo),
           new Text(
             "Description",
-            style: new TextStyle(
-              fontSize: 25.0,
-            ),
+            style: headingTwo,
           ),
           new Text(
-              "Short description stating what the class is about and who it is intended for."),
+            "Short description stating what the class is about and who it is intended for.",
+            style: contentText,
+          ),
           ButtonTheme(
-            minWidth: 50.0,
-            height: 30.0,
+            minWidth: largeButtonWidth,
+            height: buttonHeight,
             child: RaisedButton(
               onPressed: () {
-                // add email to db
+                // add event to cart
               },
               child: new Row(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   Padding(
-                    padding: const EdgeInsets.only(right: 6.0),
+                    padding: const EdgeInsets.only(
+                        right: horizontalPadding, left: horizontalPadding),
                     child: Text(
                       'Buy Tickets',
-                      style: TextStyle(fontSize: 16.0),
+                      style: headingThree,
                     ),
                   ),
                 ],

@@ -87,8 +87,8 @@ class ArtworkDetailsPage extends StatelessWidget {
                         new Container(
                           padding: const EdgeInsets.all(horizontalPadding),
                           child: new SizedBox(
-                            width: 100.0,
-                            height: 25.0,
+                            width: largeButtonWidth,
+                            height: buttonHeight,
                             child: new RaisedButton(
                                 onPressed: () {},
                                 color: Colors.amberAccent,
@@ -101,7 +101,7 @@ class ArtworkDetailsPage extends StatelessWidget {
                                 disabledTextColor: Colors.black,
                                 child: new Text(
                                   "Buy It!",
-                                  style: headingThree,
+                                  style: new TextStyle(fontSize: buttonTextSize),
                                 )),
                           ),
                         ),
@@ -156,9 +156,8 @@ class ArtworkDetailsPage extends StatelessWidget {
                     children: <Widget>[
                       new RaisedButton(
                           onPressed: null,
-                          // color: Colors.greenAccent,
-                          // splashColor: Colors.grey,
-                          // disabledColor: Colors.grey,
+                          splashColor: Colors.grey,
+                          disabledColor: Colors.grey,
                           elevation: 2.0,
                           highlightElevation: 8.0,
                           disabledElevation: 0.0,

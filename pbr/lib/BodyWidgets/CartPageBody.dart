@@ -106,7 +106,6 @@ class CartPageBody extends StatelessWidget {
         new Container(width: 20.0),
         new RaisedButton(
           child: const Text("Add Donation!"),
-          color: Theme.of(context).accentColor,
           elevation: 4.0,
           onPressed: () {
             _switchViewToDonatePage(context);

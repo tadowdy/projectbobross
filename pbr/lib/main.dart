@@ -15,7 +15,8 @@ class JACApp extends StatelessWidget {
       theme: new ThemeData(
         primarySwatch: Colors.blueGrey,
         primaryColor: Colors.blueGrey,
-        accentColor: Colors.amber,
+        accentColor: Colors.amberAccent,
+        buttonColor: Colors.amberAccent,
         canvasColor: const Color(0xFFfafafa),
         fontFamily: font,
       ),

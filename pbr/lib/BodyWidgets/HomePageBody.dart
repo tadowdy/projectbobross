@@ -108,8 +108,8 @@ class HomePageBody extends StatelessWidget {
                   fontFamily: "Roboto"),
             ),
             ButtonTheme(
-              // minWidth: 50.0,
-              // height: 30.0,
+              minWidth: medButtonWidth,
+              height: buttonHeight,
               child: RaisedButton(
                 onPressed: () {
                   Navigator.push(

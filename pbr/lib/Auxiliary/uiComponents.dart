@@ -7,11 +7,18 @@ final iconColor = Colors.black38;
 final iconSelectedColor = Colors.black;
 final font = "Roboto";
 
+// button sizes
+final buttonTextSize = 18.0;
+final largeButtonWidth = 175.0;
+final buttonHeight = 40.0;
+final medButtonWidth = 30.0;
+final smButtonWidth = 20.0;
+
 // number constants must be declared const
 // padding constants
 const topPadding = 15.0;
 const horizontalPadding = 5.0;
-const verticalWidgetPadding = 15.0;
+const verticalWidgetPadding = 20.0;
 const cardPadding = 6.0;
 const imgWidth = 400.0;
 const imgHeight = 500.0;
