@@ -13,10 +13,10 @@ class JACApp extends StatelessWidget {
     return new MaterialApp(
       title: 'PBR',
       theme: new ThemeData(
-        primarySwatch: Colors.blueGrey,
+        primarySwatch: brightButton,
         primaryColor: Colors.blueGrey,
         accentColor: Colors.amberAccent,
-        buttonColor: Colors.amberAccent,
+        buttonColor: brightButton,
         canvasColor: const Color(0xFFfafafa),
         fontFamily: font,
       ),

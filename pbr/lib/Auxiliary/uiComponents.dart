@@ -7,7 +7,9 @@ final iconColor = Colors.black38;
 final iconSelectedColor = Colors.black;
 final font = "Roboto";
 
-// button sizes
+// button
+const brightButton = Colors.amber;
+const normalButton = Color(0xFFD6D6D6);
 final buttonTextSize = 18.0;
 final largeButtonWidth = 175.0;
 final buttonHeight = 40.0;

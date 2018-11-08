@@ -104,6 +104,7 @@ class SurveyDetailsPage extends StatelessWidget {
                     ]),
                   ),
                   ButtonTheme(
+                    buttonColor: normalButton,
                     minWidth: medButtonWidth,
                     height: buttonHeight,
                     child: RaisedButton(

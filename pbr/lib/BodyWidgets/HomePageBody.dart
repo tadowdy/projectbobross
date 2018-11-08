@@ -71,6 +71,7 @@ class HomePageBody extends StatelessWidget {
                   fontFamily: "Roboto"),
             ),
             ButtonTheme(
+              buttonColor: normalButton,
               minWidth: medButtonWidth,
               height: buttonHeight,
               child: RaisedButton(
@@ -108,6 +109,7 @@ class HomePageBody extends StatelessWidget {
                   fontFamily: "Roboto"),
             ),
             ButtonTheme(
+              buttonColor: normalButton,
               minWidth: medButtonWidth,
               height: buttonHeight,
               child: RaisedButton(
