@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pbr/UIComponents.dart';
-import 'package:pbr/BodyWidgets/CartPageBody.dart';
+import 'package:pbr/widgets/CartPageBody.dart';
 import 'package:pbr/Auxiliary/CartClasses.dart';
 
 // TODO: can't return a scaffold, will need to be refactored to container

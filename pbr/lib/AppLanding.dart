@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:pbr/BodyWidgets/HomePageBody.dart';
-import 'package:pbr/BodyWidgets/GalleryListPageBody.dart';
-import 'package:pbr/BodyWidgets/EventListPageBody.dart';
-import 'package:pbr/BodyWidgets/CartPageBody.dart';
-import 'package:pbr/BodyWidgets/AccountPageBody.dart';
+import 'package:pbr/widgets/HomePageBody.dart';
+import 'package:pbr/widgets/GalleryListPageBody.dart';
+import 'package:pbr/widgets/EventListPageBody.dart';
+import 'package:pbr/widgets/CartPageBody.dart';
+import 'package:pbr/widgets/AccountPageBody.dart';
 
 class Home extends StatefulWidget{
 @override
