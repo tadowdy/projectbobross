@@ -43,7 +43,7 @@ final addTimeDate = new SingleChildScrollView(
 final addDescription = new SingleChildScrollView(
     child: new Container(
         margin: const EdgeInsets.only(
-            top: verticalWidgetPadding,
+            top: verticalWidgetPadding * 3.0,
             left: horizontalPadding,
             right: horizontalPadding),
         child: new Column(children: <Widget>[

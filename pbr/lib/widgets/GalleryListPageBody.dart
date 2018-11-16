@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pbr/BodyWidgets/ArtworkListPageBody.dart';
+import 'package:pbr/widgets/ArtworkListPageBody.dart';
 import 'package:pbr/Auxiliary/uiComponents.dart';
 
 class GalleryListPageBody extends StatelessWidget {
