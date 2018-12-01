@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "892819253876",
+    "firebase_url": "https://jacobyartscenter-2e066.firebaseio.com",
+    "project_id": "jacobyartscenter-2e066",
+    "storage_bucket": "jacobyartscenter-2e066.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:892819253876:android:7806ee22af414a03",
+        "android_client_info": {
+          "package_name": "com.example.pbr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "892819253876-q7ukhsap3qmcfk53nug3258v2647c76e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.pbr",
+            "certificate_hash": "cccea10cfeda21ad3b032ac1be84e32b61e3d3e1"
+          }
+        },
+        {
+          "client_id": "892819253876-elrp7b4flsnounmaoesapitmb93o9vv5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3P7r6oq03V9Urq1P7xCG0LDSuUHTjXt0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "892819253876-elrp7b4flsnounmaoesapitmb93o9vv5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
