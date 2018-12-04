@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pbr/Pages/DonatePage.dart';
 import 'package:pbr/Auxiliary/CartClasses.dart';
+import 'package:pbr/Auxiliary/uiComponents.dart';
 
 final _cartItems = <ArtInfo>[
   new ArtInfo("We are Number One", "Robbie Rotten", 1.11),
@@ -29,7 +30,10 @@ class CartPageBody extends StatelessWidget {
 
   Widget _buildCartItems(List<ArtInfo> _cartItems) {
     return ListView.builder(
-      padding: const EdgeInsets.all(16.0),
+      padding: EdgeInsets.only(
+          left: horizontalPadding,
+          right: horizontalPadding,
+          top: verticalWidgetPadding),
       shrinkWrap: true,
       itemCount: _cartItems.length,
       itemBuilder: (context, i) {
@@ -48,41 +52,41 @@ class CartPageBody extends StatelessWidget {
         child: _makeCartItemCard(item));
   }
 
-  Widget _makeCartItemCard(ArtInfo item){
+  Widget _makeCartItemCard(ArtInfo item) {
     return new Card(
-          elevation: 8.0,
-          margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
-          child: Container(
-              decoration: BoxDecoration(color: Colors.blueGrey),
-              child: ListTile(
-                contentPadding:
-                    EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-                leading: Container(
-                  padding: EdgeInsets.only(right: 12.0),
-                  decoration: new BoxDecoration(
-                      // create a inset for the image
-                      border: new Border(
-                          right:
-                              new BorderSide(width: 1.0, color: Colors.white))),
-                  child: Icon(Icons.image, color: Colors.white),
-                ),
-                title: Text(
-                  item.artworkName,
-                  style: TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.bold),
-                ),
-                // subtitle: Text("Intermediate", style: TextStyle(color: Colors.white)),
+      elevation: 8.0,
+      margin: new EdgeInsets.symmetric(
+          horizontal: horizontalPadding, vertical: cardPadding),
+      child: Container(
+          decoration: BoxDecoration(color: Colors.blueGrey),
+          child: ListTile(
+            contentPadding:
+                EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+            leading: Container(
+              padding: EdgeInsets.only(right: 12.0),
+              decoration: new BoxDecoration(
+                  // create a inset for the image
+                  border: new Border(
+                      right: new BorderSide(width: 1.0, color: Colors.white))),
+              child: Icon(Icons.image, color: Colors.white),
+            ),
+            title: Text(
+              item.artworkName,
+              style:
+                  TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+            ),
+            // subtitle: Text("Intermediate", style: TextStyle(color: Colors.white)),
 
-                subtitle: Row(
-                  children: <Widget>[
-                    Text(item.artistName + "     ",
-                        style: TextStyle(color: Colors.white)),
-                    Text(r"$" + item.price.toStringAsFixed(2),
-                        style: TextStyle(color: Colors.white)),
-                  ],
-                ),
-              )),
-        );
+            subtitle: Row(
+              children: <Widget>[
+                Text(item.artistName + "     ",
+                    style: TextStyle(color: Colors.white)),
+                Text(r"$" + item.price.toStringAsFixed(2),
+                    style: TextStyle(color: Colors.white)),
+              ],
+            ),
+          )),
+    );
   }
 
   Widget _cartHeader(BuildContext context, List<ArtInfo> _cartItems) {
@@ -94,15 +98,14 @@ class CartPageBody extends StatelessWidget {
     roundedTotal = total.toStringAsFixed(2);
     return new Row(
       children: <Widget>[
-        new Container(width: 10.0),
+        new Container(width: horizontalPadding),
         Text(
           "Current Total: " + r"$" + "$roundedTotal",
-          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+          style: headingThreeBold,
         ),
         new Container(width: 20.0),
         new RaisedButton(
-          child: const Text("Donate to Jacoby Arts"),
-          color: Theme.of(context).accentColor,
+          child: const Text("Add Donation!"),
           elevation: 4.0,
           onPressed: () {
             _switchViewToDonatePage(context);

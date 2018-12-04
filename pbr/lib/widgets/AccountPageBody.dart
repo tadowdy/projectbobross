@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pbr/Auxiliary/uiComponents.dart';
 
 class AccountPageBody extends StatelessWidget {
   AccountPageBody();
@@ -30,8 +31,10 @@ class AccountPageBody extends StatelessWidget {
 }
 
 final profileBackground = new Container(
-  margin: const EdgeInsets.symmetric(
-    vertical: 60.0,
+  margin: const EdgeInsets.only(
+    left: horizontalPadding,
+    right: horizontalPadding,
+    top: topPadding,
   ),
   child: CircleAvatar(
     backgroundColor: Colors.orange[200],
@@ -41,36 +44,54 @@ final profileBackground = new Container(
 );
 
 final membershipInfo = new Container(
-    margin: const EdgeInsets.symmetric(
-      horizontal: 30.0,
+    margin: const EdgeInsets.only(
+      top: verticalWidgetPadding,
+      left: horizontalPadding,
+      right: horizontalPadding,
     ),
     child: Column(
       crossAxisAlignment:
           CrossAxisAlignment.start, // allow left alignment for the text
       children: <Widget>[
         Row(children: <Widget>[
-          new Text("Jane Doe",
-              style: new TextStyle(
-                fontSize: 35.0,
-              )),
+          new Text("Jane Doe", style: headingOneBold),
         ]),
-        new Text(
-          "Membership Level: Gold",
-          style: new TextStyle(fontSize: 15.0),
-          textAlign: TextAlign.left,
+        new Row(
+          children: <Widget>[
+            new Text(
+              "Membership Level: ",
+              style: headingTwoBold,
+              textAlign: TextAlign.left,
+            ),
+            new Text(
+              "Gold",
+              style: headingTwo,
+              textAlign: TextAlign.left,
+            ),
+          ],
         ),
-        new Text(
-          "Expiriation Date: 10/10/2019",
-          style: new TextStyle(fontSize: 15.0),
-          textAlign: TextAlign.left,
+        new Row(
+          children: <Widget>[
+            new Text(
+              "Expiriation Date: ",
+              style: headingTwoBold,
+              textAlign: TextAlign.left,
+            ),
+            new Text(
+              "10/10/2019",
+              style: headingTwo,
+              textAlign: TextAlign.left,
+            ),
+          ],
         ),
       ],
     ));
 
 final membershipDesc = new Container(
-  margin: const EdgeInsets.symmetric(
-    horizontal: 30.0,
-    vertical: 20.0,
+  margin: const EdgeInsets.only(
+    top: verticalWidgetPadding,
+    left: horizontalPadding,
+    right: horizontalPadding,
   ),
   child: new Row(
     children: <Widget>[
@@ -87,9 +108,7 @@ final membershipDesc = new Container(
             value: value,
             child: new Text(
               value,
-              style: TextStyle(
-                fontSize: 15.0,
-              ),
+              style: headingThree,
             ),
           );
         }).toList(),

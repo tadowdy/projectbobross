@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pbr/Pages/ArtworkDetailsPage.dart';
+import 'package:pbr/Auxiliary/uiComponents.dart';
 
 class ArtworkListPageBody extends StatelessWidget {
   ArtworkListPageBody();
@@ -20,6 +21,11 @@ class ArtworkListPageBody extends StatelessWidget {
 }
 
 final makeBody = Container(
+  margin: EdgeInsets.only(
+      top: topPadding,
+      left: horizontalPadding,
+      right: horizontalPadding,
+    ),
     child: ListView.builder(
         scrollDirection: Axis.vertical,
         shrinkWrap: true,
@@ -39,7 +45,7 @@ InkWell makeCard(context) {
       },
       child: Card(
         elevation: 8.0,
-        margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
+        margin: new EdgeInsets.symmetric(horizontal: horizontalPadding, vertical: cardPadding),
         child: Container(
           decoration: BoxDecoration(color: Colors.blueGrey),
           child: makeListTile,

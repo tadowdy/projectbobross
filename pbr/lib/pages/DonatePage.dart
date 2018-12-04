@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pbr/UIComponents.dart';
+import 'package:pbr/Auxiliary/uiComponents.dart';
 import 'package:pbr/widgets/CartPageBody.dart';
 import 'package:pbr/Auxiliary/CartClasses.dart';
 
