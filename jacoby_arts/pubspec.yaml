@@ -1,4 +1,4 @@
-name: jacoby_arts
+name: pbr
 description: A new Flutter project.
 
 # The following defines the version and build number for your application.
@@ -15,10 +15,12 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  cloud_firestore: ^0.8.0  
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
+  english_words: ^3.1.0
 
 dev_dependencies:
   flutter_test:
@@ -35,6 +37,10 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  assets:
+    - images/full_logo.png
+    - images/profile_temp.png
+    - images/sunflowers.jpg
 
   # To add assets to your application, add an assets section, like this:
   # assets:
