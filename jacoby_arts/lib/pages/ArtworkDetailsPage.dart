@@ -37,7 +37,6 @@ Scaffold detailsScaffold(context) {
               imageDetailsContainer(context),
               artistInfoContainer(context),
               priceInfoContainer(context),
-              purchaseContainer(context),
               descriptionHeader(context),
               description(context),
               questionHeader(context),
