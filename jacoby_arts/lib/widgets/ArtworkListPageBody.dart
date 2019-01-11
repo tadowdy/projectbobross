@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jacoby_arts/Pages/ArtworkDetailsPage.dart';
+import 'package:jacoby_arts/pages/ArtworkDetailsPage.dart';
 import 'package:jacoby_arts/Auxiliary/uiComponents.dart';
 
 class ArtworkListPageBody extends StatelessWidget {

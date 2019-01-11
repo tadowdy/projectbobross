@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jacoby_arts/Pages/SurveyDetailsPage.dart';
+import 'package:jacoby_arts/pages/SurveyDetailsPage.dart';
 import 'package:jacoby_arts/Auxiliary/uiComponents.dart';
 
 class HomePageBody extends StatelessWidget {
