@@ -66,7 +66,7 @@ Column mainColumn(context) {
             fontFamily: "Roboto"),
       ),
       emailField,
-      emailButton,
+      emailButton(context),
     ],
   );
 }
