@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:pbr/widgets/HomePageBody.dart';
-import 'package:pbr/widgets/GalleryListPageBody.dart';
-import 'package:pbr/widgets/EventListPageBody.dart';
-import 'package:pbr/widgets/CartPageBody.dart';
-import 'package:pbr/widgets/AccountPageBody.dart';
-import 'package:pbr/Auxiliary/uiComponents.dart';
+import 'package:jacoby_arts/widgets/GalleryListPageBody.dart';
+import 'package:jacoby_arts/widgets/EventListPageBody.dart';
+import 'package:jacoby_arts/widgets/CartPageBody.dart';
+import 'package:jacoby_arts/widgets/AccountPageBody.dart';
+import 'package:jacoby_arts/Auxiliary/uiComponents.dart';
 
 class Home extends StatefulWidget {
   @override
