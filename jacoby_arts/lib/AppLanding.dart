@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jacoby_arts/widgets/HomePageBody.dart';
 import 'package:jacoby_arts/widgets/GalleryListPageBody.dart';
 import 'package:jacoby_arts/widgets/EventListPageBody.dart';
 import 'package:jacoby_arts/widgets/CartPageBody.dart';
