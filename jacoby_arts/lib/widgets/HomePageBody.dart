@@ -85,7 +85,7 @@ final emailField = new TextField(
 
 ButtonTheme emailButton(context) {
   return new ButtonTheme(
-    buttonColor: normalButton,
+   // buttonColor: normalButton,
     minWidth: medButtonWidth,
     height: buttonHeight,
     child: RaisedButton(

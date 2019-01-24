@@ -1,12 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:jacoby_arts/widgets/ArtworkListPageBody.dart';
 import 'package:jacoby_arts/Auxiliary/uiComponents.dart';
+import 'package:jacoby_arts/business/obj/Exhibit.dart';
 
+var names;
+Exhibit exhibitNames = new Exhibit();
+
+void initState(){
+  exhibitNames.getName().then((results){
+      names = results;
+  });
+
+}
+test(){
+  initState();
+  var i = 0;
+  while(i < names.documents.length){
+    debugPrint(names.documents[i].data['Name']);
+  }
+}
 class GalleryListPageBody extends StatelessWidget {
   GalleryListPageBody();
 
   @override
   Widget build(BuildContext context) {
+    test();
     return makeBody;
   }
 }
