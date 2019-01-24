@@ -5,7 +5,7 @@ import 'package:jacoby_arts/widgets/EventListPageBody.dart';
 import 'package:jacoby_arts/widgets/CartPageBody.dart';
 import 'package:jacoby_arts/widgets/AccountPageBody.dart';
 import 'package:jacoby_arts/Auxiliary/uiComponents.dart';
-
+import 'package:jacoby_arts/pages/Login.dart';
 class Home extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -20,7 +20,8 @@ class _HomeState extends State<Home> {
     GalleryListPageBody(),
     EventListPageBody(),
     CartPageBody(),
-    AccountPageBody()
+    // AccountPageBody(),
+    LoginPage(),
   ];
   @override
   Widget build(BuildContext context) {
