@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jacoby_arts/Pages/EventDetailsPage.dart';
-import 'package:jacoby_arts/auxiliary/uiComponents.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:intl/intl.dart';
 
 class Events{
   final String title;
@@ -80,14 +79,15 @@ InkWell makeCard(BuildContext context, DocumentSnapshot data){
   return new InkWell( // make it clickable
   onTap: (){
     Navigator.push(context,
-    MaterialPageRoute(
-      builder: (context) => new Scaffold(
-        appBar: new AppBar(
-          title: new Text(eventData.title)
-        ),
-        body: new EventDetailsPage(), // go to new page
-      )
-    )); // create a event page if its clicked
+    MaterialPageRoute(builder: (__) =>new EventDetailsPage(eventData: eventData)
+      // builder: (context) => new Scaffold(
+      //   appBar: new AppBar(
+      //     title: new Text(eventData.title)
+      //   ),
+      //   body: new EventDetailsPage(), // go to new page
+      // )
+    )
+    ); // create a event page if its clicked
   },
   child: Card(
     elevation: 8.0,

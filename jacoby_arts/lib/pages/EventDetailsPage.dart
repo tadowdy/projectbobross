@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:jacoby_arts/Auxiliary/uiComponents.dart';
 
 class EventDetailsPage extends StatelessWidget {
+  var eventData;
+  EventDetailsPage({ this.eventData});
   void _addEventToCart(/*Event event*/) {
     // TODO: add the event to the cart.
     // TODO: notify the user whether the event was added to the cart using a popup.
@@ -14,46 +16,52 @@ class EventDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return buildBody;
+    return buildBody(context,eventData);
   }
 }
 
-final buildBody = new Scaffold(
+buildBody(BuildContext context, eventData){
+  return new Scaffold(
+          appBar: new AppBar(
+          title: new Text(eventData.title)
+          ),
     body: new Stack(fit: StackFit.expand, children: [
-  addTimeDate,
-  addDescription,
+  addTimeDate(context, eventData),
+  addDescription(context,eventData),
 ]));
-
-final addTimeDate = new SingleChildScrollView(
+}
+addTimeDate(BuildContext context, eventData){
+  return new SingleChildScrollView(
   child: new Container(
     margin: const EdgeInsets.only(
         top: topPadding, left: horizontalPadding, right: horizontalPadding, bottom: verticalWidgetPadding),
     child: new Row(
       children: <Widget>[
-        new Expanded(child: new Text("Location", style: headingOneBold)),
+        new Expanded(child: new Text(eventData.location, style: headingOneBold)),
         new Text(
-          "Date/Time",
+          eventData.date,
           style: headingOneBold,
         ),
       ],
     ),
   ),
 );
-
-final addDescription = new SingleChildScrollView(
+}
+addDescription(BuildContext context, eventData){
+   return new SingleChildScrollView(
     child: new Container(
         margin: const EdgeInsets.only(
             top: verticalWidgetPadding * 3.0,
             left: horizontalPadding,
             right: horizontalPadding),
         child: new Column(children: <Widget>[
-          new Text("Price", style: headingTwo),
+          new Text(eventData.price.toString(), style: headingTwo),
           new Text(
             "Description",
             style: headingTwo,
           ),
           new Text(
-            "Short description stating what the class is about and who it is intended for.",
+            eventData.description,
             style: contentText,
           ),
           ButtonTheme(
@@ -79,3 +87,4 @@ final addDescription = new SingleChildScrollView(
             ),
           ),
         ])));
+}
