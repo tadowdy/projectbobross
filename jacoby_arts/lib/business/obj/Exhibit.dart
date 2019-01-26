@@ -6,19 +6,8 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-Firestore db = Firestore.instance;
-CollectionReference exhibitCollectionRef = db.collection('Exhibits');
-
-Stream<QuerySnapshot> getExhibitList({int offset, int limit}){
-  Stream<QuerySnapshot> snapshots = exhibitCollectionRef.snapshots();
-
-  if(offset != null){
-    snapshots = snapshots.skip(offset);
-  }
-  if(limit != null){
-    snapshots = snapshots.take(limit);
-  }
-  return snapshots;
+getData(){
+  
 }
 
 
@@ -61,13 +50,13 @@ class Exhibit {
   // // }
 
   /*GETTERS****/
-  int getExhibitId() {
-    return _exhibitId;
-  }
+  // int getExhibitId() {
+  //   return _exhibitId;
+  // }
 
-  getName() async {
-    return Firestore.instance.collection('Exhibits').getDocuments();
-  }
+  // getName() async {
+  //   return Firestore.instance.collection('Exhibits').getDocuments();
+  // }
 
   // String getImage() {
   //   return _imageURL;

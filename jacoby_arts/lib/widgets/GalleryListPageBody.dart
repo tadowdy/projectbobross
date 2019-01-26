@@ -1,48 +1,73 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:jacoby_arts/widgets/ArtworkListPageBody.dart';
 import 'package:jacoby_arts/Auxiliary/uiComponents.dart';
 import 'package:jacoby_arts/business/obj/Exhibit.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:path/path.dart';
+import 'package:flutter/foundation.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-var names;
-Exhibit exhibitNames = new Exhibit();
 
-void initState(){
-  exhibitNames.getName().then((results){
-      names = results;
-  });
 
+
+class ExhibitName{
+  final String name;
+  final DocumentReference reference;
+
+  ExhibitName.fromMap(Map<String, dynamic> map, {this.reference})
+    :assert(map['Name'] != null),
+    name = map['Name'];
+  ExhibitName.fromSnapshot(DocumentSnapshot snapshot)
+    :this.fromMap(snapshot.data, reference: snapshot.reference);
+  @override
+  String toString() => "ExhibitName<$name>";
 }
-test(){
-  initState();
-  var i = 0;
-  while(i < names.documents.length){
-    debugPrint(names.documents[i].data['Name']);
-  }
-}
+
 class GalleryListPageBody extends StatelessWidget {
   GalleryListPageBody();
 
   @override
-  Widget build(BuildContext context) {
-    test();
-    return makeBody;
+  Widget build(BuildContext context) {   
+    return getData(context);
   }
 }
-
-final makeBody = Container(
+getData(BuildContext context){
+    return StreamBuilder<QuerySnapshot>(
+    stream: Firestore.instance.collection('Exhibits').snapshots(),
+    builder: (context, snapshot) {
+      if(!snapshot.hasData) return LinearProgressIndicator();
+      return makeBody(context, snapshot.data.documents);
+    }
+    
+  );
+}
+makeBody(BuildContext context,List<DocumentSnapshot> snapshot){
+  return Container(
     margin: EdgeInsets.only(
       top: topPadding,
       left: horizontalPadding,
       right: horizontalPadding,
     ),
-    child: ListView.builder(
-        scrollDirection: Axis.vertical,
-        shrinkWrap: true,
-        itemBuilder: (BuildContext context, int index) {
-          return makeCard(context); // make a card for the list
-        }));
-
-InkWell makeCard(context) {
+    child: _listView(context,snapshot)
+    
+    // ListView.builder(
+    //     scrollDirection: Axis.vertical,
+    //     shrinkWrap: true,
+    //     itemBuilder: (BuildContext context, int index) {
+    //       return makeCard(context,snapshot); // make a card for the list
+    //     })
+  );
+}
+_listView(BuildContext context, List<DocumentSnapshot> snapshot){
+return ListView(
+  padding: const EdgeInsets.only(top: 20.0),
+  children: snapshot.map((data) => makeCard(context,data)).toList(),
+);
+}
+InkWell makeCard(BuildContext context, DocumentSnapshot data) {
+  final galleryName =  ExhibitName.fromSnapshot(data);
   return new InkWell(
       // make it clickable
       onTap: () {
@@ -62,24 +87,41 @@ InkWell makeCard(context) {
         margin: new EdgeInsets.symmetric(horizontal: horizontalPadding, vertical: cardPadding),
         child: Container(
           decoration: BoxDecoration(color: Colors.blueGrey),
-          child: makeListTile,
+          child: ListTile(
+            contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+            leading: Container(
+              padding: EdgeInsets.only(right: 12.0),
+              decoration: new BoxDecoration(
+                 // create a inset for the image
+                border: new Border(
+                right: new BorderSide(width: 1.0, color: Colors.white))),
+                child: Icon(Icons.image, color: Colors.white),
+            ),
+              title: Text(
+                galleryName.name,
+                style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+              ),
+              trailing:
+                Icon(Icons.keyboard_arrow_right, color: Colors.white, size: 30.0)),
         ),
-      ));
+  ));
 }
 
-final makeListTile = ListTile(
-    contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-    leading: Container(
-      padding: EdgeInsets.only(right: 12.0),
-      decoration: new BoxDecoration(
-          // create a inset for the image
-          border: new Border(
-              right: new BorderSide(width: 1.0, color: Colors.white))),
-      child: Icon(Icons.image, color: Colors.white),
-    ),
-    title: Text(
-      "Gallery Name",
-      style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-    ),
-    trailing:
-        Icon(Icons.keyboard_arrow_right, color: Colors.white, size: 30.0));
+// makeListTile() {
+// return ListTile(
+//     contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+//     leading: Container(
+//       padding: EdgeInsets.only(right: 12.0),
+//       decoration: new BoxDecoration(
+//           // create a inset for the image
+//           border: new Border(
+//               right: new BorderSide(width: 1.0, color: Colors.white))),
+//       child: Icon(Icons.image, color: Colors.white),
+//     ),
+//     title: Text(
+//       "Gallery Name",
+//       style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+//     ),
+//     trailing:
+//         Icon(Icons.keyboard_arrow_right, color: Colors.white, size: 30.0));
+// }
