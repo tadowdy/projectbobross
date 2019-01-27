@@ -11,14 +11,14 @@ class LoginPage extends StatelessWidget {
 
 Scaffold loginScaffold(context) {
   return new Scaffold(
-      appBar: new AppBar(
-        title: new Text('Sunflowers'),
-        backgroundColor: themeColor,
-      ),
       body: Center(
-          child: new SingleChildScrollView(
-        child: mainColumn(context),
-      )));
+          child: new ListView(
+    shrinkWrap: true,
+    children: <Widget>[
+      logo,
+      mainColumn(context),
+    ],
+  )));
 }
 
 Column mainColumn(context) {
@@ -29,86 +29,67 @@ Column mainColumn(context) {
     children: <Widget>[
       userInput,
       passInput,
-      submitButtons(context),
-    ],
-  );
-}
-
-final userInput = new TextField(
-  decoration: const InputDecoration(
-    hintText: "Username",
-  ),
-  textAlign: TextAlign.left,
-  style: new TextStyle(
-    fontSize: headingThreeSize,
-  ),
-);
-
-final passInput = new TextField(
-  decoration: const InputDecoration(
-    hintText: "Password",
-  ),
-  textAlign: TextAlign.left,
-  style: new TextStyle(
-    fontSize: headingThreeSize,
-  ),
-);
-
-Row submitButtons(context){
-  return new Row(
-    
-    children: <Widget>[
-      signUpButton(context),
       loginButton(context),
+      signupButton(context),
     ],
   );
 }
-ButtonTheme loginButton(context) {
-  return new ButtonTheme(
-    buttonColor: normalButton,
-    minWidth: medButtonWidth,
-    height: buttonHeight,
+
+final logo = Hero(
+  tag: 'hero',
+  child: CircleAvatar(
+    backgroundColor: Colors.transparent,
+    radius: 45.0,
+    child: Image.asset('images/squares_logo.png'),
+  ),
+);
+
+final userInput = TextFormField(
+  keyboardType: TextInputType.emailAddress,
+  autofocus: true,
+  initialValue: 'email@gmail.com',
+  decoration: InputDecoration(
+    hintText: 'Email',
+    contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+  ),
+);
+
+final passInput = TextFormField(
+  autofocus: false,
+  initialValue: 'some password',
+  obscureText: true,
+  decoration: InputDecoration(
+    hintText: 'Password',
+    contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+  ),
+);
+
+Padding loginButton(context) {
+  return Padding(
+    padding: EdgeInsets.symmetric(vertical: topPadding),
     child: RaisedButton(
-      onPressed: () {
-        // confirm credentials
-      },
-      child: new Row(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(right: horizontalPadding),
-            child: Text(
-              'Log In',
-              style: TextStyle(fontSize: buttonTextSize),
-            ),
-          )
-        ],
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(24),
       ),
+      onPressed: () {}, // check credentials and move to account page
+      padding: EdgeInsets.all(12),
+      color: brightButton,
+      child: Text('Log In', style: TextStyle(color: Colors.white)),
     ),
   );
 }
 
-ButtonTheme signUpButton(context) {
-  return new ButtonTheme(
-    buttonColor: normalButton,
-    minWidth: medButtonWidth,
-    height: buttonHeight,
+Padding signupButton(context) {
+  return Padding(
+    padding: EdgeInsets.symmetric(vertical: topPadding),
     child: RaisedButton(
-      onPressed: () {
-        // confirm credentials
-      },
-      child: new Row(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(right: horizontalPadding),
-            child: Text(
-              'Sign Up',
-              style: TextStyle(fontSize: buttonTextSize),
-            ),
-          )
-        ],
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(24),
       ),
+      onPressed: () {}, // allow user to create an account
+      padding: EdgeInsets.all(12),
+      color: normalButton,
+      child: Text('Sign Up', style: TextStyle(color: Colors.white)),
     ),
   );
 }
