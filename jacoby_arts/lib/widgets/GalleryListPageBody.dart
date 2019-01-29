@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jacoby_arts/pages/ArtworkDetailsPage.dart';
 import 'package:jacoby_arts/widgets/ArtworkListPageBody.dart';
 import 'package:jacoby_arts/Auxiliary/uiComponents.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -7,17 +8,31 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 
 
-class ExhibitName{
-  final String name;
+class Artwork{
+  final String artworkname;
+  final String artistname;
+  final int price;
+  final String description;
+  final String image_url;
+
+
   final DocumentReference reference;
 
-  ExhibitName.fromMap(Map<String, dynamic> map, {this.reference})
-    :assert(map['Name'] != null),
-    name = map['Name'];
-  ExhibitName.fromSnapshot(DocumentSnapshot snapshot)
+  Artwork.fromMap(Map<String, dynamic> map, {this.reference})
+    :assert(map['artworkname'] != null),
+    assert(map['artist'] != null),
+    assert(map['description'] != null),
+    assert(map['image_url'] != null),
+    assert(map['price'] != null),
+    artworkname = map['artworkname'],
+    artistname = map['artist'],
+    description = map['description'],
+    image_url = map['image_url'],
+    price = map['price'];
+  Artwork.fromSnapshot(DocumentSnapshot snapshot)
     :this.fromMap(snapshot.data, reference: snapshot.reference);
   @override
-  String toString() => "ExhibitName<$name>";
+  String toString() => "ExhibitName<$artworkname:$artistname:$description:$image_url:$price>";
 }
 
 class GalleryListPageBody extends StatelessWidget {
@@ -30,7 +45,7 @@ class GalleryListPageBody extends StatelessWidget {
 }
 getData(BuildContext context){
     return StreamBuilder<QuerySnapshot>(
-    stream: Firestore.instance.collection('Exhibits').snapshots(),
+    stream: Firestore.instance.collection('Artworks').snapshots(),
     builder: (context, snapshot) {
       if(!snapshot.hasData) return LinearProgressIndicator();
       return makeBody(context, snapshot.data.documents);
@@ -62,20 +77,23 @@ return ListView(
 );
 }
 InkWell makeCard(BuildContext context, DocumentSnapshot data) {
-  final galleryName =  ExhibitName.fromSnapshot(data);
+  final _artwork =  Artwork.fromSnapshot(data);
   return new InkWell(
       // make it clickable
       onTap: () {
         // create a event page if its clicked
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => new Scaffold(
-                    appBar: new AppBar(
-                      title: new Text('Gallery Title'),
-                      backgroundColor: themeColor,
-                    ),
-                    body: new ArtworkListPageBody())));
+        Navigator.push(context,
+        MaterialPageRoute(
+            builder: (__) => new ArtworkDetailsPage(artData: _artwork)
+            // new Scaffold(
+            //     appBar: new AppBar(
+            //       title: new Text('Gallery Title'),
+            //       backgroundColor: themeColor,
+            //     ),
+            //     body: new ArtworkDetailsPage(_artwork: _artwork)
+            //     )
+          )
+          );
       },
       child: Card(
         elevation: 8.0,
@@ -93,8 +111,14 @@ InkWell makeCard(BuildContext context, DocumentSnapshot data) {
                 child: Icon(Icons.image, color: Colors.white),
             ),
               title: Text(
-                galleryName.name,
+                _artwork.artworkname,
                 style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+              ),
+              subtitle: Row(
+                children: <Widget>[
+                  Text(_artwork.artistname, style: TextStyle(color: Colors.white)),
+                  Text(_artwork.price.toString(), style: TextStyle(color: Colors.white)),
+                ],
               ),
               trailing:
                 Icon(Icons.keyboard_arrow_right, color: Colors.white, size: 30.0)),

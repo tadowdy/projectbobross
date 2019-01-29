@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:jacoby_arts/Auxiliary/uiComponents.dart';
+import 'package:jacoby_arts/widgets/GalleryListPageBody.dart';
 
 const verticalTextPadding = 5.0;
 // const horizontalTextPadding = 5.0;
 // const verticalWidgetPadding = 15.0;
 
 class ArtworkDetailsPage extends StatelessWidget {
+  var artData;
+  ArtworkDetailsPage({this.artData});
   void _addArtworkToCart(/*Artwork artwork, Cart cart*/) {
     // TODO: add the artwork to the cart.
     // TODO: notify the user whether the artwork was added to the cart using a popup.
@@ -18,14 +21,14 @@ class ArtworkDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return detailsScaffold(context);
+    return detailsScaffold(context,artData);
   }
 }
 
-Scaffold detailsScaffold(context) {
+Scaffold detailsScaffold(context, artData) {
   return new Scaffold(
       appBar: new AppBar(
-        title: new Text('Sunflowers'),
+        title: new Text(artData.artworkname),
         backgroundColor: themeColor,
       ),
       body: Center(
@@ -34,11 +37,11 @@ Scaffold detailsScaffold(context) {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               new MyImageWidget(),
-              imageDetailsContainer(context),
-              artistInfoContainer(context),
-              priceInfoContainer(context),
-              descriptionHeader(context),
-              description(context),
+              imageDetailsContainer(context,artData),
+              artistInfoContainer(context,artData),
+              priceInfoContainer(context,artData),
+              descriptionHeader(context,artData),
+              description(context,artData),
               questionHeader(context),
               questionBox(context),
               questionSubmit(context),
@@ -64,7 +67,7 @@ class MyImageWidget extends StatelessWidget {
   }
 }
 
-Container imageDetailsContainer(context) {
+Container imageDetailsContainer(context, artData) {
   return Container(
     padding: const EdgeInsets.all(verticalTextPadding),
     child: new Row(
@@ -78,7 +81,7 @@ Container imageDetailsContainer(context) {
           new Container(
             padding: const EdgeInsets.all(horizontalPadding),
             child: new Text(
-              'Sunflowers',
+              artData.artworkname,
               style: headingThree,
             ),
           ),
@@ -86,7 +89,7 @@ Container imageDetailsContainer(context) {
   );
 }
 
-Container artistInfoContainer(context) {
+Container artistInfoContainer(context, artData) {
   return Container(
     padding: const EdgeInsets.all(verticalTextPadding),
     child: new Row(
@@ -100,7 +103,7 @@ Container artistInfoContainer(context) {
           new Container(
             padding: const EdgeInsets.all(horizontalPadding),
             child: new Text(
-              'Vincent Van Gogh',
+              artData.artistname,
               style: headingThree,
             ),
           ),
@@ -108,7 +111,7 @@ Container artistInfoContainer(context) {
   );
 }
 
-Container priceInfoContainer(context) {
+Container priceInfoContainer(context, artData) {
   return Container(
       padding: const EdgeInsets.all(verticalTextPadding),
       child: new Row(
@@ -122,7 +125,7 @@ Container priceInfoContainer(context) {
             new Container(
               padding: const EdgeInsets.all(horizontalPadding),
               child: new Text(
-                'Priceless',
+                artData.price.toString(),
                 style: headingThree,
               ),
             ),
@@ -154,7 +157,7 @@ Container purchaseContainer(context) {
   );
 }
 
-Container descriptionHeader(context) {
+Container descriptionHeader(context, artData) {
   return Container(
     padding: const EdgeInsets.only(
         top: verticalWidgetPadding,
@@ -169,14 +172,14 @@ Container descriptionHeader(context) {
   );
 }
 
-Container description(context) {
+Container description(context, artData) {
   return Container(
       padding: const EdgeInsets.only(
           top: verticalWidgetPadding,
           left: horizontalPadding,
           right: horizontalPadding),
       child: new Text(
-        '''This is a famous painting by Vincent Van Gogh which can be viewed at the Van Gogh museum in Amsterdam, Netherlands. Van Gogh is a artist from the late 17th century. He was born in the Netherlands''',
+        artData.description,
         style: contentText,
       ));
 }
