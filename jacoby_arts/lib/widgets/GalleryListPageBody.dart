@@ -3,36 +3,62 @@ import 'package:jacoby_arts/pages/ArtworkDetailsPage.dart';
 import 'package:jacoby_arts/widgets/ArtworkListPageBody.dart';
 import 'package:jacoby_arts/Auxiliary/uiComponents.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:async';
 
 
 
 
+
+class Artist{
+  final String artist_name;
+  final DocumentReference reference;
+
+  Artist.fromMap(Map<String,dynamic> map, {this.reference})
+  :assert(map['name'] != null),
+  artist_name = map['name'];
+
+  Artist.fromSnapshot(DocumentSnapshot snapshot)
+  :this.fromMap(snapshot.data, reference: snapshot.reference);
+
+  @override
+  String toString() => "Artist<$artist_name>";
+}
 
 class Artwork{
-  final String artworkname;
-  final String artistname;
-  final int price;
+  final String artist_id;
+  final String artwork_id;
+  final String cart_id;
   final String description;
+  final String exhibit_name;
   final String image_url;
-
-
+  final String market_status;
+  final int price;
+  final String title;
   final DocumentReference reference;
 
   Artwork.fromMap(Map<String, dynamic> map, {this.reference})
-    :assert(map['artworkname'] != null),
-    assert(map['artist'] != null),
+    :assert(map['artist_id'] != null),
+    assert(map['artwork_id'] != null),
+    assert(map['cart_id'] != null),
     assert(map['description'] != null),
+    assert(map['exhibit_name'] != null),
     assert(map['image_url'] != null),
+    assert(map['market_status'] != null),
     assert(map['price'] != null),
-    artworkname = map['artworkname'],
-    artistname = map['artist'],
+    assert(map['title'] != null),
+    artist_id = map['artist_id'],
+    artwork_id = map['artwork_id'],
+    cart_id = map['cart_id'],
     description = map['description'],
+    exhibit_name = map['exhibit_name'],
     image_url = map['image_url'],
-    price = map['price'];
+    market_status = map['market_status'],
+    price = map['price'],
+    title = map['title'];
   Artwork.fromSnapshot(DocumentSnapshot snapshot)
     :this.fromMap(snapshot.data, reference: snapshot.reference);
   @override
-  String toString() => "ExhibitName<$artworkname:$artistname:$description:$image_url:$price>";
+  String toString() => "ExhibitName<$artwork_id:$artist_id:$cart_id:$description:$exhibit_name:$image_url:$market_status:$price:$title>";
 }
 
 class GalleryListPageBody extends StatelessWidget {
@@ -45,7 +71,7 @@ class GalleryListPageBody extends StatelessWidget {
 }
 getData(BuildContext context){
     return StreamBuilder<QuerySnapshot>(
-    stream: Firestore.instance.collection('Artworks').snapshots(),
+    stream: Firestore.instance.collection('Artwork').snapshots(),
     builder: (context, snapshot) {
       if(!snapshot.hasData) return LinearProgressIndicator();
       return makeBody(context, snapshot.data.documents);
@@ -54,6 +80,7 @@ getData(BuildContext context){
   );
 }
 makeBody(BuildContext context,List<DocumentSnapshot> snapshot){
+
   return Container(
     margin: EdgeInsets.only(
       top: topPadding,
@@ -62,12 +89,6 @@ makeBody(BuildContext context,List<DocumentSnapshot> snapshot){
     ),
     child: _listView(context,snapshot)
     
-    // ListView.builder(
-    //     scrollDirection: Axis.vertical,
-    //     shrinkWrap: true,
-    //     itemBuilder: (BuildContext context, int index) {
-    //       return makeCard(context,snapshot); // make a card for the list
-    //     })
   );
 }
 _listView(BuildContext context, List<DocumentSnapshot> snapshot){
@@ -76,8 +97,30 @@ return ListView(
   children: snapshot.map((data) => makeCard(context,data)).toList(),
 );
 }
-InkWell makeCard(BuildContext context, DocumentSnapshot data) {
+getArtist(String ref){
+
+  Stream<DocumentSnapshot> x = Firestore.instance.collection('Artists')
+  .document(ref).snapshots();
+  if (x != null){
+    print('has data');
+    return x.map((data) => dataa(data)).toList();
+    
+  }
+  else{
+    print('nope');
+  }
+
+}
+var _artist;
+dataa(DocumentSnapshot data){
+  print('in dataa');
+_artist = Artist.fromSnapshot(data);
+//print(_artist.artist_name);
+}
+
+InkWell makeCard(BuildContext context, DocumentSnapshot data){
   final _artwork =  Artwork.fromSnapshot(data);
+  getArtist(_artwork.artist_id);
   return new InkWell(
       // make it clickable
       onTap: () {
@@ -111,12 +154,13 @@ InkWell makeCard(BuildContext context, DocumentSnapshot data) {
                 child: Icon(Icons.image, color: Colors.white),
             ),
               title: Text(
-                _artwork.artworkname,
+                _artwork.title,
                 style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
               ),
               subtitle: Row(
                 children: <Widget>[
-                  Text(_artwork.artistname, style: TextStyle(color: Colors.white)),
+                  
+                  Text(_artist, style: TextStyle(color: Colors.white)),
                   Text(_artwork.price.toString(), style: TextStyle(color: Colors.white)),
                 ],
               ),
@@ -125,22 +169,3 @@ InkWell makeCard(BuildContext context, DocumentSnapshot data) {
         ),
   ));
 }
-
-// makeListTile() {
-// return ListTile(
-//     contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-//     leading: Container(
-//       padding: EdgeInsets.only(right: 12.0),
-//       decoration: new BoxDecoration(
-//           // create a inset for the image
-//           border: new Border(
-//               right: new BorderSide(width: 1.0, color: Colors.white))),
-//       child: Icon(Icons.image, color: Colors.white),
-//     ),
-//     title: Text(
-//       "Gallery Name",
-//       style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-//     ),
-//     trailing:
-//         Icon(Icons.keyboard_arrow_right, color: Colors.white, size: 30.0));
-// }
