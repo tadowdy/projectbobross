@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jacoby_arts/widgets/HomePageBody.dart';
-import 'package:jacoby_arts/widgets/GalleryListPageBody.dart';
+import 'package:jacoby_arts/widgets/ArtworkListPageBody.dart';
 import 'package:jacoby_arts/widgets/EventListPageBody.dart';
 import 'package:jacoby_arts/widgets/CartPageBody.dart';
 import 'package:jacoby_arts/widgets/AccountPageBody.dart';
@@ -17,7 +17,7 @@ class _HomeState extends State<Home> {
   int _currentIndex = 0;
   final List<Widget> _children = [
     HomePageBody(),
-    GalleryListPageBody(),
+    ArtworkListPageBody(),
     EventListPageBody(),
     CartPageBody(),
     AccountPageBody()
@@ -45,7 +45,7 @@ class _HomeState extends State<Home> {
               ),
               BottomNavigationBarItem(
                 icon: new Icon(Icons.image),
-                title: new Text('Gallery'),
+                title: new Text('Artwork'),
               ),
               BottomNavigationBarItem(
                 icon: new Icon(Icons.today),
