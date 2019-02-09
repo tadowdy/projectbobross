@@ -28,7 +28,7 @@ class ArtworkDetailsPage extends StatelessWidget {
 Scaffold detailsScaffold(context, artData) {
   return new Scaffold(
       appBar: new AppBar(
-        title: new Text(artData.artworkname),
+        title: new Text(artData.title),
         backgroundColor: themeColor,
       ),
       body: Center(
@@ -81,7 +81,7 @@ Container imageDetailsContainer(context, artData) {
           new Container(
             padding: const EdgeInsets.all(horizontalPadding),
             child: new Text(
-              artData.artworkname,
+              artData.title,
               style: headingThree,
             ),
           ),
@@ -103,7 +103,7 @@ Container artistInfoContainer(context, artData) {
           new Container(
             padding: const EdgeInsets.all(horizontalPadding),
             child: new Text(
-              artData.artistname,
+              artData.artist_id,
               style: headingThree,
             ),
           ),

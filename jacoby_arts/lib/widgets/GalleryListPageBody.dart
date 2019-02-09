@@ -120,7 +120,8 @@ _artist = Artist.fromSnapshot(data);
 
 InkWell makeCard(BuildContext context, DocumentSnapshot data){
   final _artwork =  Artwork.fromSnapshot(data);
-  getArtist(_artwork.artist_id);
+  
+ 
   return new InkWell(
       // make it clickable
       onTap: () {
@@ -128,13 +129,7 @@ InkWell makeCard(BuildContext context, DocumentSnapshot data){
         Navigator.push(context,
         MaterialPageRoute(
             builder: (__) => new ArtworkDetailsPage(artData: _artwork)
-            // new Scaffold(
-            //     appBar: new AppBar(
-            //       title: new Text('Gallery Title'),
-            //       backgroundColor: themeColor,
-            //     ),
-            //     body: new ArtworkDetailsPage(_artwork: _artwork)
-            //     )
+
           )
           );
       },
@@ -160,7 +155,7 @@ InkWell makeCard(BuildContext context, DocumentSnapshot data){
               subtitle: Row(
                 children: <Widget>[
                   
-                  Text(_artist, style: TextStyle(color: Colors.white)),
+                  Text('_artist', style: TextStyle(color: Colors.white)),
                   Text(_artwork.price.toString(), style: TextStyle(color: Colors.white)),
                 ],
               ),
