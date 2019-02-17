@@ -23,7 +23,8 @@ class CartPageBody extends StatelessWidget {
     return new Column(
       children: <Widget>[
         _cartHeader(context, _cartItems),
-        _buildCartItems(_cartItems)
+        _buildCartItems(_cartItems),
+        _checkoutButton(context),
       ],
     );
   }
@@ -125,4 +126,24 @@ class CartPageBody extends StatelessWidget {
   void addDonationToCart(ArtInfo cartItem) {
     _cartItems.add(cartItem);
   }
+}
+
+Widget _checkoutButton(context) {
+  return new ButtonTheme(
+    child: new Container(
+      width: largeButtonWidth,
+      height: buttonHeight,
+      child: new RaisedButton(
+        color: brightButton,
+        child: new Text(
+          "Checkout",
+          style: new TextStyle(fontSize: buttonTextSize),
+        ),
+        elevation: 4.0,
+        onPressed: () {
+          // lead to square checkout
+        },
+      ),
+    ),
+  );
 }
