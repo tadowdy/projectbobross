@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jacoby_arts/Auxiliary/uiComponents.dart';
+import 'package:intl/intl.dart';
 
 class EventDetailsPage extends StatelessWidget {
   var eventData;
@@ -30,15 +31,22 @@ buildBody(BuildContext context, eventData){
         //valueColor:AlwaysStoppedAnimation(Colors.green)),
       //),
     //);
+    var time = eventData.date.replaceAll(new RegExp(r'-'),'');
+    var time1 = time.replaceAll(new RegExp(r':'),'');
+    var time2 = time1.substring(0,15);
+    DateTime date = DateTime.parse(time2);
+    var final_date = new DateFormat.yMMMd().format(date);
+    var final_time = new DateFormat.jm().format(date);
 
       final eventPrice = Container(
     padding: const EdgeInsets.all(7.0),
     decoration: new BoxDecoration(
       border: new Border.all(color: Colors.white),
-      borderRadius: BorderRadius.circular(5.0)),
+      borderRadius: BorderRadius.circular(15.0)),
       child: new Text(
         "\$" + eventData.price.toString(),
         style: TextStyle(color: Colors.white),
+        textAlign: TextAlign.center,
       ),
     );
 
@@ -71,12 +79,12 @@ buildBody(BuildContext context, eventData){
             child: Padding(
               padding:EdgeInsets.only(left: 10.0),
               child: Text(
-                eventData.date.toString(),
+                final_date+"  "+final_time.toString(),
                 style: TextStyle(color: Colors.white),
               )
             )
           ),
-          Expanded(flex: 1, child: eventPrice)
+          Expanded(flex: 2, child: eventPrice)
         ],
       ),
     ],
