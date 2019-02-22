@@ -53,7 +53,7 @@ buildBody(BuildContext context, eventData){
     final topContentText = Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: <Widget>[
-      SizedBox(height:40.0),
+      SizedBox(height:10.0),
       Icon(
         Icons.calendar_today,
         color: Colors.white,
