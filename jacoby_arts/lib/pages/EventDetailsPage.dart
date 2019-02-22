@@ -98,7 +98,7 @@ buildBody(BuildContext context, eventData){
       height: MediaQuery.of(context).size.height * 0.4,
       padding: EdgeInsets.all(40.0),
       width: MediaQuery.of(context).size.width,
-      decoration: BoxDecoration(color: Color.fromRGBO(58,66,86,.9)),
+      decoration: BoxDecoration(color: Color.fromRGBO(58,66,86,.7)),
       child: Center(
         child: topContentText,
     ),
