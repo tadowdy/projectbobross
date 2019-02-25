@@ -37,14 +37,15 @@ buildBody(BuildContext context, eventData){
     DateTime date = DateTime.parse(time2);
     var final_date = new DateFormat.yMMMd().format(date);
     var final_time = new DateFormat.jm().format(date);
-
+    var intEventPrice = eventData.price.toString();
+    intEventPrice = intEventPrice.substring(0,intEventPrice.length-2);
       final eventPrice = Container(
     padding: const EdgeInsets.all(7.0),
     decoration: new BoxDecoration(
       border: new Border.all(color: Colors.white),
       borderRadius: BorderRadius.circular(15.0)),
       child: new Text(
-        "\$" + eventData.price.toString(),
+        "\$" + intEventPrice,
         style: TextStyle(color: Colors.white),
         textAlign: TextAlign.center,
       ),
@@ -57,7 +58,7 @@ buildBody(BuildContext context, eventData){
       Icon(
         Icons.calendar_today,
         color: Colors.white,
-        size:40.0,
+        size:30.0,
       ),
       Container(
         width: 120.0,
@@ -67,7 +68,7 @@ buildBody(BuildContext context, eventData){
       SizedBox(height: 10.0),
       Text(
         eventData.title,
-        style: TextStyle(color: Colors.white, fontSize: 45.0),
+        style: TextStyle(color: Colors.white, fontSize: 40.0),
       ),
       SizedBox(height: 10.0),
       Row(
