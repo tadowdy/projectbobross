@@ -54,12 +54,12 @@ buildBody(BuildContext context, eventData){
     final topContentText = Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: <Widget>[
-      SizedBox(height:10.0),
-      Icon(
-        Icons.calendar_today,
-        color: Colors.white,
-        size:30.0,
-      ),
+      //SizedBox(height:10.0),
+      //Icon(
+        //Icons.calendar_today,
+        //color: Colors.white,
+        //size:30.0,
+      //),
       Container(
         width: 120.0,
         
@@ -95,7 +95,7 @@ buildBody(BuildContext context, eventData){
   children: <Widget>[
     Container(
       padding: EdgeInsets.only(left:10.0),
-      height: MediaQuery.of(context).size.height * 0.4,
+      height: MediaQuery.of(context).size.height * 0.35,
       decoration: new BoxDecoration(
         image: new DecorationImage(
           image: new AssetImage('images/lobby.jpg'),
@@ -104,7 +104,7 @@ buildBody(BuildContext context, eventData){
       ),
       ),
     Container(
-      height: MediaQuery.of(context).size.height * 0.4,
+      height: MediaQuery.of(context).size.height * 0.35,
       padding: EdgeInsets.all(40.0),
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(color: Color.fromRGBO(58,66,86,.7)),
