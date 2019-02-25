@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jacoby_arts/Auxiliary/uiComponents.dart';
+import 'package:intl/intl.dart';
 
 class EventDetailsPage extends StatelessWidget {
   var eventData;
@@ -31,6 +32,12 @@ buildBody(BuildContext context, eventData){
 ]));
 }
 addTimeDate(BuildContext context, eventData){
+  var time = eventData.date.replaceAll(new RegExp(r'-'), '');
+  var time1 = time.replaceAll(new RegExp(r':'), '');
+  var time2 = time1.substring(0,15);
+  DateTime date = DateTime.parse(time2);
+  final _date = new DateFormat.yMMMd().format(date);
+  final _time = new DateFormat.jm().format(date);
   return new SingleChildScrollView(
   child: new Container(
     margin: const EdgeInsets.only(
@@ -39,7 +46,7 @@ addTimeDate(BuildContext context, eventData){
       children: <Widget>[
         new Expanded(child: new Text(eventData.location, style: headingOneBold)),
         new Text(
-          eventData.date,
+          _date + " " + _time,
           style: headingOneBold,
         ),
       ],

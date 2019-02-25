@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:jacoby_arts/Pages/EventDetailsPage.dart';
-
+import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+
 
 class Events{
   final String title;
@@ -73,19 +74,20 @@ makeBody(BuildContext context, List<DocumentSnapshot> snapshot){
 }
 InkWell makeCard(BuildContext context, DocumentSnapshot data){
   final eventData = Events.fromSnapshot(data);
-  // DateTime eventDate = eventData.date;
-  // String formattedDate = DateFormat('yyyy-MM-dd - kk:mm').format(eventDate);
+  var time = eventData.date.replaceAll(new RegExp(r'-'), '');
+  var time1 = time.replaceAll(new RegExp(r':'), '');
+  var time2 = time1.substring(0,15);
+  DateTime date = DateTime.parse(time2);
+  final _date = new DateFormat.yMMMd().format(date);
+  final _time = new DateFormat.jm().format(date);
+  
+  
 
   return new InkWell( // make it clickable
   onTap: (){
     Navigator.push(context,
     MaterialPageRoute(builder: (__) =>new EventDetailsPage(eventData: eventData)
-      // builder: (context) => new Scaffold(
-      //   appBar: new AppBar(
-      //     title: new Text(eventData.title)
-      //   ),
-      //   body: new EventDetailsPage(), // go to new page
-      // )
+
     )
     ); // create a event page if its clicked
   },
@@ -110,7 +112,7 @@ InkWell makeCard(BuildContext context, DocumentSnapshot data){
   // subtitle: Text("Intermediate", style: TextStyle(color: Colors.white)),
           subtitle: Row(
             children: <Widget>[
-              Text(eventData.date, style: TextStyle(color: Colors.white)),
+              Text(_date + " " + _time , style: TextStyle(color: Colors.white)),
               Text(' \$' + eventData.price.toString(), style: TextStyle(color: Colors.white)),
             ],
           ),
@@ -122,30 +124,4 @@ InkWell makeCard(BuildContext context, DocumentSnapshot data){
   );
 }
 
-// final makeListTile = ListTile(
-//   contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-//   leading: Container(
-//     padding: EdgeInsets.only(right: 12.0),
-//     decoration: new BoxDecoration( // create a inset for the image
-//         border: new Border(
-//             right: new BorderSide(width: 1.0, color: Colors.white))),
-//     child: Icon(Icons.image, color: Colors.white),
-//   ),
-//   title: Text(
-//     "Class Name",
-//     style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-//   ),
-//   // subtitle: Text("Intermediate", style: TextStyle(color: Colors.white)),
-
-//   subtitle: Row(
-//     children: <Widget>[
-//       Text(" Date/Time", style: TextStyle(color: Colors.white)),
-//       Text(" Price", style: TextStyle(color: Colors.white)),
-
-//     ],
-//   ),
-  
-//   trailing:
-//       Icon(Icons.keyboard_arrow_right, color: Colors.white, size: 30.0)
-//   );
 

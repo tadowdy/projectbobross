@@ -26,39 +26,40 @@ class Artist{
 
 class Artwork{
   final String artist_id;
-  final String artwork_id;
+  //final String artwork_id;
   final String cart_id;
   final String description;
   final String exhibit_name;
   final String image_url;
   final String market_status;
-  final int price;
+  final double price;
   final String title;
   final DocumentReference reference;
 
   Artwork.fromMap(Map<String, dynamic> map, {this.reference})
     :assert(map['artist_id'] != null),
-    assert(map['artwork_id'] != null),
+   // assert(map['artwork_id'] != null),
     assert(map['cart_id'] != null),
     assert(map['description'] != null),
     assert(map['exhibit_name'] != null),
-    assert(map['image_url'] != null),
+    assert(map['image_URL'] != null),
     assert(map['market_status'] != null),
     assert(map['price'] != null),
     assert(map['title'] != null),
     artist_id = map['artist_id'],
-    artwork_id = map['artwork_id'],
+    //artwork_id = map['artwork_id'],
     cart_id = map['cart_id'],
     description = map['description'],
     exhibit_name = map['exhibit_name'],
-    image_url = map['image_url'],
+    image_url = map['image_URL'],
     market_status = map['market_status'],
     price = map['price'],
     title = map['title'];
   Artwork.fromSnapshot(DocumentSnapshot snapshot)
     :this.fromMap(snapshot.data, reference: snapshot.reference);
   @override
-  String toString() => "ExhibitName<$artwork_id:$artist_id:$cart_id:$description:$exhibit_name:$image_url:$market_status:$price:$title>";
+  String toString() => "ExhibitName<$artist_id:$cart_id:$description:$exhibit_name:$image_url:$market_status:$price:$title>";
+  //$artwork_id:
 }
 
 class GalleryListPageBody extends StatelessWidget {
@@ -120,7 +121,7 @@ _artist = Artist.fromSnapshot(data);
 
 InkWell makeCard(BuildContext context, DocumentSnapshot data){
   final _artwork =  Artwork.fromSnapshot(data);
-  
+  final _artist =_artwork.artist_id;
  
   return new InkWell(
       // make it clickable
@@ -155,7 +156,7 @@ InkWell makeCard(BuildContext context, DocumentSnapshot data){
               subtitle: Row(
                 children: <Widget>[
                   
-                  Text('_artist', style: TextStyle(color: Colors.white)),
+                  Text(_artist, style: TextStyle(color: Colors.white)),
                   Text(_artwork.price.toString(), style: TextStyle(color: Colors.white)),
                 ],
               ),
