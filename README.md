@@ -1,6 +1,7 @@
 <h1> Project Bob Ross </h1>
 <h2> Intro <h2>
-  Currently: Project Bob Ross is in the beginning UI/UX phases which is in the folder pbr.
+  Currently: Working on integrating the database and payment methods.
+  Done: Project Bob Ross is done with the UI/UX phases which are in the folder pbr.
   
   <h3> Branch Naming Conventions </h3>
     <ul><li>use description(ex: feature/)</li>
@@ -9,4 +10,3 @@
     </ul>
     <h3> Commit Conventions </h3>
     All commit messages will be made in present tense.
-<h2> TODO <h2>
