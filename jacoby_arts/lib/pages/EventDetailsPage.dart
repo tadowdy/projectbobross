@@ -162,6 +162,12 @@ buildBody(BuildContext context, eventData){
   );
 
 addTimeDate(BuildContext context, eventData){
+  var time = eventData.date.replaceAll(new RegExp(r'-'), '');
+  var time1 = time.replaceAll(new RegExp(r':'), '');
+  var time2 = time1.substring(0,15);
+  DateTime date = DateTime.parse(time2);
+  final _date = new DateFormat.yMMMd().format(date);
+  final _time = new DateFormat.jm().format(date);
   return new SingleChildScrollView(
   child: new Container(
     margin: const EdgeInsets.only(
@@ -172,6 +178,7 @@ addTimeDate(BuildContext context, eventData){
         new Column(children: <Widget>[
         new Text(eventData.location, style: headingOne),
         new Text(
+
           eventData.date,
           style: headingOne,
         ),
