@@ -42,6 +42,8 @@ flutter:
     - images/full_logo.png
     - images/profile_temp.png
     - images/sunflowers.jpg
+    - images/lobby.jpg
+    - images/sign.jpg
 
   # To add assets to your application, add an assets section, like this:
   # assets:
