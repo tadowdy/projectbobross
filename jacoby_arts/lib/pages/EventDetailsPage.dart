@@ -23,14 +23,6 @@ class EventDetailsPage extends StatelessWidget {
 
 buildBody(BuildContext context, eventData){
 
-    //final levelIndicator = Container(
-    //child: Container(
-      //child:LinearProgressIndicator(
-        //backgroundColor: Color.fromRGBO(209, 224, 224, 0.2),
-        //value: eventData.price,
-        //valueColor:AlwaysStoppedAnimation(Colors.green)),
-      //),
-    //);
     var time = eventData.date.replaceAll(new RegExp(r'-'),'');
     var time1 = time.replaceAll(new RegExp(r':'),'');
     var time2 = time1.substring(0,15);
