@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jacoby_arts/pages/SurveyDetailsPage.dart';
 import 'package:jacoby_arts/Auxiliary/uiComponents.dart';
+import 'package:jacoby_arts/pages/LogInPage.dart';
 
 class HomePageBody extends StatelessWidget {
   HomePageBody();
@@ -66,7 +67,13 @@ Column mainColumn(context) {
             fontFamily: "Roboto"),
       ),
       emailField,
-      emailButton(context),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget> [
+      surveyButton(context),
+      loginButton(context),
+        ]
+      )
     ],
   );
 }
@@ -83,7 +90,7 @@ final emailField = new TextField(
       fontFamily: "Roboto"),
 );
 
-ButtonTheme emailButton(context) {
+ButtonTheme surveyButton(context) {
   return new ButtonTheme(
    // buttonColor: normalButton,
     minWidth: medButtonWidth,
@@ -107,4 +114,28 @@ ButtonTheme emailButton(context) {
       ),
     ),
   );
+}
+  ButtonTheme loginButton(context) {
+    return new ButtonTheme(
+    minWidth: medButtonWidth,
+    height: buttonHeight,
+    child: RaisedButton(
+      onPressed: () {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => LogInPage()));
+      },
+      child: new Row(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.only(right: 6.0),
+            child: Text(
+              'Sign In',
+              style: TextStyle(fontSize: buttonTextSize),
+            ),
+          ),
+        ],
+      ),
+    ),
+    );
 }
