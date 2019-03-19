@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:jacoby_arts/widgets/HomePageBody.dart';
 import 'package:jacoby_arts/widgets/GalleryListPageBody.dart';
@@ -5,8 +7,37 @@ import 'package:jacoby_arts/widgets/EventListPageBody.dart';
 import 'package:jacoby_arts/widgets/CartPageBody.dart';
 import 'package:jacoby_arts/widgets/AccountPageBody.dart';
 import 'package:jacoby_arts/Auxiliary/uiComponents.dart';
+import 'package:square_in_app_payments/models.dart';
+import 'package:square_in_app_payments/in_app_payments.dart';
 
 class Home extends StatefulWidget {
+    Future<void> _onStartCardEntryFlow() async {
+    await InAppPayments.startCardEntryFlow(
+        onCardNonceRequestSuccess: _onCardEntryCardNonceRequestSuccess,
+        onCardEntryCancel: _onCancelCardEntryFlow);
+  }
+    void _onCancelCardEntryFlow() {
+    // Handle the cancel callback
+  }
+    void _onCardEntryCardNonceRequestSuccess(CardDetails result) async {
+    try {
+      // take payment with the card nonce details
+      // you can take a charge
+      // await chargeCard(result);
+
+      // payment finished successfully
+      // you must call this method to close card entry
+      void _onCardEntryComplete() {
+    // Update UI to notify user that the payment flow is finished successfully
+  }
+      InAppPayments.completeCardEntry(
+          onCardEntryComplete: _onCardEntryComplete);
+    } on Exception catch (ex) {
+      // payment failed to complete due to error
+      // notify card entry to show processing error
+      InAppPayments.showCardNonceProcessingError(ex.message);
+    }
+  }
   @override
   State<StatefulWidget> createState() {
     return _HomeState();
@@ -14,6 +45,9 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+    Future<void> _initSquarePayment() async{
+    await InAppPayments.setSquareApplicationId('sq0idp-ZiZd4OWH_IAerGyP9TUhWQ');
+  }
   int _currentIndex = 0;
   final List<Widget> _children = [
     HomePageBody(),

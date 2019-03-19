@@ -17,6 +17,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:square_in_app_payments/models.dart';
+import 'package:square_in_app_payments/in_app_payments.dart';
 import 'package:http/http.dart' as http;
 
 // Replace this with the server host you create, if you have your own server running
