@@ -10,6 +10,7 @@ final _cartItems = <ArtInfo>[
 ];
 
 class CartPageBody extends StatelessWidget {
+  
   CartPageBody();
 
   @override
