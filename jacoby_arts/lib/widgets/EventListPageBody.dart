@@ -11,7 +11,7 @@ class Events{
   final String image_url;
   final String description;
   final String date;
-  final double capacity;
+  final int capacity;
   final DocumentReference reference;
 
   Events.fromMap(Map<String,dynamic> map, {this.reference})
