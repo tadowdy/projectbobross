@@ -5,8 +5,17 @@ import 'package:jacoby_arts/widgets/EventListPageBody.dart';
 import 'package:jacoby_arts/widgets/CartPageBody.dart';
 import 'package:jacoby_arts/widgets/AccountPageBody.dart';
 import 'package:jacoby_arts/Auxiliary/uiComponents.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Home extends StatefulWidget {
+  const Home({
+    Key key,
+    @required this.user
+  }) : super(key: key);
+
+  final FirebaseUser user;
+
+
   @override
   State<StatefulWidget> createState() {
     return _HomeState();

@@ -1,9 +1,11 @@
+
 import 'package:flutter/material.dart';
 import 'package:jacoby_arts/pages/SurveyDetailsPage.dart';
 import 'package:jacoby_arts/Auxiliary/uiComponents.dart';
 import 'package:jacoby_arts/pages/LogInPage.dart';
 
 class HomePageBody extends StatelessWidget {
+  
   HomePageBody();
 
   @override
@@ -27,7 +29,7 @@ Column mainColumn(context) {
     crossAxisAlignment: CrossAxisAlignment.center,
     children: <Widget>[
       new Text(
-        "Welcome!",
+        'Welcome!',
         style: new TextStyle(
             fontSize: headingOneSize,
             color: const Color(0xFF080808),
@@ -122,7 +124,7 @@ ButtonTheme surveyButton(context) {
     child: RaisedButton(
       onPressed: () {
         Navigator.push(context,
-            MaterialPageRoute(builder: (context) => LogInPage()));
+            MaterialPageRoute(builder: (context) => LoginPage()));
       },
       child: new Row(
         mainAxisSize: MainAxisSize.min,
