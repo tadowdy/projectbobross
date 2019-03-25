@@ -3,6 +3,14 @@ import 'package:jacoby_arts/Pages/DonatePage.dart';
 import 'package:jacoby_arts/Auxiliary/CartClasses.dart';
 import 'package:jacoby_arts/Auxiliary/uiComponents.dart';
 
+import 'dart:async';
+import 'dart:convert';
+import 'dart:io';
+import 'package:http/http.dart' as http;
+import 'package:square_in_app_payments/in_app_payments.dart';
+// Put and alias due to name conflict
+import 'package:square_in_app_payments/models.dart' as IAPModels;
+
 final _cartItems = <ArtInfo>[
   new ArtInfo("We are Number One", "Robbie Rotten", 1.11),
   new ArtInfo("I Was Number One", "Smitty Werbenjagermanjensen", 1.00),
@@ -127,24 +135,85 @@ class CartPageBody extends StatelessWidget {
   void addDonationToCart(ArtInfo cartItem) {
     _cartItems.add(cartItem);
   }
+
+  Future<void> chargeCard(IAPModels.CardDetails cardDetails) async {
+    // charge card by call to server charge endpoint
+    // set a easy charge endpoint by following this example:
+    // https://github.com/square/in-app-payments-server-quickstart
+    
+    print("charge doesn't actually happen, please set up charge endpiont server.");
+    //// An example code to call your server api to charge
+    // var chargeUrl = "REPLACE_ME";
+    // var body = jsonEncode({"nonce": cardDetails.nonce});
+    // http.Response response;
+    // try {
+    //   response = await http.post(chargeUrl, body: body, headers: {
+    //     "Accept": "application/json",
+    //     "content-type": "application/json"
+    //   });
+    // } on SocketException catch (ex) {
+    //   throw ex;
+    // }
+
+    // var responseBody = json.decode(response.body);
+    // if (response.statusCode == 200) {
+    //   // handle response
+    //   return;
+    // } else {
+    //   throw Exception("failed to charge");
+    // }
+  }
+
+  void _onCardEntryCardNonceRequestSuccess(IAPModels.CardDetails result) async {
+    try {
+      await chargeCard(result);
+      InAppPayments.completeCardEntry(
+          onCardEntryComplete: _onCardEntryComplete);
+    } on Exception catch (ex) {
+      InAppPayments.showCardNonceProcessingError(ex.toString());
+    }
+  }
+
+  Future<void> _onStartCardEntryFlow() async {
+    await InAppPayments.startCardEntryFlow(
+        onCardNonceRequestSuccess: _onCardEntryCardNonceRequestSuccess,
+        onCardEntryCancel: _onCancelCardEntryFlow,
+        collectPostalCode: true);
+  }
+
+  void _onCancelCardEntryFlow() {
+    print("payment canceled");
+  }
+
+  void _onCardEntryComplete() {
+    print("card entry UI is closed completely.");
+  }
+
+  Future<void> _onStartCardEntry() async {
+    print("start card entry clicked.");
+    await InAppPayments.startCardEntryFlow(
+        onCardNonceRequestSuccess: _onCardEntryCardNonceRequestSuccess,
+        onCardEntryCancel: _onCancelCardEntryFlow,
+        collectPostalCode: true);
+  } 
+
+  Widget _checkoutButton(context) {
+    return new ButtonTheme(
+      child: new Container(
+        width: largeButtonWidth,
+        height: buttonHeight,
+        child: new RaisedButton(
+          color: brightButton,
+          child: new Text(
+            "Checkout",
+            style: new TextStyle(fontSize: buttonTextSize),
+          ),
+          elevation: 4.0,
+          onPressed: _onStartCardEntry,
+        ),
+      ),
+    );
+  }
 }
 
-Widget _checkoutButton(context) {
-  return new ButtonTheme(
-    child: new Container(
-      width: largeButtonWidth,
-      height: buttonHeight,
-      child: new RaisedButton(
-        color: brightButton,
-        child: new Text(
-          "Checkout",
-          style: new TextStyle(fontSize: buttonTextSize),
-        ),
-        elevation: 4.0,
-        onPressed: () {
-          // lead to square checkout
-        },
-      ),
-    ),
-  );
-}
+

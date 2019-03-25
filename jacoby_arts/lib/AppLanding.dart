@@ -45,9 +45,16 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-    Future<void> _initSquarePayment() async{
+  Future<void> _initSquarePayment() async{
     await InAppPayments.setSquareApplicationId('sq0idp-ZiZd4OWH_IAerGyP9TUhWQ');
   }
+
+  @override
+  void initState() {
+    super.initState();
+    _initSquarePayment();
+  }
+
   int _currentIndex = 0;
   final List<Widget> _children = [
     HomePageBody(),
