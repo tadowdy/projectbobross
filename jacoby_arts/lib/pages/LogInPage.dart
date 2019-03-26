@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:jacoby_arts/Auxiliary/uiComponents.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:jacoby_arts/AppLanding.dart';
-
+import 'package:jacoby_arts/globals.dart' as globals;
 
 class LoginPage extends StatefulWidget {
   @override
@@ -13,7 +13,9 @@ class LoginPage extends StatefulWidget {
   enum FormMode { LOGIN, SIGNUP }
 
 class _LoginPageState extends State<LoginPage> {
-  String _email, _password;
+  String _email, _password, _passwordVerify, _firstName, _lastName;
+  var _passwordKey = GlobalKey<FormFieldState>();
+
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -30,8 +32,8 @@ class _LoginPageState extends State<LoginPage> {
     if(formState.validate()){
       formState.save();
       try{
-        FirebaseUser user = await FirebaseAuth.instance.signInWithEmailAndPassword(email: _email, password: _password);
-        Navigator.push(context, MaterialPageRoute(builder: (context) => Home(user: user)));
+        globals.user2 = await FirebaseAuth.instance.signInWithEmailAndPassword(email: _email, password: _password);
+        Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
       }catch(e){
         print(e.message);
       }
@@ -42,20 +44,15 @@ class _LoginPageState extends State<LoginPage> {
     if(formState.validate()){
       formState.save();
       try{
-        FirebaseUser user = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: _email, password: _password);
-        user.sendEmailVerification();
-        Navigator.push(context, MaterialPageRoute(builder: (context) => Home(user: user)));
+        globals.user2 = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: _email, password: _password);
+        globals.user2.sendEmailVerification();
+        Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
       }catch(e){
         print(e.message);
       }
     }
   }
 
-
-// class _LogInPageState extends State<LogInPage> {
-//   final _formKey = new GlobalKey<FormState>();
-//   String _email;
-//   String _password;
   String _errorMessage;
 
   bool _isIos;
@@ -95,39 +92,6 @@ class _LoginPageState extends State<LoginPage> {
     });
   }
 
-  // void _validateAndSubmit() async {
-  //   setState(() {
-  //     _errorMessage = "";
-  //     _isLoading = true;
-  //   });
-  //   if (_validateAndSave()) {
-  //     String userId = "";
-  //     try {
-  //       if (_formMode == FormMode.LOGIN) {
-  //         userId = await widget.auth.signIn(_email, _password);
-  //         print('Signed in: $userId');
-  //       } else {
-  //         userId = await widget.auth.signUp(_email, _password);
-  //         print('Signed up user: $userId');
-  //       }
-  //       if (userId.length > 0 && userId != null) {
-  //         widget.onSignedIn();
-  //       }
-  //     } catch (e) {
-  //       print('Error: $e');
-  //       setState(() {
-  //         _isLoading = false;
-  //         if (_isIos) {
-  //           _errorMessage = e.details;
-  //         } else
-  //           _errorMessage = e.message;
-  //       });
-  //     }
-  //   }
-  // }
-
-
-
 // // void _showVerifyEmailSentDialog() {
 // //   showDialog(
 // //     context: context,
@@ -156,7 +120,18 @@ class _LoginPageState extends State<LoginPage> {
             key: _formKey,
             child: new ListView(
               shrinkWrap: true,
-              children: <Widget>[
+               children: _formMode == FormMode.SIGNUP 
+                ? <Widget>[
+                _showFirstNameInput(),
+                _showLastNameInput(),
+                _showEmailInput(),
+                _showPasswordInput(),
+                _showPasswordVerifyInput(),
+                _showPrimaryButton(),
+                _showSecondaryButton(),
+                _showErrorMessage()
+              ]
+              :  <Widget>[
                 _showEmailInput(),
                 _showPasswordInput(),
                 _showPrimaryButton(),
@@ -165,6 +140,40 @@ class _LoginPageState extends State<LoginPage> {
               ],
             )));
   }
+
+  Widget _showFirstNameInput() {
+    return TextFormField(
+      keyboardType: TextInputType.text,
+      decoration: InputDecoration(
+        labelText: "First Name ",
+        hintText: "Ex: John",
+        hintStyle: hintStyleText),
+        validator: (input) {
+          if(input.isEmpty){
+            return 'Please enter a first name';
+          }
+        },
+        onSaved: (input) => _firstName = input,
+      );
+  }
+
+    Widget _showLastNameInput() {
+    return TextFormField(
+      keyboardType: TextInputType.text,
+      decoration: InputDecoration(
+        labelText: "Last Name ",
+        hintText: "Ex: Doe",
+        hintStyle: hintStyleText),
+        validator: (input) {
+          if(input.isEmpty){
+            return 'Please enter a last name';
+          }
+        },
+        onSaved: (input) => _lastName = input,
+      );
+  }
+
+
 
   Widget _showEmailInput() {
     return TextFormField(
@@ -182,19 +191,38 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
+
+
   Widget _showPasswordInput() {
     return TextFormField(
+      key: _passwordKey,
       obscureText: true,
       decoration: InputDecoration(
           labelText: "Password: ",
           hintText: "Ex:  happy_Tr33s",
           hintStyle: hintStyleText),
       validator: (input) {
-        if(input.length<6){
-          return 'Your password must be at least 6 characters';
+        if(input.length < 6){
+          return 'Your password must be at least 6 characters long';
         }
       }, 
       onSaved: (value) => _password = value,
+    );
+  }
+
+   Widget _showPasswordVerifyInput() {
+    return TextFormField(
+      obscureText: true,
+      decoration: InputDecoration(
+          labelText: "Verify password ",
+          hintStyle: hintStyleText),
+      validator: (input) {
+        var password =_passwordKey.currentState.value;
+        if(input != password){
+          return 'Your passwords must match!';
+        }
+      }, 
+      onSaved: (value) => _passwordVerify = value,
     );
   }
 
