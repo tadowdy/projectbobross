@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:jacoby_arts/pages/ArtworkDetailsPage.dart';
 import 'package:jacoby_arts/widgets/ArtworkListPageBody.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:jacoby_arts/Auxiliary/uiComponents.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:async';
+
+
 
 
 
@@ -122,7 +125,8 @@ _artist = Artist.fromSnapshot(data);
 InkWell makeCard(BuildContext context, DocumentSnapshot data){
   final _artwork =  Artwork.fromSnapshot(data);
   final _artist =_artwork.artist_id;
- 
+  var _imageUrl = 'http://image.pbs.org/video-assets/WUCF/wucf-artisodes/119008/images/mezzanine_768.jpg';
+  
   return new InkWell(
       // make it clickable
       onTap: () {
@@ -147,7 +151,7 @@ InkWell makeCard(BuildContext context, DocumentSnapshot data){
                  // create a inset for the image
                 border: new Border(
                 right: new BorderSide(width: 1.0, color: Colors.white))),
-                child: Icon(Icons.image, color: Colors.white),
+                child: new Image.network(_artwork.image_url, height: 75, width: 75,), //url here
             ),
               title: Text(
                 _artwork.title,

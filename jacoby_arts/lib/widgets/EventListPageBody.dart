@@ -80,7 +80,7 @@ InkWell makeCard(BuildContext context, DocumentSnapshot data){
   DateTime date = DateTime.parse(time2);
   final _date = new DateFormat.yMMMd().format(date);
   final _time = new DateFormat.jm().format(date);
-  
+  var _imageUrl = eventData.image_url;
   
 
   return new InkWell( // make it clickable
@@ -103,7 +103,7 @@ InkWell makeCard(BuildContext context, DocumentSnapshot data){
           decoration: new BoxDecoration( // create a inset for the image
             border: new Border(
             right: new BorderSide(width: 1.0, color: Colors.white))),
-            child: Icon(Icons.image, color: Colors.white),
+            child: new Image.network(_imageUrl, height: 75, width: 75,),
         ),
           title: Text(
             eventData.title,
