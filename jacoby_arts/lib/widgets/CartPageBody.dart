@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:jacoby_arts/Pages/DonatePage.dart';
 import 'package:jacoby_arts/Auxiliary/CartClasses.dart';
 import 'package:jacoby_arts/Auxiliary/uiComponents.dart';
+import 'package:jacoby_arts/auxiliary/transaction_service.dart';
+import 'package:square_in_app_payments/in_app_payments.dart';
+import 'package:square_in_app_payments/models.dart';
 
 final _cartItems = <ArtInfo>[
   new ArtInfo("We are Number One", "Robbie Rotten", 1.11),
@@ -10,7 +13,7 @@ final _cartItems = <ArtInfo>[
 ];
 
 class CartPageBody extends StatelessWidget {
-  
+  bool get _chargeServerHostReplaced => chargeServerHost != "REPLACE_ME";
   CartPageBody();
 
   @override
@@ -18,6 +21,43 @@ class CartPageBody extends StatelessWidget {
     return Container(
       child: makeBody(context, _cartItems),
     );
+  void _onCardEntryComplete() {
+    // if (_chargeServerHostReplaced) {
+    //   showAlertDialog(
+    //       context: BuySheet.scaffoldKey.currentContext,
+    //       title: "Your order was successful",
+    //       description:
+    //           "Go to your Square dashbord to see this order reflected in the sales tab.");
+    // }
+  }
+
+  void _onCardEntryCardNonceRequestSuccess(CardDetails result) async {
+    if (!_chargeServerHostReplaced) {
+      InAppPayments.completeCardEntry(
+          onCardEntryComplete: _onCardEntryComplete);
+
+      // _showUrlNotSetAndPrintCurlCommand(result.nonce);
+      return;
+    }
+    try {
+      await chargeCard(result);
+      InAppPayments.completeCardEntry(
+          onCardEntryComplete: _onCardEntryComplete);
+    } on ChargeException catch (ex) {
+      InAppPayments.showCardNonceProcessingError(ex.errorMessage);
+    }
+  }
+
+  Future<void> _onStartCardEntryFlow() async {
+    await InAppPayments.startCardEntryFlow(
+        onCardNonceRequestSuccess: _onCardEntryCardNonceRequestSuccess,
+        onCardEntryCancel: _onCancelCardEntryFlow,
+        collectPostalCode: true);
+  }
+
+  void _onCancelCardEntryFlow() {
+    _showOrderSheet();
+  }
   }
 
   Widget makeBody(BuildContext context, List<ArtInfo> _cartItems) {
@@ -143,6 +183,7 @@ Widget _checkoutButton(context) {
         elevation: 4.0,
         onPressed: () {
           // lead to square checkout
+          _onStartCardEntryFlow();
         },
       ),
     ),
