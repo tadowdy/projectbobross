@@ -32,7 +32,7 @@ Column mainColumn(context) {
     mainAxisSize: MainAxisSize.max,
     crossAxisAlignment: CrossAxisAlignment.center,
     children: <Widget>[
-        globals.user2 == null
+        globals.user.fbuser == null
           ? new Text(  'Welcome Guest!',
           style: new TextStyle(
           fontSize: headingOneSize,
@@ -41,7 +41,7 @@ Column mainColumn(context) {
           fontFamily: "Roboto"),
         )
      :  new Text(
-        'Welcome ${globals.user2.email}!',
+        'Welcome ${globals.user.fbuser.email}!',
         style: new TextStyle(
             fontSize: headingOneSize,
             color: const Color(0xFF080808),

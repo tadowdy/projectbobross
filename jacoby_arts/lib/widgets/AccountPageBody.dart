@@ -55,9 +55,9 @@ final membershipInfo = new Container(
           CrossAxisAlignment.start, // allow left alignment for the text
       children: <Widget>[
         Row(children: <Widget>[
-          globals.user2 == null
+          globals.user.fbuser == null
           ? new Text("Jane Doe", style: headingOneBold)
-          : new Text('${globals.user2.email}', style: headingOneBold),
+          : new Text('${globals.user.fbuser.email}', style: headingOneBold),
         ]),
         new Row(
           children: <Widget>[

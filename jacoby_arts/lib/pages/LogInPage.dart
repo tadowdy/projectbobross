@@ -32,7 +32,7 @@ class _LoginPageState extends State<LoginPage> {
     if(formState.validate()){
       formState.save();
       try{
-        globals.user2 = await FirebaseAuth.instance.signInWithEmailAndPassword(email: _email, password: _password);
+        globals.user.fbuser = await FirebaseAuth.instance.signInWithEmailAndPassword(email: _email, password: _password);
         Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
       }catch(e){
         print(e.message);
@@ -44,8 +44,8 @@ class _LoginPageState extends State<LoginPage> {
     if(formState.validate()){
       formState.save();
       try{
-        globals.user2 = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: _email, password: _password);
-        globals.user2.sendEmailVerification();
+        globals.user.fbuser = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: _email, password: _password);
+        globals.user.fbuser.sendEmailVerification();
         Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
       }catch(e){
         print(e.message);

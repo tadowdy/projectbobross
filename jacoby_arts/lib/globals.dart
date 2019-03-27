@@ -1,14 +1,21 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
-JacUser user;
-
 class JacUser {
 
-  FirebaseUser fbuser;
+  FirebaseUser fbuser;    //for firebase authentication
 
+  String memberID;        //use userID that firebase creates
+  String membershipID;
+  String accountID;
+  //int artworkDiscountCount;
+  //int classDiscountCount;
+  String email;
+  //int freeTicketCount;
+  //String imageUrl;
+  DateTime membershipStartDate;
+  DateTime membershipEndDate;
   String firstName;
-  String lastName, email, imageURL;
-
+  String lastName;
 }
 
-FirebaseUser user2;
+JacUser user;
