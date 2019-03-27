@@ -36,7 +36,7 @@ Scaffold detailsScaffold(context, artData) {
           child: new Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              new MyImageWidget(),
+              new MyImageWidget(artData: artData),
               imageDetailsContainer(context,artData),
               artistInfoContainer(context,artData),
               priceInfoContainer(context,artData),
@@ -52,16 +52,19 @@ Scaffold detailsScaffold(context, artData) {
 }
 
 class MyImageWidget extends StatelessWidget {
+  var artData;
+  MyImageWidget({this.artData});
   @override
   Widget build(BuildContext context) {
-    var assetsImage = new AssetImage('images/sunflowers.jpg');
-    var image = new Image(
-      image: assetsImage,
-      width: imgWidth,
-      height: imgHeight,
-    );
+    
+    // var assetsImage = new AssetImage(artData.image_url);
+    // var image = new Image(
+    //   image: new Image.network(_artwork.image_url, height: 75, width: 75,),
+    //   width: imgWidth,
+    //   height: imgHeight,
+    // );
     return new Container(
-      child: image,
+      child: new Image.network(artData.image_url, height: 250, width: 150,),
       margin: EdgeInsets.symmetric(vertical: topPadding),
     );
   }

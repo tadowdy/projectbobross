@@ -35,7 +35,7 @@ class Artwork{
   final String exhibit_name;
   final String image_url;
   final String market_status;
-  final double price;
+  final int price;
   final String title;
   final DocumentReference reference;
 
