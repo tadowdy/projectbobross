@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:jacoby_arts/pages/ArtworkDetailsPage.dart';
 import 'package:jacoby_arts/widgets/ArtworkListPageBody.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:jacoby_arts/Auxiliary/uiComponents.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:async';
+
+
 
 
 
@@ -32,7 +35,7 @@ class Artwork{
   final String exhibit_name;
   final String image_url;
   final String market_status;
-  final double price;
+  final int price;
   final String title;
   final DocumentReference reference;
 
@@ -122,7 +125,8 @@ _artist = Artist.fromSnapshot(data);
 InkWell makeCard(BuildContext context, DocumentSnapshot data){
   final _artwork =  Artwork.fromSnapshot(data);
   final _artist =_artwork.artist_id;
- 
+  
+  
   return new InkWell(
       // make it clickable
       onTap: () {
@@ -147,7 +151,7 @@ InkWell makeCard(BuildContext context, DocumentSnapshot data){
                  // create a inset for the image
                 border: new Border(
                 right: new BorderSide(width: 1.0, color: Colors.white))),
-                child: Icon(Icons.image, color: Colors.white),
+                child: new Image.network(_artwork.image_url, height: 75, width: 75,), //url here
             ),
               title: Text(
                 _artwork.title,
@@ -157,7 +161,7 @@ InkWell makeCard(BuildContext context, DocumentSnapshot data){
                 children: <Widget>[
                   
                   Text(_artist, style: TextStyle(color: Colors.white)),
-                  Text(_artwork.price.toString(), style: TextStyle(color: Colors.white)),
+                  Text("\$" + _artwork.price.toString() + ".00 ", style: TextStyle(color: Colors.white)),
                 ],
               ),
               trailing:

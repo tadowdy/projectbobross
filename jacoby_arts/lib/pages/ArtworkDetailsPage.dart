@@ -36,15 +36,15 @@ Scaffold detailsScaffold(context, artData) {
           child: new Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              new MyImageWidget(),
+              new MyImageWidget(artData: artData),
               imageDetailsContainer(context,artData),
               artistInfoContainer(context,artData),
               priceInfoContainer(context,artData),
               descriptionHeader(context,artData),
               description(context,artData),
-              questionHeader(context),
-              questionBox(context),
-              questionSubmit(context),
+              // questionHeader(context),
+              // questionBox(context),
+              // questionSubmit(context),
             ],
           ),
         ),
@@ -52,16 +52,19 @@ Scaffold detailsScaffold(context, artData) {
 }
 
 class MyImageWidget extends StatelessWidget {
+  var artData;
+  MyImageWidget({this.artData});
   @override
   Widget build(BuildContext context) {
-    var assetsImage = new AssetImage('images/sunflowers.jpg');
-    var image = new Image(
-      image: assetsImage,
-      width: imgWidth,
-      height: imgHeight,
-    );
+    
+    // var assetsImage = new AssetImage(artData.image_url);
+    // var image = new Image(
+    //   image: new Image.network(_artwork.image_url, height: 75, width: 75,),
+    //   width: imgWidth,
+    //   height: imgHeight,
+    // );
     return new Container(
-      child: image,
+      child: new Image.network(artData.image_url, height: 250, width: 150,),
       margin: EdgeInsets.symmetric(vertical: topPadding),
     );
   }
@@ -125,7 +128,7 @@ Container priceInfoContainer(context, artData) {
             new Container(
               padding: const EdgeInsets.all(horizontalPadding),
               child: new Text(
-                artData.price.toString(),
+                "\$" + artData.price.toString() + ".00",
                 style: headingThree,
               ),
             ),
@@ -184,47 +187,47 @@ Container description(context, artData) {
       ));
 }
 
-Container questionHeader(context) {
-  return Container(
-    padding: const EdgeInsets.only(top: verticalWidgetPadding),
-    child: new Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: <Widget>[
-        new Text('Questions about the piece? Ask Away!',
-            style: headingThreeBold),
-      ],
-    ),
-  );
-}
+// Container questionHeader(context) {
+//   return Container(
+//     padding: const EdgeInsets.only(top: verticalWidgetPadding),
+//     child: new Row(
+//       crossAxisAlignment: CrossAxisAlignment.center,
+//       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//       children: <Widget>[
+//         new Text('Questions about the piece? Ask Away!',
+//             style: headingThreeBold),
+//       ],
+//     ),
+//   );
+// }
 
-Container questionBox(context) {
-  return Container(
-    padding: const EdgeInsets.only(
-        top: verticalWidgetPadding,
-        left: horizontalPadding,
-        right: horizontalPadding),
-    child: new TextField(
-      decoration: InputDecoration(
-          fillColor: Colors.grey, border: new OutlineInputBorder()),
-    ),
-  );
-}
+// Container questionBox(context) {
+//   return Container(
+//     padding: const EdgeInsets.only(
+//         top: verticalWidgetPadding,
+//         left: horizontalPadding,
+//         right: horizontalPadding),
+//     child: new TextField(
+//       decoration: InputDecoration(
+//           fillColor: Colors.grey, border: new OutlineInputBorder()),
+//     ),
+//   );
+// }
 
-Row questionSubmit(context) {
-  return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: <Widget>[
-        new RaisedButton(
-            onPressed: null,
-            splashColor: Colors.grey,
-            disabledColor: Colors.grey,
-            elevation: 2.0,
-            highlightElevation: 8.0,
-            disabledElevation: 0.0,
-            textColor: Colors.black,
-            disabledTextColor: Colors.black,
-            child: new Text("Submit")),
-      ]);
-}
+// Row questionSubmit(context) {
+//   return Row(
+//       mainAxisAlignment: MainAxisAlignment.center,
+//       crossAxisAlignment: CrossAxisAlignment.center,
+//       children: <Widget>[
+//         new RaisedButton(
+//             onPressed: null,
+//             splashColor: Colors.grey,
+//             disabledColor: Colors.grey,
+//             elevation: 2.0,
+//             highlightElevation: 8.0,
+//             disabledElevation: 0.0,
+//             textColor: Colors.black,
+//             disabledTextColor: Colors.black,
+//             child: new Text("Submit")),
+//       ]);
+// }
