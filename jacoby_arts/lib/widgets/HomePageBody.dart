@@ -4,6 +4,7 @@ import 'package:jacoby_arts/pages/SurveyDetailsPage.dart';
 import 'package:jacoby_arts/Auxiliary/uiComponents.dart';
 import 'package:jacoby_arts/globals.dart' as globals;
 import 'package:jacoby_arts/pages/LogInPage.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 
 class HomePageBody extends StatelessWidget {
@@ -73,18 +74,66 @@ Column mainColumn(context) {
             fontFamily: "Roboto"),
       ),
       new Text(
-        "Sign up to receive our newsletter",
+        "Visit Us",
+        style: new TextStyle(
+            fontSize: headingThreeSize,
+            color: const Color(0xFF080808),
+            fontWeight: FontWeight.w500,
+            fontFamily: "Roboto"),
+      ),
+      new Text(
+        "Addr: 627 E.Broadway, Alton,IL 62002",
         style: new TextStyle(
             fontSize: headingThreeSize,
             color: const Color(0xFF080808),
             fontWeight: FontWeight.w200,
             fontFamily: "Roboto"),
       ),
-      emailField,
+      new Text(
+        "Phone: +1.618.462.5222",
+        style: new TextStyle(
+            fontSize: headingThreeSize,
+            color: const Color(0xFF080808),
+            fontWeight: FontWeight.w200,
+            fontFamily: "Roboto"),
+      ),
+      new Text(
+        "Hours:",
+        style: new TextStyle(
+            fontSize: headingThreeSize,
+            color: const Color(0xFF080808),
+            fontWeight: FontWeight.w500,
+            fontFamily: "Roboto"),
+      ),
+      new Text(
+        "Wednesday - Saturday: 10am-5pm",
+        style: new TextStyle(
+            fontSize: headingThreeSize,
+            color: const Color(0xFF080808),
+            fontWeight: FontWeight.w200,
+            fontFamily: "Roboto"),
+      ),
+      new Text(
+        "Sunday: 12pm-4pm",
+        style: new TextStyle(
+            fontSize: headingThreeSize,
+            color: const Color(0xFF080808),
+            fontWeight: FontWeight.w200,
+            fontFamily: "Roboto"),
+      ),
+      new Text(
+        "Admission is Free",
+        style: new TextStyle(
+            fontSize: headingThreeSize,
+            color: const Color(0xFF080808),
+            fontWeight: FontWeight.w500,
+            fontFamily: "Roboto"),
+      ),
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget> [
-      surveyButton(context),
+      newsletterButton(context),
+      //surveyButton(context),
       loginButton(context),
         ]
       )
@@ -92,35 +141,21 @@ Column mainColumn(context) {
   );
 }
 
-final emailField = new TextField(
-  decoration: const InputDecoration(
-    hintText: "Enter e-mail here.",
-  ),
-  textAlign: TextAlign.center,
-  style: new TextStyle(
-      fontSize: contentTextSize,
-      color: const Color(0xFF080808),
-      fontWeight: FontWeight.w200,
-      fontFamily: "Roboto"),
-);
 
-ButtonTheme surveyButton(context) {
+ButtonTheme newsletterButton(context) {
   return new ButtonTheme(
    // buttonColor: normalButton,
     minWidth: medButtonWidth,
     height: buttonHeight,
     child: RaisedButton(
-      onPressed: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => SurveyDetailsPage()));
-      },
+      onPressed: () => launch("https://www.jacobyartscenter.org/#newsletter"),
       child: new Row(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           Padding(
             padding: const EdgeInsets.only(right: 6.0),
             child: Text(
-              'Survey',
+              'Newsletter',
               style: TextStyle(fontSize: buttonTextSize),
             ),
           ),
@@ -129,6 +164,32 @@ ButtonTheme surveyButton(context) {
     ),
   );
 }
+
+// ButtonTheme surveyButton(context) {
+//   return new ButtonTheme(
+//    // buttonColor: normalButton,
+//     minWidth: medButtonWidth,
+//     height: buttonHeight,
+//     child: RaisedButton(
+//       onPressed: () {
+//         Navigator.push(context,
+//             MaterialPageRoute(builder: (context) => SurveyDetailsPage()));
+//       },
+//       child: new Row(
+//         mainAxisSize: MainAxisSize.min,
+//         children: <Widget>[
+//           Padding(
+//             padding: const EdgeInsets.only(right: 6.0),
+//             child: Text(
+//               'Survey',
+//               style: TextStyle(fontSize: buttonTextSize),
+//             ),
+//           ),
+//         ],
+//       ),
+//     ),
+//   );
+// }
   ButtonTheme loginButton(context) {
     return new ButtonTheme(
     minWidth: medButtonWidth,
