@@ -42,9 +42,9 @@ Scaffold detailsScaffold(context, artData) {
               priceInfoContainer(context,artData),
               descriptionHeader(context,artData),
               description(context,artData),
-              questionHeader(context),
-              questionBox(context),
-              questionSubmit(context),
+              // questionHeader(context),
+              // questionBox(context),
+              // questionSubmit(context),
             ],
           ),
         ),
@@ -128,7 +128,7 @@ Container priceInfoContainer(context, artData) {
             new Container(
               padding: const EdgeInsets.all(horizontalPadding),
               child: new Text(
-                artData.price.toString(),
+                "\$" + artData.price.toString() + ".00",
                 style: headingThree,
               ),
             ),
@@ -187,47 +187,47 @@ Container description(context, artData) {
       ));
 }
 
-Container questionHeader(context) {
-  return Container(
-    padding: const EdgeInsets.only(top: verticalWidgetPadding),
-    child: new Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: <Widget>[
-        new Text('Questions about the piece? Ask Away!',
-            style: headingThreeBold),
-      ],
-    ),
-  );
-}
+// Container questionHeader(context) {
+//   return Container(
+//     padding: const EdgeInsets.only(top: verticalWidgetPadding),
+//     child: new Row(
+//       crossAxisAlignment: CrossAxisAlignment.center,
+//       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//       children: <Widget>[
+//         new Text('Questions about the piece? Ask Away!',
+//             style: headingThreeBold),
+//       ],
+//     ),
+//   );
+// }
 
-Container questionBox(context) {
-  return Container(
-    padding: const EdgeInsets.only(
-        top: verticalWidgetPadding,
-        left: horizontalPadding,
-        right: horizontalPadding),
-    child: new TextField(
-      decoration: InputDecoration(
-          fillColor: Colors.grey, border: new OutlineInputBorder()),
-    ),
-  );
-}
+// Container questionBox(context) {
+//   return Container(
+//     padding: const EdgeInsets.only(
+//         top: verticalWidgetPadding,
+//         left: horizontalPadding,
+//         right: horizontalPadding),
+//     child: new TextField(
+//       decoration: InputDecoration(
+//           fillColor: Colors.grey, border: new OutlineInputBorder()),
+//     ),
+//   );
+// }
 
-Row questionSubmit(context) {
-  return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: <Widget>[
-        new RaisedButton(
-            onPressed: null,
-            splashColor: Colors.grey,
-            disabledColor: Colors.grey,
-            elevation: 2.0,
-            highlightElevation: 8.0,
-            disabledElevation: 0.0,
-            textColor: Colors.black,
-            disabledTextColor: Colors.black,
-            child: new Text("Submit")),
-      ]);
-}
+// Row questionSubmit(context) {
+//   return Row(
+//       mainAxisAlignment: MainAxisAlignment.center,
+//       crossAxisAlignment: CrossAxisAlignment.center,
+//       children: <Widget>[
+//         new RaisedButton(
+//             onPressed: null,
+//             splashColor: Colors.grey,
+//             disabledColor: Colors.grey,
+//             elevation: 2.0,
+//             highlightElevation: 8.0,
+//             disabledElevation: 0.0,
+//             textColor: Colors.black,
+//             disabledTextColor: Colors.black,
+//             child: new Text("Submit")),
+//       ]);
+// }

@@ -6,7 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Events{
   final String title;
-  final double price;
+  final int price;
   final String location;
   final String image_url;
   final String description;
@@ -113,7 +113,7 @@ InkWell makeCard(BuildContext context, DocumentSnapshot data){
           subtitle: Row(
             children: <Widget>[
               Text(_date + " " + _time , style: TextStyle(color: Colors.white)),
-              Text(' \$' + eventData.price.toString(), style: TextStyle(color: Colors.white)),
+              Text(' \$' + eventData.price.toString()+ ".00", style: TextStyle(color: Colors.white)),
             ],
           ),
           trailing:

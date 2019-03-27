@@ -125,7 +125,7 @@ _artist = Artist.fromSnapshot(data);
 InkWell makeCard(BuildContext context, DocumentSnapshot data){
   final _artwork =  Artwork.fromSnapshot(data);
   final _artist =_artwork.artist_id;
-  var _imageUrl = 'http://image.pbs.org/video-assets/WUCF/wucf-artisodes/119008/images/mezzanine_768.jpg';
+  
   
   return new InkWell(
       // make it clickable
@@ -161,7 +161,7 @@ InkWell makeCard(BuildContext context, DocumentSnapshot data){
                 children: <Widget>[
                   
                   Text(_artist, style: TextStyle(color: Colors.white)),
-                  Text(_artwork.price.toString(), style: TextStyle(color: Colors.white)),
+                  Text("\$" + _artwork.price.toString() + ".00 ", style: TextStyle(color: Colors.white)),
                 ],
               ),
               trailing:
