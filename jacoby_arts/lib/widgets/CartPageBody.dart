@@ -3,14 +3,14 @@ import 'package:jacoby_arts/Pages/DonatePage.dart';
 import 'package:jacoby_arts/Auxiliary/uiComponents.dart';
 import 'package:jacoby_arts/auxiliary/ArtworkClass.dart';
 import 'package:jacoby_arts/auxiliary/CartClasses.dart';
-
-class CartPageBody extends StatefulWidget {
+class CartPageBody extends StatefulWidget{
   @override
   _CartPageBody createState() => _CartPageBody();
+
 }
 
 
-class _CartPageBody extends StatefulWidget {
+class _CartPageBody extends State<CartPageBody> {
   @override
   Widget build(BuildContext context) {
 
@@ -20,18 +20,17 @@ class _CartPageBody extends StatefulWidget {
       child: makeBody(context, _cartItems),
     );
   }
-  
-  
+
   Widget makeBody(BuildContext context, List<Artwork> _cartItems) {
     return new Column(
       children: <Widget>[
         _cartHeader(context, _cartItems),
-        _buildCartItems(context, _cartItems)
+        _buildCartItems(_cartItems)
       ],
     );
   }
 
-  Widget _buildCartItems(BuildContext context, List<Artwork> _cartItems) {
+  Widget _buildCartItems(List<Artwork> _cartItems) {
     return ListView.builder(
       padding: EdgeInsets.only(
           left: horizontalPadding,
@@ -40,29 +39,25 @@ class _CartPageBody extends StatefulWidget {
       shrinkWrap: true,
       itemCount: _cartItems.length,
       itemBuilder: (context, i) {
-        return _itemRow(context, _cartItems[i]);
+        return _itemRow(_cartItems[i]);
       },
     );
   }
 
   //TODO: ArtInfo will actually have to be CartItems as not every cart item will be art
-  Widget _itemRow(BuildContext context, Artwork item) {
+  Widget _itemRow(Artwork item) {
     return InkWell(
         // make it clickable
         onTap: () {
-          // TODO: direct user to item details on tap
+          setState(() {
+            removeCartItem(item);
+          });
         },
-        child: _makeCartItemCard(context, item));
+        child: _makeCartItemCard(item));
   }
 
-  Widget _makeCartItemCard(BuildContext context, Artwork item) {
-        return new InkWell(
-        // make it clickable
-        onTap: () {
-          removeCartItem(item);
-          
-        },
-    child: Card(
+  Widget _makeCartItemCard(Artwork item) {
+    return new Card(
       elevation: 8.0,
       margin: new EdgeInsets.symmetric(
           horizontal: horizontalPadding, vertical: cardPadding),
@@ -95,10 +90,8 @@ class _CartPageBody extends StatefulWidget {
               ],
             ),
                 trailing:
-                  Icon(Icons.keyboard_arrow_right, color: Colors.white, size: 30.0)),
-          
-          ),
-    ));
+                  Icon(Icons.keyboard_arrow_right, color: Colors.white, size: 30.0))),
+    );
   }
 
   Widget _cartHeader(BuildContext context, List<Artwork> _cartItems) {
@@ -120,25 +113,19 @@ class _CartPageBody extends StatefulWidget {
           child: const Text("Add Donation!"),
           elevation: 4.0,
           onPressed: () {
-            _switchViewToDonatePage(context);
+            //_switchViewToDonatePage(context);
           },
         ),
       ],
     );
   }
 
-  void _switchViewToDonatePage(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => DonatePage(this)),
-    );
-  }
-
-  @override
-  State<StatefulWidget> createState() {
-    // TODO: implement createState
-    return null;
-  }
+  // void _switchViewToDonatePage(BuildContext context) {
+  //   Navigator.push(
+  //     context,
+  //     MaterialPageRoute(builder: (context) => DonatePage(this)),
+  //   );
+  // }
 
   // void addDonationToCart(ArtInfo cartItem) {
   //   _cartItems.add(cartItem);
