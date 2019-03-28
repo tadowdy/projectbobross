@@ -39,7 +39,7 @@ class DonatePage extends StatelessWidget {
             new Container(height: 90.0),
             RaisedButton(
               onPressed: () {
-                cart.addDonationToCart(new ArtInfo("Donation", "for Jacoby Arts Center", 10.00));
+                //cart.addDonationToCart(new ArtInfo("Donation", "for Jacoby Arts Center", 10.00));
                 Navigator.pop(context);
               },
               child: Text('Give Us Your Money!'),

@@ -1,65 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:jacoby_arts/Auxiliary/uiComponents.dart';
 import 'package:flutter/material.dart';
-import 'package:jacoby_arts/pages/ArtworkDetailsPage.dart';
-import 'package:jacoby_arts/widgets/ArtworkListPageBody.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:jacoby_arts/Auxiliary/uiComponents.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'dart:async';
-
-class Artist{
-  final String artist_name;
-  final DocumentReference reference;
-
-  Artist.fromMap(Map<String,dynamic> map, {this.reference})
-  :assert(map['name'] != null),
-  artist_name = map['name'];
-
-  Artist.fromSnapshot(DocumentSnapshot snapshot)
-  :this.fromMap(snapshot.data, reference: snapshot.reference);
-
-  @override
-  String toString() => "Artist<$artist_name>";
-}
-
-class Artwork{
-  final String artist_id;
-  //final String artwork_id;
-  final String cart_id;
-  final String description;
-  final String exhibit_name;
-  final String image_url;
-  final String market_status;
-  final int price;
-  final String title;
-  final DocumentReference reference;
-
-  Artwork.fromMap(Map<String, dynamic> map, {this.reference})
-    :assert(map['artist_id'] != null),
-   // assert(map['artwork_id'] != null),
-    assert(map['cart_id'] != null),
-    assert(map['description'] != null),
-    assert(map['exhibit_name'] != null),
-    assert(map['image_URL'] != null),
-    assert(map['market_status'] != null),
-    assert(map['price'] != null),
-    assert(map['title'] != null),
-    artist_id = map['artist_id'],
-    //artwork_id = map['artwork_id'],
-    cart_id = map['cart_id'],
-    description = map['description'],
-    exhibit_name = map['exhibit_name'],
-    image_url = map['image_URL'],
-    market_status = map['market_status'],
-    price = map['price'],
-    title = map['title'];
-  Artwork.fromSnapshot(DocumentSnapshot snapshot)
-    :this.fromMap(snapshot.data, reference: snapshot.reference);
-  @override
-  String toString() => "ExhibitName<$artist_id:$cart_id:$description:$exhibit_name:$image_url:$market_status:$price:$title>";
-  //$artwork_id:
-}
+import 'package:jacoby_arts/widgets/CartPageBody.dart';
 
 const verticalTextPadding = 5.0;
 // const horizontalTextPadding = 5.0;
@@ -191,18 +136,26 @@ Container priceInfoContainer(context, artData) {
                 style: headingThree,
               ),
             ),
-            purchaseContainer(context),
+            purchaseContainer(context, artData),
           ]));
 }
 
-Container purchaseContainer(context) {
+Container purchaseContainer(context, artData) {
   return Container(
     padding: const EdgeInsets.all(horizontalPadding),
     child: new SizedBox(
       width: largeButtonWidth,
       height: buttonHeight,
       child: new RaisedButton(
-          onPressed: () {},
+          onPressed: () {
+                     // create a event page if its clicked
+          Navigator.push(context,
+          MaterialPageRoute(
+              builder: (__) => new CartPageBody(artData: artData)
+
+            )
+            );
+          },
           color: Colors.amberAccent,
           splashColor: Colors.grey,
           disabledColor: Colors.red,
@@ -212,7 +165,7 @@ Container purchaseContainer(context) {
           textColor: Colors.black,
           disabledTextColor: Colors.black,
           child: new Text(
-            "Buy It!",
+            "Add to cart",
             style: new TextStyle(fontSize: buttonTextSize),
           )),
     ),

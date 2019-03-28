@@ -3,17 +3,19 @@ import 'package:jacoby_arts/Pages/DonatePage.dart';
 import 'package:jacoby_arts/Auxiliary/CartClasses.dart';
 import 'package:jacoby_arts/Auxiliary/uiComponents.dart';
 
-final _cartItems = <ArtInfo>[
-  new ArtInfo("We are Number One", "Robbie Rotten", 1.11),
-  new ArtInfo("I Was Number One", "Smitty Werbenjagermanjensen", 1.00),
-  new ArtInfo("The One", "Neo", 10011.10),
-];
+List _cartItems = <ArtInfo>[];
 
 class CartPageBody extends StatelessWidget {
-  CartPageBody();
+  var artData;
+  CartPageBody({this.artData});
+  
+  
 
   @override
   Widget build(BuildContext context) {
+    debugPrint(artData.title);
+    ArtInfo test = new ArtInfo(artData.title, artData.artist_id, artData.price,artData.image_url);
+    _cartItems.add(test);
     return Container(
       child: makeBody(context, _cartItems),
     );
