@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:jacoby_arts/Auxiliary/uiComponents.dart';
-import 'package:flutter/material.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:jacoby_arts/Auxiliary/uiComponents.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:jacoby_arts/widgets/CartPageBody.dart';
+import 'package:jacoby_arts/auxiliary/CartClasses.dart';
 
 const verticalTextPadding = 5.0;
 // const horizontalTextPadding = 5.0;
@@ -25,6 +25,7 @@ class ArtworkDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return detailsScaffold(context,artData);
   }
 }
@@ -148,13 +149,7 @@ Container purchaseContainer(context, artData) {
       height: buttonHeight,
       child: new RaisedButton(
           onPressed: () {
-                     // create a event page if its clicked
-          Navigator.push(context,
-          MaterialPageRoute(
-              builder: (__) => new CartPageBody(artData: artData)
-
-            )
-            );
+            addCartItem(artData);
           },
           color: Colors.amberAccent,
           splashColor: Colors.grey,

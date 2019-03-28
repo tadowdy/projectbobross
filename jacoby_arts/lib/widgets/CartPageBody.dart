@@ -1,36 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:jacoby_arts/Pages/DonatePage.dart';
-import 'package:jacoby_arts/Auxiliary/CartClasses.dart';
 import 'package:jacoby_arts/Auxiliary/uiComponents.dart';
+import 'package:jacoby_arts/auxiliary/ArtworkClass.dart';
+import 'package:jacoby_arts/auxiliary/CartClasses.dart';
 
-List _cartItems = <ArtInfo>[];
+class CartPageBody extends StatefulWidget {
+  @override
+  _CartPageBody createState() => _CartPageBody();
+}
 
-class CartPageBody extends StatelessWidget {
-  var artData;
-  CartPageBody({this.artData});
-  
-  
 
+class _CartPageBody extends StatefulWidget {
   @override
   Widget build(BuildContext context) {
-    debugPrint(artData.title);
-    ArtInfo test = new ArtInfo(artData.title, artData.artist_id, artData.price,artData.image_url);
-    _cartItems.add(test);
+
+      List _cartItems = getCartItems();
+      debugPrint(_cartItems.toString());
     return Container(
       child: makeBody(context, _cartItems),
     );
   }
-
-  Widget makeBody(BuildContext context, List<ArtInfo> _cartItems) {
+  
+  
+  Widget makeBody(BuildContext context, List<Artwork> _cartItems) {
     return new Column(
       children: <Widget>[
         _cartHeader(context, _cartItems),
-        _buildCartItems(_cartItems)
+        _buildCartItems(context, _cartItems)
       ],
     );
   }
 
-  Widget _buildCartItems(List<ArtInfo> _cartItems) {
+  Widget _buildCartItems(BuildContext context, List<Artwork> _cartItems) {
     return ListView.builder(
       padding: EdgeInsets.only(
           left: horizontalPadding,
@@ -39,23 +40,29 @@ class CartPageBody extends StatelessWidget {
       shrinkWrap: true,
       itemCount: _cartItems.length,
       itemBuilder: (context, i) {
-        return _itemRow(_cartItems[i]);
+        return _itemRow(context, _cartItems[i]);
       },
     );
   }
 
   //TODO: ArtInfo will actually have to be CartItems as not every cart item will be art
-  Widget _itemRow(ArtInfo item) {
+  Widget _itemRow(BuildContext context, Artwork item) {
     return InkWell(
         // make it clickable
         onTap: () {
           // TODO: direct user to item details on tap
         },
-        child: _makeCartItemCard(item));
+        child: _makeCartItemCard(context, item));
   }
 
-  Widget _makeCartItemCard(ArtInfo item) {
-    return new Card(
+  Widget _makeCartItemCard(BuildContext context, Artwork item) {
+        return new InkWell(
+        // make it clickable
+        onTap: () {
+          removeCartItem(item);
+          
+        },
+    child: Card(
       elevation: 8.0,
       margin: new EdgeInsets.symmetric(
           horizontal: horizontalPadding, vertical: cardPadding),
@@ -73,7 +80,7 @@ class CartPageBody extends StatelessWidget {
               child: Icon(Icons.image, color: Colors.white),
             ),
             title: Text(
-              item.artworkName,
+              item.title,
               style:
                   TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
             ),
@@ -81,20 +88,23 @@ class CartPageBody extends StatelessWidget {
 
             subtitle: Row(
               children: <Widget>[
-                Text(item.artistName + "     ",
+                Text(item.artist_id + "     ",
                     style: TextStyle(color: Colors.white)),
                 Text(r"$" + item.price.toStringAsFixed(2),
                     style: TextStyle(color: Colors.white)),
               ],
             ),
-          )),
-    );
+                trailing:
+                  Icon(Icons.keyboard_arrow_right, color: Colors.white, size: 30.0)),
+          
+          ),
+    ));
   }
 
-  Widget _cartHeader(BuildContext context, List<ArtInfo> _cartItems) {
+  Widget _cartHeader(BuildContext context, List<Artwork> _cartItems) {
     double total = 0.00;
     String roundedTotal;
-    for (ArtInfo item in _cartItems) {
+    for (Artwork item in _cartItems) {
       total += item.price;
     }
     roundedTotal = total.toStringAsFixed(2);
@@ -124,7 +134,13 @@ class CartPageBody extends StatelessWidget {
     );
   }
 
-  void addDonationToCart(ArtInfo cartItem) {
-    _cartItems.add(cartItem);
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return null;
   }
+
+  // void addDonationToCart(ArtInfo cartItem) {
+  //   _cartItems.add(cartItem);
+  // }
 }
