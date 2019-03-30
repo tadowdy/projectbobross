@@ -113,7 +113,12 @@ class _CartPageBody extends State<CartPageBody> {
           child: const Text("Add Donation!"),
           elevation: 4.0,
           onPressed: () {
-            //_switchViewToDonatePage(context);
+            Navigator.push(context,
+              MaterialPageRoute(
+                builder: (__) => new DonatePage()
+
+            )
+            );
           },
         ),
       ],

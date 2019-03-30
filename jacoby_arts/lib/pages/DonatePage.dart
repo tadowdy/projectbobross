@@ -2,17 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:jacoby_arts/Auxiliary/uiComponents.dart';
 import 'package:jacoby_arts/widgets/CartPageBody.dart';
 import 'package:jacoby_arts/Auxiliary/CartClasses.dart';
+import 'package:jacoby_arts/auxiliary/ArtworkClass.dart';
 
 // TODO: can't return a scaffold, will need to be refactored to container
 class DonatePage extends StatelessWidget {
-
-// TODO: look into this strategy
-  CartPageBody cart;
-
-  DonatePage(CartPageBody cart){
-    this.cart = cart;
-  }
-
+  int donation_amount = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,6 +26,7 @@ class DonatePage extends StatelessWidget {
                       keyboardType: TextInputType.number,
                       decoration: new InputDecoration(
                           hintText: 'Enter Donation Amount'),
+
                     ),
                   ),
               ],
@@ -39,6 +34,7 @@ class DonatePage extends StatelessWidget {
             new Container(height: 90.0),
             RaisedButton(
               onPressed: () {
+
                 //cart.addDonationToCart(new ArtInfo("Donation", "for Jacoby Arts Center", 10.00));
                 Navigator.pop(context);
               },
