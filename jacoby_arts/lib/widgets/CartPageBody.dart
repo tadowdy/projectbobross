@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jacoby_arts/Pages/DonatePage.dart';
-import 'package:jacoby_arts/Auxiliary/CartClasses.dart';
+import 'package:jacoby_arts/auxiliary/CartClasses.dart';
 import 'package:jacoby_arts/Auxiliary/uiComponents.dart';
-
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
@@ -118,19 +117,19 @@ class CartPageBody extends StatelessWidget {
           child: const Text("Add Donation!"),
           elevation: 4.0,
           onPressed: () {
-            _switchViewToDonatePage(context);
+            //_switchViewToDonatePage(context);
           },
         ),
       ],
     );
   }
 
-  void _switchViewToDonatePage(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => DonatePage(this)),
-    );
-  }
+  // void _switchViewToDonatePage(BuildContext context) {
+  //   Navigator.push(
+  //     context,
+  //     MaterialPageRoute(builder: (context) => DonatePage(this)),
+  //   );
+  // }
 
   void addDonationToCart(ArtInfo cartItem) {
     _cartItems.add(cartItem);

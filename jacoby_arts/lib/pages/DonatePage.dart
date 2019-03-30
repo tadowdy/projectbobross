@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jacoby_arts/Auxiliary/uiComponents.dart';
 import 'package:jacoby_arts/widgets/CartPageBody.dart';
-import 'package:jacoby_arts/Auxiliary/CartClasses.dart';
+import 'package:jacoby_arts/auxiliary/CartClasses.dart';
 
 // TODO: can't return a scaffold, will need to be refactored to container
 class DonatePage extends StatelessWidget {
