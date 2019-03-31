@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:jacoby_arts/Pages/DonatePage.dart';
-import 'package:jacoby_arts/Auxiliary/uiComponents.dart';
+import 'package:jacoby_arts/pages/DonatePage.dart';
+import 'package:jacoby_arts/auxiliary/uiComponents.dart';
 import 'package:jacoby_arts/auxiliary/ArtworkClass.dart';
 import 'package:jacoby_arts/auxiliary/CartClasses.dart';
 class CartPageBody extends StatefulWidget{
@@ -21,7 +21,7 @@ class _CartPageBody extends State<CartPageBody> {
     );
   }
 
-  Widget makeBody(BuildContext context, List<Artwork> _cartItems) {
+  Widget makeBody(BuildContext context, List<CartItemInfo> _cartItems) {
     return new Column(
       children: <Widget>[
         _cartHeader(context, _cartItems),
@@ -30,7 +30,7 @@ class _CartPageBody extends State<CartPageBody> {
     );
   }
 
-  Widget _buildCartItems(List<Artwork> _cartItems) {
+  Widget _buildCartItems(List<CartItemInfo> _cartItems) {
     return ListView.builder(
       padding: EdgeInsets.only(
           left: horizontalPadding,
@@ -45,7 +45,7 @@ class _CartPageBody extends State<CartPageBody> {
   }
 
   //TODO: ArtInfo will actually have to be CartItems as not every cart item will be art
-  Widget _itemRow(Artwork item) {
+  Widget _itemRow(CartItemInfo item) {
     return InkWell(
         // make it clickable
         onTap: () {
@@ -56,7 +56,7 @@ class _CartPageBody extends State<CartPageBody> {
         child: _makeCartItemCard(item));
   }
 
-  Widget _makeCartItemCard(Artwork item) {
+  Widget _makeCartItemCard(CartItemInfo item) {
     return new Card(
       elevation: 8.0,
       margin: new EdgeInsets.symmetric(
@@ -72,10 +72,10 @@ class _CartPageBody extends State<CartPageBody> {
                   // create a inset for the image
                   border: new Border(
                       right: new BorderSide(width: 1.0, color: Colors.white))),
-              child: Icon(Icons.image, color: Colors.white),
+              child: new Image.network(item.url, height: 200, width: 100,),
             ),
             title: Text(
-              item.title,
+              item.artworkName,
               style:
                   TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
             ),
@@ -83,7 +83,7 @@ class _CartPageBody extends State<CartPageBody> {
 
             subtitle: Row(
               children: <Widget>[
-                Text(item.artist_id + "     ",
+                Text(item.artistName + "     ",
                     style: TextStyle(color: Colors.white)),
                 Text(r"$" + item.price.toStringAsFixed(2),
                     style: TextStyle(color: Colors.white)),
@@ -94,10 +94,10 @@ class _CartPageBody extends State<CartPageBody> {
     );
   }
 
-  Widget _cartHeader(BuildContext context, List<Artwork> _cartItems) {
+  Widget _cartHeader(BuildContext context, List<CartItemInfo> _cartItems) {
     double total = 0.00;
     String roundedTotal;
-    for (Artwork item in _cartItems) {
+    for (CartItemInfo item in _cartItems) {
       total += item.price;
     }
     roundedTotal = total.toStringAsFixed(2);
@@ -115,7 +115,7 @@ class _CartPageBody extends State<CartPageBody> {
           onPressed: () {
             Navigator.push(context,
               MaterialPageRoute(
-                builder: (__) => new DonatePage()
+              builder: (__) => new DonatePage()
 
             )
             );

@@ -1,16 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:jacoby_arts/auxiliary/ArtworkClass.dart';
 
+class CartItemInfo {
+  String artworkName;
+  String artistName;
+  int price;
+  String url;
 
-List _cartItems = <Artwork>[];
+  CartItemInfo(String artworkName, String artistName, int price, String url) {
+    this.artworkName = artworkName;
+    this.artistName = artistName;
+    this.price = price;
+    this.url = url;
+  }
+}
 
-void addCartItem(Artwork artworkItem){
-  _cartItems.add(artworkItem);
+List _cartItems = <CartItemInfo>[];
+
+void addCartItem(CartItemInfo item){
+  _cartItems.add(item);
   print(_cartItems);
 }
 
-void removeCartItem(Artwork artworkItem){
-  _cartItems.remove(artworkItem);
+void removeCartItem(CartItemInfo item){
+  _cartItems.remove(item);
   print(_cartItems);
 }
 

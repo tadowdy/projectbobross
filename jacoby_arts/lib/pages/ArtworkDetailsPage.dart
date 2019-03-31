@@ -149,7 +149,9 @@ Container purchaseContainer(context, artData) {
       height: buttonHeight,
       child: new RaisedButton(
           onPressed: () {
-            addCartItem(artData);
+            CartItemInfo item = new CartItemInfo(artData.title, 
+            artData.artist_id, artData.price, artData.image_url);
+            addCartItem(item);
           },
           color: Colors.amberAccent,
           splashColor: Colors.grey,
