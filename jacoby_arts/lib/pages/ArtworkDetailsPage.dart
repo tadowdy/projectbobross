@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:jacoby_arts/Auxiliary/uiComponents.dart';
-import 'package:flutter/material.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:jacoby_arts/Auxiliary/uiComponents.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:jacoby_arts/widgets/CartPageBody.dart';
+import 'package:jacoby_arts/auxiliary/CartClasses.dart';
 
 const verticalTextPadding = 5.0;
 // const horizontalTextPadding = 5.0;
@@ -25,6 +25,7 @@ class ArtworkDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return detailsScaffold(context,artData);
   }
 }
@@ -36,22 +37,25 @@ Scaffold detailsScaffold(context, artData) {
         backgroundColor: themeColor,
       ),
       body: Center(
+        child: Align(
+          alignment: Alignment.topCenter,
         child: new SingleChildScrollView(
-          child: new Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              new MyImageWidget(artData: artData),
-              imageDetailsContainer(context,artData),
-              artistInfoContainer(context,artData),
-              priceInfoContainer(context,artData),
-              descriptionHeader(context,artData),
-              description(context,artData),
-              // questionHeader(context),
-              // questionBox(context),
-              // questionSubmit(context),
-            ],
+            child: new Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                new MyImageWidget(artData: artData),
+                imageDetailsContainer(context,artData),
+                artistInfoContainer(context,artData),
+                priceInfoContainer(context,artData),
+                descriptionHeader(context,artData),
+                description(context,artData),
+                // questionHeader(context),
+                // questionBox(context),
+                // questionSubmit(context),
+              ],
+            ),
           ),
-        ),
+        )
       ));
 }
 
@@ -61,16 +65,10 @@ class MyImageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     
-    // var assetsImage = new AssetImage(artData.image_url);
-    // var image = new Image(
-    //   image: new Image.network(_artwork.image_url, height: 75, width: 75,),
-    //   width: imgWidth,
-    //   height: imgHeight,
-    // );
     return new Container(
-      child: new Image.network(artData.image_url, height: 250, width: 150,),
-      margin: EdgeInsets.symmetric(vertical: topPadding),
+      child: new Image.network(artData.image_url, fit: BoxFit.fill),
     );
+    
   }
 }
 
@@ -148,13 +146,9 @@ Container purchaseContainer(context, artData) {
       height: buttonHeight,
       child: new RaisedButton(
           onPressed: () {
-                     // create a event page if its clicked
-          Navigator.push(context,
-          MaterialPageRoute(
-              builder: (__) => new CartPageBody(artData: artData)
-
-            )
-            );
+            CartItemInfo item = new CartItemInfo(artData.title, 
+            artData.artist_id, artData.price, artData.image_url);
+            addCartItem(item);
           },
           color: Colors.amberAccent,
           splashColor: Colors.grey,

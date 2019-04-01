@@ -8,59 +8,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:async';
 
 
-// class Artist{
-//   final String artist_name;
-//   final DocumentReference reference;
-
-//   Artist.fromMap(Map<String,dynamic> map, {this.reference})
-//   :assert(map['name'] != null),
-//   artist_name = map['name'];
-
-//   Artist.fromSnapshot(DocumentSnapshot snapshot)
-//   :this.fromMap(snapshot.data, reference: snapshot.reference);
-
-//   @override
-//   String toString() => "Artist<$artist_name>";
-// }
-
-// class Artwork{
-//   final String artist_id;
-//   //final String artwork_id;
-//   final String cart_id;
-//   final String description;
-//   final String exhibit_name;
-//   final String image_url;
-//   final String market_status;
-//   final int price;
-//   final String title;
-//   final DocumentReference reference;
-
-//   Artwork.fromMap(Map<String, dynamic> map, {this.reference})
-//     :assert(map['artist_id'] != null),
-//    // assert(map['artwork_id'] != null),
-//     assert(map['cart_id'] != null),
-//     assert(map['description'] != null),
-//     assert(map['exhibit_name'] != null),
-//     assert(map['image_URL'] != null),
-//     assert(map['market_status'] != null),
-//     assert(map['price'] != null),
-//     assert(map['title'] != null),
-//     artist_id = map['artist_id'],
-//     //artwork_id = map['artwork_id'],
-//     cart_id = map['cart_id'],
-//     description = map['description'],
-//     exhibit_name = map['exhibit_name'],
-//     image_url = map['image_URL'],
-//     market_status = map['market_status'],
-//     price = map['price'],
-//     title = map['title'];
-//   Artwork.fromSnapshot(DocumentSnapshot snapshot)
-//     :this.fromMap(snapshot.data, reference: snapshot.reference);
-//   @override
-//   String toString() => "ExhibitName<$artist_id:$cart_id:$description:$exhibit_name:$image_url:$market_status:$price:$title>";
-//   //$artwork_id:
-// }
-
 class ArtworkListPageBody extends StatelessWidget {
   ArtworkListPageBody();
 
@@ -97,25 +44,8 @@ return ListView(
   children: snapshot.map((data) => makeCard(context,data)).toList(),
 );
 }
-getArtist(String ref){
-
-  Stream<DocumentSnapshot> x = Firestore.instance.collection('Artists')
-  .document(ref).snapshots();
-  if (x != null){
-    print('has data');
-    return x.map((data) => dataa(data)).toList();
-    
-  }
-  else{
-    print('nope');
-  }
-
-}
-var _artist;
-dataa(DocumentSnapshot data){
-  print('in dataa');
-_artist = Artist.fromSnapshot(data);
-//print(_artist.artist_name);
+displayArtwork(BuildContext context, DocumentSnapshot data){
+  
 }
 
 InkWell makeCard(BuildContext context, DocumentSnapshot data){
@@ -140,7 +70,7 @@ InkWell makeCard(BuildContext context, DocumentSnapshot data){
           child: Container(
             decoration: BoxDecoration(color: Colors.blueGrey),
             child: ListTile(
-              contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+              contentPadding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
               leading: Container(
                 padding: EdgeInsets.only(right: 12.0),
                 decoration: new BoxDecoration(
@@ -165,4 +95,5 @@ InkWell makeCard(BuildContext context, DocumentSnapshot data){
           ),
     ));
   }
+  
 }

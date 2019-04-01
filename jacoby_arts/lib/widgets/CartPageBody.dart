@@ -1,35 +1,44 @@
 import 'package:flutter/material.dart';
-import 'package:jacoby_arts/Pages/DonatePage.dart';
-import 'package:jacoby_arts/auxiliary/CartClasses.dart';
+import 'package:jacoby_arts/pages/DonatePage.dart';
 import 'package:jacoby_arts/auxiliary/uiComponents.dart';
+import 'package:jacoby_arts/auxiliary/ArtworkClass.dart';
+import 'package:jacoby_arts/auxiliary/CartClasses.dart';
+import 'dart:async';
+import 'dart:convert';
+import 'dart:io';
+import 'package:http/http.dart' as http;
+import 'package:square_in_app_payments/in_app_payments.dart';
+// Put and alias due to name conflict
+import 'package:square_in_app_payments/models.dart' as IAPModels;
 
-List _cartItems = <ArtInfo>[];
+class CartPageBody extends StatefulWidget{
+  @override
+  _CartPageBody createState() => _CartPageBody();
 
-class CartPageBody extends StatelessWidget {
-  var artData;
-  CartPageBody({this.artData});
-  
-  
+}
 
+class _CartPageBody extends State<CartPageBody> {
   @override
   Widget build(BuildContext context) {
-    ArtInfo test = new ArtInfo(artData.title, artData.artist_id, artData.price,artData.image_url);
-    _cartItems.add(test);
+
+      List _cartItems = getCartItems();
+    
     return Container(
       child: makeBody(context, _cartItems),
     );
   }
 
-  Widget makeBody(BuildContext context, List<ArtInfo> _cartItems) {
+  Widget makeBody(BuildContext context, List<CartItemInfo> _cartItems) {
     return new Column(
       children: <Widget>[
         _cartHeader(context, _cartItems),
-        _buildCartItems(_cartItems)
+        _buildCartItems(_cartItems),
+        _checkoutButton(context),
       ],
     );
   }
 
-  Widget _buildCartItems(List<ArtInfo> _cartItems) {
+  Widget _buildCartItems(List<CartItemInfo> _cartItems) {
     return ListView.builder(
       padding: EdgeInsets.only(
           left: horizontalPadding,
@@ -44,16 +53,18 @@ class CartPageBody extends StatelessWidget {
   }
 
   //TODO: ArtInfo will actually have to be CartItems as not every cart item will be art
-  Widget _itemRow(ArtInfo item) {
+  Widget _itemRow(CartItemInfo item) {
     return InkWell(
         // make it clickable
         onTap: () {
-          // TODO: direct user to item details on tap
+          setState(() {
+            removeCartItem(item);
+          });
         },
         child: _makeCartItemCard(item));
   }
 
-  Widget _makeCartItemCard(ArtInfo item) {
+  Widget _makeCartItemCard(CartItemInfo item) {
     return new Card(
       elevation: 8.0,
       margin: new EdgeInsets.symmetric(
@@ -69,7 +80,7 @@ class CartPageBody extends StatelessWidget {
                   // create a inset for the image
                   border: new Border(
                       right: new BorderSide(width: 1.0, color: Colors.white))),
-              child: Icon(Icons.image, color: Colors.white),
+              child: new Image.network(item.url, height: 200, width: 100,),
             ),
             title: Text(
               item.artworkName,
@@ -86,14 +97,15 @@ class CartPageBody extends StatelessWidget {
                     style: TextStyle(color: Colors.white)),
               ],
             ),
-          )),
+                trailing:
+                  Icon(Icons.keyboard_arrow_right, color: Colors.white, size: 30.0))),
     );
   }
 
-  Widget _cartHeader(BuildContext context, List<ArtInfo> _cartItems) {
+  Widget _cartHeader(BuildContext context, List<CartItemInfo> _cartItems) {
     double total = 0.00;
     String roundedTotal;
-    for (ArtInfo item in _cartItems) {
+    for (CartItemInfo item in _cartItems) {
       total += item.price;
     }
     roundedTotal = total.toStringAsFixed(2);
@@ -109,6 +121,12 @@ class CartPageBody extends StatelessWidget {
           child: const Text("Add Donation!"),
           elevation: 4.0,
           onPressed: () {
+            Navigator.push(context,
+              MaterialPageRoute(
+              builder: (__) => new DonatePage()
+
+            )
+            );
             //_switchViewToDonatePage(context);
           },
         ),
@@ -123,7 +141,89 @@ class CartPageBody extends StatelessWidget {
   //   );
   // }
 
-  void addDonationToCart(ArtInfo cartItem) {
-    _cartItems.add(cartItem);
+  void addDonationToCart(CartItemInfo cartItem) {
+    addCartItem(cartItem);
+  
+  }
+
+  Future<void> chargeCard(IAPModels.CardDetails cardDetails) async {
+    // charge card by call to server charge endpoint
+    // set a easy charge endpoint by following this example:
+    // https://github.com/square/in-app-payments-server-quickstart
+    
+    print("charge doesn't actually happen, please set up charge endpiont server.");
+    //// An example code to call your server api to charge
+    // var chargeUrl = "REPLACE_ME";
+    // var body = jsonEncode({"nonce": cardDetails.nonce});
+    // http.Response response;
+    // try {
+    //   response = await http.post(chargeUrl, body: body, headers: {
+    //     "Accept": "application/json",
+    //     "content-type": "application/json"
+    //   });
+    // } on SocketException catch (ex) {
+    //   throw ex;
+    // }
+
+    // var responseBody = json.decode(response.body);
+    // if (response.statusCode == 200) {
+    //   // handle response
+    //   return;
+    // } else {
+    //   throw Exception("failed to charge");
+    // }
+  }
+
+  void _onCardEntryCardNonceRequestSuccess(IAPModels.CardDetails result) async {
+    try {
+      await chargeCard(result);
+      InAppPayments.completeCardEntry(
+          onCardEntryComplete: _onCardEntryComplete);
+    } on Exception catch (ex) {
+      InAppPayments.showCardNonceProcessingError(ex.toString());
+    }
+  }
+
+  Future<void> _onStartCardEntryFlow() async {
+    await InAppPayments.startCardEntryFlow(
+        onCardNonceRequestSuccess: _onCardEntryCardNonceRequestSuccess,
+        onCardEntryCancel: _onCancelCardEntryFlow,
+        collectPostalCode: true);
+  }
+
+  void _onCancelCardEntryFlow() {
+    print("payment canceled");
+  }
+
+  void _onCardEntryComplete() {
+    print("card entry UI is closed completely.");
+  }
+
+  Future<void> _onStartCardEntry() async {
+    print("start card entry clicked.");
+    await InAppPayments.startCardEntryFlow(
+        onCardNonceRequestSuccess: _onCardEntryCardNonceRequestSuccess,
+        onCardEntryCancel: _onCancelCardEntryFlow,
+        collectPostalCode: true);
+  } 
+
+  Widget _checkoutButton(context) {
+    return new ButtonTheme(
+      child: new Container(
+        width: largeButtonWidth,
+        height: buttonHeight,
+        child: new RaisedButton(
+          color: brightButton,
+          child: new Text(
+            "Checkout",
+            style: new TextStyle(fontSize: buttonTextSize),
+          ),
+          elevation: 4.0,
+          onPressed: _onStartCardEntry,
+        ),
+      ),
+    );
   }
 }
+
+
