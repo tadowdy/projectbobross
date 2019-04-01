@@ -11,6 +11,7 @@ class Artwork{
   final String market_status;
   final int price;
   final String title;
+  final String reveal_date;
   final DocumentReference reference;
 
   Artwork.fromMap(Map<String, dynamic> map, {this.reference})
@@ -23,6 +24,7 @@ class Artwork{
     assert(map['market_status'] != null),
     assert(map['price'] != null),
     assert(map['title'] != null),
+    assert(map['reveal_date'] != null),
     artist_id = map['artist_id'],
     //artwork_id = map['artwork_id'],
     cart_id = map['cart_id'],
@@ -31,7 +33,8 @@ class Artwork{
     image_url = map['image_URL'],
     market_status = map['market_status'],
     price = map['price'],
-    title = map['title'];
+    title = map['title'],
+    reveal_date = map['reveal_date'];
   Artwork.fromSnapshot(DocumentSnapshot snapshot)
     :this.fromMap(snapshot.data, reference: snapshot.reference);
   @override

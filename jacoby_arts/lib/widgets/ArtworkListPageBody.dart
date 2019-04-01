@@ -44,25 +44,8 @@ return ListView(
   children: snapshot.map((data) => makeCard(context,data)).toList(),
 );
 }
-getArtist(String ref){
-
-  Stream<DocumentSnapshot> x = Firestore.instance.collection('Artists')
-  .document(ref).snapshots();
-  if (x != null){
-    
-    return x.map((data) => dataa(data)).toList();
-    
-  }
-  else{
-   
-  }
-
-}
-var _artist;
-dataa(DocumentSnapshot data){
+displayArtwork(BuildContext context, DocumentSnapshot data){
   
-_artist = Artist.fromSnapshot(data);
-//print(_artist.artist_name);
 }
 
 InkWell makeCard(BuildContext context, DocumentSnapshot data){
@@ -112,4 +95,5 @@ InkWell makeCard(BuildContext context, DocumentSnapshot data){
           ),
     ));
   }
+  
 }
