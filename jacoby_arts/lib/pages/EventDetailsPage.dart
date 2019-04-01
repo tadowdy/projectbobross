@@ -29,15 +29,15 @@ buildBody(BuildContext context, eventData){
     DateTime date = DateTime.parse(time2);
     var final_date = new DateFormat.yMMMd().format(date);
     var final_time = new DateFormat.jm().format(date);
-    var intEventPrice = eventData.price.toString();
-    intEventPrice = intEventPrice.substring(0,intEventPrice.length-2);
-      final eventPrice = Container(
+    // var intEventPrice = eventData.price.toString();
+    // intEventPrice = intEventPrice.substring(0,intEventPrice.length-2);
+    final eventPrice = Container(
     padding: const EdgeInsets.all(7.0),
     decoration: new BoxDecoration(
       border: new Border.all(color: Colors.white),
       borderRadius: BorderRadius.circular(15.0)),
       child: new Text(
-        "\$" + intEventPrice,
+        "\$" + eventData.price.toString() + ".00",
         style: TextStyle(color: Colors.white),
         textAlign: TextAlign.center,
       ),

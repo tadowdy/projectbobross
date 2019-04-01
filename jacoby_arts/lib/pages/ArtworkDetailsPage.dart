@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:jacoby_arts/Auxiliary/uiComponents.dart';
-import 'package:jacoby_arts/widgets/GalleryListPageBody.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:jacoby_arts/Auxiliary/uiComponents.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:jacoby_arts/widgets/CartPageBody.dart';
+import 'package:jacoby_arts/auxiliary/CartClasses.dart';
 
 const verticalTextPadding = 5.0;
 // const horizontalTextPadding = 5.0;
@@ -21,6 +25,7 @@ class ArtworkDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return detailsScaffold(context,artData);
   }
 }
@@ -32,38 +37,38 @@ Scaffold detailsScaffold(context, artData) {
         backgroundColor: themeColor,
       ),
       body: Center(
+        child: Align(
+          alignment: Alignment.topCenter,
         child: new SingleChildScrollView(
-          child: new Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              new MyImageWidget(),
-              imageDetailsContainer(context,artData),
-              artistInfoContainer(context,artData),
-              priceInfoContainer(context,artData),
-              descriptionHeader(context,artData),
-              description(context,artData),
-              questionHeader(context),
-              questionBox(context),
-              questionSubmit(context),
-            ],
+            child: new Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                new MyImageWidget(artData: artData),
+                imageDetailsContainer(context,artData),
+                artistInfoContainer(context,artData),
+                priceInfoContainer(context,artData),
+                descriptionHeader(context,artData),
+                description(context,artData),
+                // questionHeader(context),
+                // questionBox(context),
+                // questionSubmit(context),
+              ],
+            ),
           ),
-        ),
+        )
       ));
 }
 
 class MyImageWidget extends StatelessWidget {
+  var artData;
+  MyImageWidget({this.artData});
   @override
   Widget build(BuildContext context) {
-    var assetsImage = new AssetImage('images/sunflowers.jpg');
-    var image = new Image(
-      image: assetsImage,
-      width: imgWidth,
-      height: imgHeight,
-    );
+    
     return new Container(
-      child: image,
-      margin: EdgeInsets.symmetric(vertical: topPadding),
+      child: new Image.network(artData.image_url, fit: BoxFit.fill),
     );
+    
   }
 }
 
@@ -125,22 +130,26 @@ Container priceInfoContainer(context, artData) {
             new Container(
               padding: const EdgeInsets.all(horizontalPadding),
               child: new Text(
-                artData.price.toString(),
+                "\$" + artData.price.toString() + ".00",
                 style: headingThree,
               ),
             ),
-            purchaseContainer(context),
+            purchaseContainer(context, artData),
           ]));
 }
 
-Container purchaseContainer(context) {
+Container purchaseContainer(context, artData) {
   return Container(
     padding: const EdgeInsets.all(horizontalPadding),
     child: new SizedBox(
       width: largeButtonWidth,
       height: buttonHeight,
       child: new RaisedButton(
-          onPressed: () {},
+          onPressed: () {
+            CartItemInfo item = new CartItemInfo(artData.title, 
+            artData.artist_id, artData.price, artData.image_url);
+            addCartItem(item);
+          },
           color: Colors.amberAccent,
           splashColor: Colors.grey,
           disabledColor: Colors.red,
@@ -150,7 +159,7 @@ Container purchaseContainer(context) {
           textColor: Colors.black,
           disabledTextColor: Colors.black,
           child: new Text(
-            "Buy It!",
+            "Add to cart",
             style: new TextStyle(fontSize: buttonTextSize),
           )),
     ),
@@ -184,47 +193,47 @@ Container description(context, artData) {
       ));
 }
 
-Container questionHeader(context) {
-  return Container(
-    padding: const EdgeInsets.only(top: verticalWidgetPadding),
-    child: new Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: <Widget>[
-        new Text('Questions about the piece? Ask Away!',
-            style: headingThreeBold),
-      ],
-    ),
-  );
-}
+// Container questionHeader(context) {
+//   return Container(
+//     padding: const EdgeInsets.only(top: verticalWidgetPadding),
+//     child: new Row(
+//       crossAxisAlignment: CrossAxisAlignment.center,
+//       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//       children: <Widget>[
+//         new Text('Questions about the piece? Ask Away!',
+//             style: headingThreeBold),
+//       ],
+//     ),
+//   );
+// }
 
-Container questionBox(context) {
-  return Container(
-    padding: const EdgeInsets.only(
-        top: verticalWidgetPadding,
-        left: horizontalPadding,
-        right: horizontalPadding),
-    child: new TextField(
-      decoration: InputDecoration(
-          fillColor: Colors.grey, border: new OutlineInputBorder()),
-    ),
-  );
-}
+// Container questionBox(context) {
+//   return Container(
+//     padding: const EdgeInsets.only(
+//         top: verticalWidgetPadding,
+//         left: horizontalPadding,
+//         right: horizontalPadding),
+//     child: new TextField(
+//       decoration: InputDecoration(
+//           fillColor: Colors.grey, border: new OutlineInputBorder()),
+//     ),
+//   );
+// }
 
-Row questionSubmit(context) {
-  return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: <Widget>[
-        new RaisedButton(
-            onPressed: null,
-            splashColor: Colors.grey,
-            disabledColor: Colors.grey,
-            elevation: 2.0,
-            highlightElevation: 8.0,
-            disabledElevation: 0.0,
-            textColor: Colors.black,
-            disabledTextColor: Colors.black,
-            child: new Text("Submit")),
-      ]);
-}
+// Row questionSubmit(context) {
+//   return Row(
+//       mainAxisAlignment: MainAxisAlignment.center,
+//       crossAxisAlignment: CrossAxisAlignment.center,
+//       children: <Widget>[
+//         new RaisedButton(
+//             onPressed: null,
+//             splashColor: Colors.grey,
+//             disabledColor: Colors.grey,
+//             elevation: 2.0,
+//             highlightElevation: 8.0,
+//             disabledElevation: 0.0,
+//             textColor: Colors.black,
+//             disabledTextColor: Colors.black,
+//             child: new Text("Submit")),
+//       ]);
+// }
