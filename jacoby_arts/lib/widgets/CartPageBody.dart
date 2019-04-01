@@ -13,7 +13,6 @@ class CartPageBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint(artData.title);
     ArtInfo test = new ArtInfo(artData.title, artData.artist_id, artData.price,artData.image_url);
     _cartItems.add(test);
     return Container(
