@@ -37,22 +37,25 @@ Scaffold detailsScaffold(context, artData) {
         backgroundColor: themeColor,
       ),
       body: Center(
+        child: Align(
+          alignment: Alignment.topCenter,
         child: new SingleChildScrollView(
-          child: new Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              new MyImageWidget(artData: artData),
-              imageDetailsContainer(context,artData),
-              artistInfoContainer(context,artData),
-              priceInfoContainer(context,artData),
-              descriptionHeader(context,artData),
-              description(context,artData),
-              // questionHeader(context),
-              // questionBox(context),
-              // questionSubmit(context),
-            ],
+            child: new Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                new MyImageWidget(artData: artData),
+                imageDetailsContainer(context,artData),
+                artistInfoContainer(context,artData),
+                priceInfoContainer(context,artData),
+                descriptionHeader(context,artData),
+                description(context,artData),
+                // questionHeader(context),
+                // questionBox(context),
+                // questionSubmit(context),
+              ],
+            ),
           ),
-        ),
+        )
       ));
 }
 
@@ -62,16 +65,10 @@ class MyImageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     
-    // var assetsImage = new AssetImage(artData.image_url);
-    // var image = new Image(
-    //   image: new Image.network(_artwork.image_url, height: 75, width: 75,),
-    //   width: imgWidth,
-    //   height: imgHeight,
-    // );
     return new Container(
-      child: new Image.network(artData.image_url, height: 250, width: 150,),
-      margin: EdgeInsets.symmetric(vertical: topPadding),
+      child: new Image.network(artData.image_url, fit: BoxFit.fill),
     );
+    
   }
 }
 

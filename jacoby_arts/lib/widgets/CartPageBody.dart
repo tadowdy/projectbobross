@@ -15,7 +15,7 @@ class _CartPageBody extends State<CartPageBody> {
   Widget build(BuildContext context) {
 
       List _cartItems = getCartItems();
-      debugPrint(_cartItems.toString());
+    
     return Container(
       child: makeBody(context, _cartItems),
     );

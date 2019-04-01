@@ -49,18 +49,18 @@ getArtist(String ref){
   Stream<DocumentSnapshot> x = Firestore.instance.collection('Artists')
   .document(ref).snapshots();
   if (x != null){
-    print('has data');
+    
     return x.map((data) => dataa(data)).toList();
     
   }
   else{
-    print('nope');
+   
   }
 
 }
 var _artist;
 dataa(DocumentSnapshot data){
-  print('in dataa');
+  
 _artist = Artist.fromSnapshot(data);
 //print(_artist.artist_name);
 }
