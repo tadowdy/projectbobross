@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:jacoby_arts/widgets/HomePageBody.dart';
 import 'package:jacoby_arts/widgets/ArtworkListPageBody.dart';
@@ -11,6 +11,12 @@ import 'package:square_in_app_payments/models.dart';
 import 'package:square_in_app_payments/in_app_payments.dart';
 
 class Home extends StatefulWidget {
+    const Home({
+    Key key,
+    @required this.user
+  }) : super(key: key);
+
+  final FirebaseUser user;
   //   Future<void> _onStartCardEntryFlow() async {
   //   await InAppPayments.startCardEntryFlow(
   //       onCardNonceRequestSuccess: _onCardEntryCardNonceRequestSuccess,
