@@ -119,6 +119,7 @@ class _CartPageBody extends State<CartPageBody> {
 
             )
             );
+            //_switchViewToDonatePage(context);
           },
         ),
       ],
