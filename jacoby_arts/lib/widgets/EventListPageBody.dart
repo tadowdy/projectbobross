@@ -112,8 +112,8 @@ InkWell makeCard(BuildContext context, DocumentSnapshot data){
   // subtitle: Text("Intermediate", style: TextStyle(color: Colors.white)),
           subtitle: Row(
             children: <Widget>[
-              Text(_date + " " + _time , style: TextStyle(color: Colors.white)),
-              Text(' \$' + eventData.price.toString()+ ".00", style: TextStyle(color: Colors.white)),
+              Text(_date + " " + _time + "\n\$" + eventData.price.toString()+ ".00"  , style: TextStyle(color: Colors.white)),
+
             ],
           ),
           trailing:

@@ -91,10 +91,10 @@ class _CartPageBody extends State<CartPageBody> {
 
             subtitle: Row(
               children: <Widget>[
-                Text(item.artistName + "     ",
+                Text(item.artistName + " " + "\n\$ " + item.price.toStringAsFixed(2),
                     style: TextStyle(color: Colors.white)),
-                Text(r"$" + item.price.toStringAsFixed(2),
-                    style: TextStyle(color: Colors.white)),
+                // Text(r"$" + item.price.toStringAsFixed(2),
+                //     style: TextStyle(color: Colors.white)),
               ],
             ),
                 trailing:
@@ -110,26 +110,27 @@ class _CartPageBody extends State<CartPageBody> {
     }
     roundedTotal = total.toStringAsFixed(2);
     return new Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        new Container(width: horizontalPadding),
-        Text(
-          "Current Total: " + r"$" + "$roundedTotal",
-          style: headingThreeBold,
-        ),
-        new Container(width: 20.0),
-        new RaisedButton(
-          child: const Text("Add Donation!"),
-          elevation: 4.0,
-          onPressed: () {
-            Navigator.push(context,
-              MaterialPageRoute(
-              builder: (__) => new DonatePage()
-
+        new Column(
+          children: <Widget>[
+            Text("Current Total: " + r"$" +"$roundedTotal",
+            style: headingThreeBold,
+            ),
+            new RaisedButton(
+              child: const Text("Add Donation"),
+              elevation: 4.0,
+              onPressed: (){
+                Navigator.push(context, 
+                MaterialPageRoute(
+                  builder: (__) => new DonatePage()
+                ));
+              },
             )
-            );
-            //_switchViewToDonatePage(context);
-          },
-        ),
+          ],
+        )
+        
       ],
     );
   }
