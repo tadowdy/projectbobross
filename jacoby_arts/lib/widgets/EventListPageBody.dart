@@ -62,14 +62,7 @@ makeBody(BuildContext context, List<DocumentSnapshot> snapshot){
       padding: const EdgeInsets.only(top: 20.0),
       children: snapshot.map((data) => makeCard(context,data)).toList(),
     ),
-    
-    // ListView.builder(
-    //   scrollDirection: Axis.vertical,
-    //   shrinkWrap: true,
-    //   itemBuilder: (BuildContext context, int index) {
-    //     return makeCard(context); // make a card for the list
-    //   }
-    // )
+
   );
 }
 InkWell makeCard(BuildContext context, DocumentSnapshot data){
@@ -102,7 +95,9 @@ InkWell makeCard(BuildContext context, DocumentSnapshot data){
           padding: EdgeInsets.only(right: 12.0),
           decoration: new BoxDecoration( // create a inset for the image
             border: new Border(
-            right: new BorderSide(width: 1.0, color: Colors.white))),
+            right: new BorderSide(width: 1.0, color: Colors.white)
+              )
+          ),
             child: new Image.network(_imageUrl, height: 75, width: 75,),
         ),
           title: Text(
@@ -112,12 +107,12 @@ InkWell makeCard(BuildContext context, DocumentSnapshot data){
   // subtitle: Text("Intermediate", style: TextStyle(color: Colors.white)),
           subtitle: Row(
             children: <Widget>[
-              Text(_date + " " + _time , style: TextStyle(color: Colors.white)),
-              Text(' \$' + eventData.price.toString()+ ".00", style: TextStyle(color: Colors.white)),
+              Text(_date + " " + _time + "\n\$" 
+              + eventData.price.toString() + ".00", style: TextStyle(color: Colors.white)),
+              //Text(' \$' + eventData.price.toString()+ ".00", style: TextStyle(color: Colors.white)),
             ],
           ),
-          trailing:
-            Icon(Icons.keyboard_arrow_right, color: Colors.white, size: 30.0)
+          trailing:Icon(Icons.keyboard_arrow_right, color: Colors.white, size: 30.0)
       ),
     ),
   )

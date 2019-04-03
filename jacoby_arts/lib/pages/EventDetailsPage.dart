@@ -29,9 +29,10 @@ buildBody(BuildContext context, eventData){
     DateTime date = DateTime.parse(time2);
     var final_date = new DateFormat.yMMMd().format(date);
     var final_time = new DateFormat.jm().format(date);
-    // var intEventPrice = eventData.price.toString();
-    // intEventPrice = intEventPrice.substring(0,intEventPrice.length-2);
-    final eventPrice = Container(
+    /*
+      Container for Price bubble
+     */
+    final eventPrice = Container( //Container for price bubble
     padding: const EdgeInsets.all(7.0),
     decoration: new BoxDecoration(
       border: new Border.all(color: Colors.white),
@@ -42,7 +43,10 @@ buildBody(BuildContext context, eventData){
         textAlign: TextAlign.center,
       ),
     );
-
+    /*
+      End Container for price bubble
+    */
+    
     final topContentText = Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: <Widget>[
@@ -82,7 +86,7 @@ buildBody(BuildContext context, eventData){
   children: <Widget>[
     Container(
       padding: EdgeInsets.only(left:10.0),
-      height: MediaQuery.of(context).size.height * 0.35,
+      height: MediaQuery.of(context).size.height * 0.5,
       decoration: new BoxDecoration(
         image: new DecorationImage(
           image: new AssetImage('images/lobby.jpg'),
@@ -91,7 +95,7 @@ buildBody(BuildContext context, eventData){
       ),
       ),
     Container(
-      height: MediaQuery.of(context).size.height * 0.35,
+      height: MediaQuery.of(context).size.height * 0.5,
       padding: EdgeInsets.all(40.0),
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(color: Color.fromRGBO(58,66,86,.7)),
