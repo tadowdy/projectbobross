@@ -18,4 +18,4 @@ class JacUser {
   String lastName;
 }
 
-JacUser user;
+JacUser user = JacUser();

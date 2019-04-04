@@ -4,10 +4,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:jacoby_arts/AppLanding.dart';
 import 'package:jacoby_arts/globals.dart' as globals;
 
+
+final FirebaseAuth _auth = FirebaseAuth.instance;
+
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => new _LoginPageState();
-  
 }
 
   enum FormMode { LOGIN, SIGNUP }
@@ -32,7 +34,7 @@ class _LoginPageState extends State<LoginPage> {
     if(formState.validate()){
       formState.save();
       try{
-        globals.user.fbuser = await FirebaseAuth.instance.signInWithEmailAndPassword(email: _email, password: _password);
+        globals.user.fbuser = await _auth.signInWithEmailAndPassword(email: _email, password: _password);
         Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
       }catch(e){
         print(e.message);
@@ -44,14 +46,23 @@ class _LoginPageState extends State<LoginPage> {
     if(formState.validate()){
       formState.save();
       try{
-        globals.user.fbuser = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: _email, password: _password);
+        globals.user.fbuser = await _auth.createUserWithEmailAndPassword(email: _email, password: _password);
         globals.user.fbuser.sendEmailVerification();
+        _showPasswordVerifyInput();
         Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
       }catch(e){
         print(e.message);
       }
     }
   }
+
+  void signOut() async {
+    
+    
+       await _auth.signOut();
+       Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));    
+      }
+  
 
   String _errorMessage;
 
@@ -92,26 +103,26 @@ class _LoginPageState extends State<LoginPage> {
     });
   }
 
-// // void _showVerifyEmailSentDialog() {
-// //   showDialog(
-// //     context: context,
-// //     builder: (BuildContext context) {
-// //       return AlertDialog(
-// //         title: new Text("Verify your account"),
-// //         content: new Text("A link to verify your account has been sent to your email."),
-// //         actions: <Widget> [
-// //           new FlatButton(
-// //             child: new Text("Dismiss"),
-// //             onPressed: () {
-// //               _changeFormToLogin();
-// //               Navigator.of(context).pop();
-// //             }
-// //           )
-// //         ]
-// //       );
-// //     }
-// //   );
-// // }
+ void _showVerifyEmailSentDialog() {
+   showDialog(
+     context: context,
+     builder: (BuildContext context) {
+       return AlertDialog(
+         title: new Text("Verify your account"),
+         content: new Text("A link to verify your account has been sent to your email."),
+         actions: <Widget> [
+           new FlatButton(
+             child: new Text("Dismiss"),
+             onPressed: () {
+               _changeFormToLogin();
+               Navigator.of(context).pop();
+             }
+           )
+         ]
+       );
+     }
+   );
+ }
 
   Widget _showBody() {
     return new Container(
@@ -120,7 +131,13 @@ class _LoginPageState extends State<LoginPage> {
             key: _formKey,
             child: new ListView(
               shrinkWrap: true,
-               children: _formMode == FormMode.SIGNUP 
+               children: globals.user.fbuser != null
+               ? <Widget>[
+                 _displayUser(),
+                 _signOutBtn()
+               ]
+               :
+               _formMode == FormMode.SIGNUP 
                 ? <Widget>[
                 _showFirstNameInput(),
                 _showLastNameInput(),
@@ -141,6 +158,22 @@ class _LoginPageState extends State<LoginPage> {
             )));
   }
 
+  Widget _displayUser() {
+    return Text('You are signed in as ${globals.user.fbuser.email}', style: headingThreeBold);
+  }
+
+  Widget _signOutBtn() {
+      return new MaterialButton(
+      elevation: 5.0,
+      minWidth: 200.0,
+      height: 42.0,
+      color: Colors.amberAccent,
+      child: 
+          new Text('Sign Out', style: new TextStyle(fontSize: buttonTextSize)),
+              onPressed: signOut
+    );
+  }
+
   Widget _showFirstNameInput() {
     return TextFormField(
       keyboardType: TextInputType.text,
@@ -157,7 +190,7 @@ class _LoginPageState extends State<LoginPage> {
       );
   }
 
-    Widget _showLastNameInput() {
+  Widget _showLastNameInput() {
     return TextFormField(
       keyboardType: TextInputType.text,
       decoration: InputDecoration(
@@ -210,7 +243,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-   Widget _showPasswordVerifyInput() {
+  Widget _showPasswordVerifyInput() {
     return TextFormField(
       obscureText: true,
       decoration: InputDecoration(
@@ -271,19 +304,5 @@ class _LoginPageState extends State<LoginPage> {
 
   final hintStyleText = TextStyle(color: Colors.black.withOpacity(0.2));
 
-  final loginBtn = new RaisedButton(
-      onPressed: () {},
-      color: Colors.amberAccent,
-      splashColor: Colors.grey,
-      disabledColor: Colors.grey,
-      elevation: 2.0,
-      highlightElevation: 8.0,
-      disabledElevation: 0.0,
-      textColor: Colors.black,
-      disabledTextColor: Colors.black,
-      child:
-          new Text("Log In", style: new TextStyle(fontSize: buttonTextSize)));
 
-  final newUserBtn = new FlatButton(
-      onPressed: () {}, textColor: themeColor, child: Text("Create account"));
 }
