@@ -65,13 +65,5 @@ final contentText = new TextStyle(
 final topAppBar = new AppBar(
   title: new Image(image: new AssetImage('images/full_logo.png')),
   backgroundColor: themeColor,
-  actions: <Widget>[
-    new IconButton(
-      icon: new Icon(Icons.camera_alt),
-      tooltip: 'QR scan',
-      onPressed: () {
-        //TODO: go to camera
-      },
-    ),
-  ],
+
 );
