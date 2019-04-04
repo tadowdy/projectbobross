@@ -82,7 +82,7 @@ Column mainColumn(context) {
             fontFamily: "Roboto"),
       ),
       new Text(
-        "Addr: 627 E.Broadway, Alton,IL 62002",
+        "627 E.Broadway, Alton,IL 62002",
         style: new TextStyle(
             fontSize: headingThreeSize,
             color: const Color(0xFF080808),
@@ -90,7 +90,7 @@ Column mainColumn(context) {
             fontFamily: "Roboto"),
       ),
       new Text(
-        "Phone: +1.618.462.5222",
+        "Phone: +1.618.462.5222\n",
         style: new TextStyle(
             fontSize: headingThreeSize,
             color: const Color(0xFF080808),
@@ -122,7 +122,7 @@ Column mainColumn(context) {
             fontFamily: "Roboto"),
       ),
       new Text(
-        "Admission is Free",
+        "Admission is Free\n",
         style: new TextStyle(
             fontSize: headingThreeSize,
             color: const Color(0xFF080808),

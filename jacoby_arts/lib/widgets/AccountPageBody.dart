@@ -19,9 +19,7 @@ class AccountPageBody extends StatelessWidget {
     return Container(
       //This is where the code for the body of your page will go
       child: new Column(
-          // mainAxisAlignment: MainAxisAlignment.start,
-          // mainAxisSize: MainAxisSize.max,
-          // crossAxisAlignment: CrossAxisAlignment.center,
+ 
           children: <Widget>[
             Center(child: profileBackground),
             membershipInfo,
