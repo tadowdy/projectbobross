@@ -25,7 +25,6 @@ class DonatePage extends StatelessWidget {
                 new Container(
                     //height: double.infinity, //This is extra
                     width: MediaQuery.of(context).size.width - 100.0, // Subtract sums of paddings and margins from actual width 
-                    //TODO: see if textField can pop up numbers only keypad instead
                     child: new TextField(
                       inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
                       keyboardType: TextInputType.number,
