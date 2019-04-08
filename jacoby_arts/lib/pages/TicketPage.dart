@@ -15,10 +15,10 @@ class TicketPage extends StatefulWidget {
 //List<String> allDropdownValues = new List<String>();
 class _TicketPage extends State<TicketPage>{
   String dropdownValue = '1';
-  int maxNumberOfTickets = 10;
   //var ddlist = makeList(maxNumberOfTickets);
   var eventData;
   _TicketPage({this.eventData});
+  //int maxNumberOfTickets = eventData.capacity;
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: topAppBar ,
@@ -52,7 +52,7 @@ class _TicketPage extends State<TicketPage>{
                     });
                   },
 
-                  items: makeList(maxNumberOfTickets).map<DropdownMenuItem<String>>((String value){
+                  items: makeList(getEventCapacity(eventData)).map<DropdownMenuItem<String>>((String value){
                     return DropdownMenuItem<String>(
                       value: value,
                       child: new Text(value),
@@ -94,4 +94,8 @@ makeList(int maxNumberOfTicket){
   print(allDropdownValues);
   return allDropdownValues;
   
+}
+getEventCapacity(eventData){
+  return eventData.capacity;
+
 }
