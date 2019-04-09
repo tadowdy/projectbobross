@@ -6,6 +6,9 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:jacoby_arts/Auxiliary/uiComponents.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:async';
+import 'dart:io';
+import 'package:jacoby_arts/auxiliary/HttpClientClass.dart';
+
 
 
 class ArtworkListPageBody extends StatelessWidget {
@@ -44,15 +47,19 @@ return ListView(
   children: snapshot.map((data) => makeCard(context,data)).toList(),
 );
 }
-displayArtwork(BuildContext context, DocumentSnapshot data){
-  
+displayArtwork(BuildContext context, Artwork _artwork)async{
+  print('display');
+  imageUrl = await getImage('Bob-Ross-3.jpg');
+  return imageUrl;
 }
 
+var imageUrl;
 InkWell makeCard(BuildContext context, DocumentSnapshot data){
   final _artwork =  Artwork.fromSnapshot(data);
+  imageUrl = displayArtwork(context, _artwork);
+
   final _artist =_artwork.artist_id;
-  var one = 1;
-  if (one == 1){
+
     return new InkWell(
         // make it clickable
         onTap: () {
@@ -77,7 +84,8 @@ InkWell makeCard(BuildContext context, DocumentSnapshot data){
                   // create a inset for the image
                   border: new Border(
                   right: new BorderSide(width: 1.0, color: Colors.white))),
-                  child: new Image.network(_artwork.image_url, height: 75, width: 75,), //url here
+                  child: new Image.network(imageUrl.toString()),
+                  //child: new Image.network(x, height: 75, width: 75,), //url here
               ),
                 title: Text(
                   _artwork.title,
@@ -94,6 +102,6 @@ InkWell makeCard(BuildContext context, DocumentSnapshot data){
                   Icon(Icons.keyboard_arrow_right, color: Colors.white, size: 30.0)),
           ),
     ));
-  }
+  
   
 }
