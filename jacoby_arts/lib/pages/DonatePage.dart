@@ -48,7 +48,7 @@ class DonatePage extends StatelessWidget {
                 Navigator.pop(context);
 
               },
-              child: Text('Give Us Your Money!'),
+              child: Text('Add to Cart'),
             )
           ],
         ),
