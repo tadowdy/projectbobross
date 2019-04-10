@@ -25,8 +25,7 @@ class ArtworkDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
-    return detailsScaffold(context,artData);
+    return detailsScaffold(context, artData);
   }
 }
 
@@ -37,26 +36,25 @@ Scaffold detailsScaffold(context, artData) {
         backgroundColor: themeColor,
       ),
       body: Center(
-        child: Align(
-          alignment: Alignment.topCenter,
+          child: Align(
+        alignment: Alignment.topCenter,
         child: new SingleChildScrollView(
-            child: new Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                new MyImageWidget(artData: artData),
-                imageDetailsContainer(context,artData),
-                artistInfoContainer(context,artData),
-                priceInfoContainer(context,artData),
-                descriptionHeader(context,artData),
-                description(context,artData),
-                // questionHeader(context),
-                // questionBox(context),
-                // questionSubmit(context),
-              ],
-            ),
+          child: new Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              new MyImageWidget(artData: artData),
+              imageDetailsContainer(context, artData),
+              artistInfoContainer(context, artData),
+              priceInfoContainer(context, artData),
+              descriptionHeader(context, artData),
+              description(context, artData),
+              // questionHeader(context),
+              // questionBox(context),
+              // questionSubmit(context),
+            ],
           ),
-        )
-      ));
+        ),
+      )));
 }
 
 class MyImageWidget extends StatelessWidget {
@@ -64,11 +62,9 @@ class MyImageWidget extends StatelessWidget {
   MyImageWidget({this.artData});
   @override
   Widget build(BuildContext context) {
-    
     return new Container(
       child: new Image.network(artData.image_url, fit: BoxFit.fill),
     );
-    
   }
 }
 
@@ -116,6 +112,25 @@ Container artistInfoContainer(context, artData) {
   );
 }
 
+Widget marketStatus(context, artData) {
+  if (artData.market_status == "For Sale") {
+    return Text(
+      "\$" + artData.price.toString() + ".00",
+      style: headingThree,
+    );
+  } else if (artData.market_status == "Not For Sale") {
+    return Text(
+      "Not For Sale",
+      style: headingThree,
+    );
+  } else {
+    return Text(
+      "Sold",
+      style: headingThree,
+    );
+  }
+}
+
 Container priceInfoContainer(context, artData) {
   return Container(
       padding: const EdgeInsets.all(verticalTextPadding),
@@ -129,13 +144,16 @@ Container priceInfoContainer(context, artData) {
             ),
             new Container(
               padding: const EdgeInsets.all(horizontalPadding),
-              child: new Text(
-                "\$" + artData.price.toString() + ".00",
-                style: headingThree,
-              ),
+              child: marketStatus(context, artData)
             ),
-            purchaseContainer(context, artData),
-          ]));
+            artData.market_status == 'For Sale' ? purchaseContainer(context, artData) : emptyContainer() 
+          ]
+          )
+          );
+}
+
+Container emptyContainer() {
+  return Container();
 }
 
 Container purchaseContainer(context, artData) {
@@ -146,8 +164,8 @@ Container purchaseContainer(context, artData) {
       height: buttonHeight,
       child: new RaisedButton(
           onPressed: () {
-            CartItemInfo item = new CartItemInfo(artData.title, 
-            artData.artist_id, artData.price, artData.image_url);
+            CartItemInfo item = new CartItemInfo(artData.title,
+                artData.artist_id, artData.price, artData.image_url);
             addCartItem(item);
           },
           color: Colors.amberAccent,

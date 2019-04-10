@@ -48,6 +48,25 @@ displayArtwork(BuildContext context, DocumentSnapshot data){
   
 }
 
+    Widget marketStatus(context, _artwork) {
+  if (_artwork.market_status == "For Sale") {
+    return Text(
+      "\$" + _artwork.price.toString() + ".00",
+      style: TextStyle(color: Colors.white),
+    );
+  } else if (_artwork.market_status == "Not For Sale") {
+    return Text(
+      "Not For Sale",
+      style: TextStyle(color: Colors.white),
+    );
+  } else {
+    return Text(
+      "Sold",
+     style: TextStyle(color: Colors.white),
+    );
+  }
+}
+
 InkWell makeCard(BuildContext context, DocumentSnapshot data){
   final _artwork =  Artwork.fromSnapshot(data);
   final _artist =_artwork.artist_id;
@@ -87,7 +106,7 @@ InkWell makeCard(BuildContext context, DocumentSnapshot data){
                   children: <Widget>[
                     
                     Text(_artist, style: TextStyle(color: Colors.white)),
-                    Text("\$" + _artwork.price.toString() + ".00 ", style: TextStyle(color: Colors.white)),
+                    marketStatus(context, _artwork),
                   ],
                 ),
                 trailing:
@@ -95,5 +114,9 @@ InkWell makeCard(BuildContext context, DocumentSnapshot data){
           ),
     ));
   }
+
+  
+
+  
   
 }
