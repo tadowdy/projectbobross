@@ -7,6 +7,9 @@ import 'package:jacoby_arts/Auxiliary/uiComponents.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'dart:async';
+import 'package:http/http.dart' as http;
+import 'package:firebase_storage/firebase_storage.dart';
+
 import 'package:jacoby_arts/auxiliary/CompareDates.dart';
 
 

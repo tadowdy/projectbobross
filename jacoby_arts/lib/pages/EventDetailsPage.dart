@@ -83,7 +83,7 @@ buildBody(BuildContext context, eventData){
   children: <Widget>[
     Container(
       padding: EdgeInsets.only(left:10.0),
-      height: MediaQuery.of(context).size.height * 0.35,
+      height: MediaQuery.of(context).size.height * 0.6,
       decoration: new BoxDecoration(
         image: new DecorationImage(
           image: new AssetImage('images/lobby.jpg'),
@@ -92,7 +92,7 @@ buildBody(BuildContext context, eventData){
       ),
       ),
     Container(
-      height: MediaQuery.of(context).size.height * 0.35,
+      height: MediaQuery.of(context).size.height * 0.6,
       padding: EdgeInsets.all(40.0),
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(color: Color.fromRGBO(58,66,86,.7)),
