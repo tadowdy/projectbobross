@@ -67,6 +67,7 @@ return ListView(
 var i = 0;
 InkWell makeCard(BuildContext context, DocumentSnapshot data){
   final _artwork =  Artwork.fromSnapshot(data);
+
   final _artist =_artwork.artist_id;
   //compareDate(_artwork.reveal_date);
   bool visible = compareDate(_artwork.reveal_date);
@@ -94,7 +95,8 @@ InkWell makeCard(BuildContext context, DocumentSnapshot data){
                   // create a inset for the image
                   border: new Border(
                   right: new BorderSide(width: 1.0, color: Colors.white))),
-                  child: new Image.network(_artwork.image_url, height: 75, width: 75,), //url here
+                  child: new Image.network(_artwork.image_url),
+                  //child: new Image.network(x, height: 75, width: 75,), //url here
               ),
                 title: Text(
                   _artwork.title,
@@ -110,6 +112,8 @@ InkWell makeCard(BuildContext context, DocumentSnapshot data){
                 trailing:
                   Icon(Icons.keyboard_arrow_right, color: Colors.white, size: 30.0)),
           ),
-    )));
+    ))
+  
+    );
   
 }
