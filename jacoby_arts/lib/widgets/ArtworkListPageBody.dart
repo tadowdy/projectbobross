@@ -6,6 +6,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:jacoby_arts/Auxiliary/uiComponents.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:async';
+import 'package:jacoby_arts/auxiliary/CompareDates.dart';
 
 
 class ArtworkListPageBody extends StatelessWidget {
@@ -44,9 +45,6 @@ return ListView(
   children: snapshot.map((data) => makeCard(context,data)).toList(),
 );
 }
-displayArtwork(BuildContext context, DocumentSnapshot data){
-  
-}
 
     Widget marketStatus(context, _artwork) {
   if (_artwork.market_status == "For Sale") {
@@ -66,12 +64,12 @@ displayArtwork(BuildContext context, DocumentSnapshot data){
     );
   }
 }
-
+var i = 0;
 InkWell makeCard(BuildContext context, DocumentSnapshot data){
   final _artwork =  Artwork.fromSnapshot(data);
   final _artist =_artwork.artist_id;
-  var one = 1;
-  if (one == 1){
+  //compareDate(_artwork.reveal_date);
+  bool visible = compareDate(_artwork.reveal_date);
     return new InkWell(
         // make it clickable
         onTap: () {
@@ -83,7 +81,7 @@ InkWell makeCard(BuildContext context, DocumentSnapshot data){
             )
             );
         },
-        child: Card(
+        child: Visibility(visible: visible, child: Card(
           elevation: 8.0,
           margin: new EdgeInsets.symmetric(horizontal: horizontalPadding, vertical: cardPadding),
           child: Container(
@@ -112,11 +110,6 @@ InkWell makeCard(BuildContext context, DocumentSnapshot data){
                 trailing:
                   Icon(Icons.keyboard_arrow_right, color: Colors.white, size: 30.0)),
           ),
-    ));
-  }
-
-  
-
-  
+    )));
   
 }
