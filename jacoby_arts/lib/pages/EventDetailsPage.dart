@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jacoby_arts/Auxiliary/uiComponents.dart';
 import 'package:intl/intl.dart';
+import 'package:jacoby_arts/pages/TicketPage.dart';
 
 class EventDetailsPage extends StatelessWidget {
   var eventData;
@@ -82,7 +83,7 @@ buildBody(BuildContext context, eventData){
   children: <Widget>[
     Container(
       padding: EdgeInsets.only(left:10.0),
-      height: MediaQuery.of(context).size.height * 0.5,
+      height: MediaQuery.of(context).size.height * 0.6,
       decoration: new BoxDecoration(
         image: new DecorationImage(
           image: new AssetImage('images/lobby.jpg'),
@@ -91,7 +92,7 @@ buildBody(BuildContext context, eventData){
       ),
       ),
     Container(
-      height: MediaQuery.of(context).size.height * 0.5,
+      height: MediaQuery.of(context).size.height * 0.6,
       padding: EdgeInsets.all(40.0),
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(color: Color.fromRGBO(58,66,86,.7)),
@@ -119,10 +120,16 @@ buildBody(BuildContext context, eventData){
     final readButton = Padding(
       padding: EdgeInsets.symmetric(vertical: 16.0),
       child:  RaisedButton(
-        onPressed: () => {},
+        onPressed: () => {
+          Navigator.push(context,
+            MaterialPageRoute(
+              builder: (__) => new TicketPage(eventData: eventData)
+            ))
+        },
         color: Color.fromRGBO(58, 66, 86, 1.0),
         child:
           Text("BUY TICKETS", style: TextStyle(color: Colors.white)),
+                      
       )
     );
 
