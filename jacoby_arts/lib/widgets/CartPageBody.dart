@@ -31,6 +31,7 @@ class _CartPageBody extends State<CartPageBody> {
   Widget makeBody(BuildContext context, List<CartItemInfo> _cartItems) {
     return new ListView(
       children: <Widget>[
+
         _cartHeader(context, _cartItems),
         _buildCartItems(_cartItems),
         _checkoutButton(context),
@@ -98,7 +99,9 @@ class _CartPageBody extends State<CartPageBody> {
               ],
             ),
                 trailing:
-                  Icon(Icons.keyboard_arrow_right, color: Colors.white, size: 30.0))),
+                  Icon(Icons.keyboard_arrow_right, color: Colors.white, size: 30.0)
+          )
+        ),
     );
   }
 

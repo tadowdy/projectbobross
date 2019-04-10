@@ -62,7 +62,9 @@ InkWell makeCard(BuildContext context, DocumentSnapshot data){
           padding: EdgeInsets.only(right: 12.0),
           decoration: new BoxDecoration( // create a inset for the image
             border: new Border(
-            right: new BorderSide(width: 1.0, color: Colors.white))),
+            right: new BorderSide(width: 1.0, color: Colors.white)
+              )
+          ),
             child: new Image.network(_imageUrl, height: 75, width: 75,),
         ),
           title: Text(
@@ -76,8 +78,7 @@ InkWell makeCard(BuildContext context, DocumentSnapshot data){
 
             ],
           ),
-          trailing:
-            Icon(Icons.keyboard_arrow_right, color: Colors.white, size: 30.0)
+          trailing:Icon(Icons.keyboard_arrow_right, color: Colors.white, size: 30.0)
       ),
     ),
   )
