@@ -160,7 +160,7 @@ Container purchaseContainer(context, artData) {
   return Container(
     padding: const EdgeInsets.all(horizontalPadding),
     child: new SizedBox(
-      width: largeButtonWidth,
+      width: 150,
       height: buttonHeight,
       child: new RaisedButton(
           onPressed: () {
