@@ -177,7 +177,7 @@ Container purchaseContainer(context, artData) {
           textColor: Colors.black,
           disabledTextColor: Colors.black,
           child: new Text(
-            "Add to cart",
+            "Add to Cart",
             style: new TextStyle(fontSize: buttonTextSize),
           )),
     ),
