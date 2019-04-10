@@ -29,8 +29,7 @@ class _CartPageBody extends State<CartPageBody> {
   }
 
   Widget makeBody(BuildContext context, List<CartItemInfo> _cartItems) {
-    return new Column(
-      
+    return new ListView(
       children: <Widget>[
 
         _cartHeader(context, _cartItems),
@@ -93,7 +92,7 @@ class _CartPageBody extends State<CartPageBody> {
 
             subtitle: Row(
               children: <Widget>[
-                Text(item.artistName + "     " + "\n\$ " + item.price.toStringAsFixed(2),
+                Text(item.artistName + " " + "\n\$ " + item.price.toStringAsFixed(2),
                     style: TextStyle(color: Colors.white)),
                 // Text(r"$" + item.price.toStringAsFixed(2),
                 //     style: TextStyle(color: Colors.white)),
@@ -113,33 +112,30 @@ class _CartPageBody extends State<CartPageBody> {
       total += item.price;
     }
     roundedTotal = total.toStringAsFixed(2);
-         return new Row(
-           crossAxisAlignment: CrossAxisAlignment.center,
-           mainAxisAlignment: MainAxisAlignment.center,
+    return new Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        new Column(
           children: <Widget>[
-            new Column(
-              children: <Widget>[
-                Text("Current Total: " + r"$" + "$roundedTotal",
-                  style: headingThreeBold,
-                ), 
-                new RaisedButton(
-                  child: const Text("Add Donation!"),
-                  elevation: 4.0,
-                  onPressed: () {
-                    Navigator.push(context,
-                      MaterialPageRoute(
-                        builder: (__) => new DonatePage()
-                      )
-                    );
-                  },
-                ),
-              ],
+            Text("Current Total: " + r"$" +"$roundedTotal",
+            style: headingThreeBold,
             ),
+            new RaisedButton(
+              child: const Text("Add Donation"),
+              elevation: 4.0,
+              onPressed: (){
+                Navigator.push(context, 
+                MaterialPageRoute(
+                  builder: (__) => new DonatePage()
+                ));
+              },
+            )
           ],
-        );
-
+        ),
+      ]);
     
-  }
+}
 
   // void _switchViewToDonatePage(BuildContext context) {
   //   Navigator.push(
