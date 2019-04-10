@@ -6,9 +6,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:jacoby_arts/Auxiliary/uiComponents.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:async';
-import 'dart:io';
-
-
+import 'package:jacoby_arts/auxiliary/CompareDates.dart';
 
 
 class ArtworkListPageBody extends StatelessWidget {
@@ -48,13 +46,31 @@ return ListView(
 );
 }
 
-
-var imageUrl;
+    Widget marketStatus(context, _artwork) {
+  if (_artwork.market_status == "For Sale") {
+    return Text(
+      "\$" + _artwork.price.toString() + ".00",
+      style: TextStyle(color: Colors.white),
+    );
+  } else if (_artwork.market_status == "Not For Sale") {
+    return Text(
+      "Not For Sale",
+      style: TextStyle(color: Colors.white),
+    );
+  } else {
+    return Text(
+      "Sold",
+     style: TextStyle(color: Colors.white),
+    );
+  }
+}
+var i = 0;
 InkWell makeCard(BuildContext context, DocumentSnapshot data){
   final _artwork =  Artwork.fromSnapshot(data);
 
   final _artist =_artwork.artist_id;
-
+  //compareDate(_artwork.reveal_date);
+  bool visible = compareDate(_artwork.reveal_date);
     return new InkWell(
         // make it clickable
         onTap: () {
@@ -66,7 +82,7 @@ InkWell makeCard(BuildContext context, DocumentSnapshot data){
             )
             );
         },
-        child: Card(
+        child: Visibility(visible: visible, child: Card(
           elevation: 8.0,
           margin: new EdgeInsets.symmetric(horizontal: horizontalPadding, vertical: cardPadding),
           child: Container(
@@ -90,13 +106,14 @@ InkWell makeCard(BuildContext context, DocumentSnapshot data){
                   children: <Widget>[
                     
                     Text(_artist, style: TextStyle(color: Colors.white)),
-                    Text("\$" + _artwork.price.toString() + ".00 ", style: TextStyle(color: Colors.white)),
+                    marketStatus(context, _artwork),
                   ],
                 ),
                 trailing:
                   Icon(Icons.keyboard_arrow_right, color: Colors.white, size: 30.0)),
           ),
-    ));
+    ))
   
+    );
   
 }
