@@ -2,12 +2,15 @@
 import 'package:flutter/material.dart';
 import 'package:jacoby_arts/pages/SurveyDetailsPage.dart';
 import 'package:jacoby_arts/Auxiliary/uiComponents.dart';
+import 'package:jacoby_arts/globals.dart' as globals;
 import 'package:jacoby_arts/pages/LogInPage.dart';
 import 'package:url_launcher/url_launcher.dart';
+
 
 class HomePageBody extends StatelessWidget {
   
   HomePageBody();
+  
 
   @override
   Widget build(BuildContext context) {
@@ -29,14 +32,23 @@ Column mainColumn(context) {
     mainAxisSize: MainAxisSize.max,
     crossAxisAlignment: CrossAxisAlignment.center,
     children: <Widget>[
-      new Text(
-        'Welcome!',
+        globals.user.fbuser == null
+          ? new Text(  'Welcome Guest!',
+          style: new TextStyle(
+          fontSize: headingOneSize,
+          color: const Color(0xFF080808),
+          fontWeight: FontWeight.w600,
+          fontFamily: "Roboto"),
+        )
+     :  new Text(
+        'Welcome ${globals.user.fbuser.email}!',
         style: new TextStyle(
             fontSize: headingOneSize,
             color: const Color(0xFF080808),
             fontWeight: FontWeight.w600,
             fontFamily: "Roboto"),
       ),
+
       new Text(
         " - Current Gallery",
         style: new TextStyle(
@@ -70,7 +82,7 @@ Column mainColumn(context) {
             fontFamily: "Roboto"),
       ),
       new Text(
-        "Addr: 627 E.Broadway, Alton,IL 62002",
+        "627 E.Broadway, Alton,IL 62002",
         style: new TextStyle(
             fontSize: headingThreeSize,
             color: const Color(0xFF080808),
@@ -78,7 +90,7 @@ Column mainColumn(context) {
             fontFamily: "Roboto"),
       ),
       new Text(
-        "Phone: +1.618.462.5222",
+        "Phone: +1.618.462.5222\n",
         style: new TextStyle(
             fontSize: headingThreeSize,
             color: const Color(0xFF080808),
@@ -110,7 +122,7 @@ Column mainColumn(context) {
             fontFamily: "Roboto"),
       ),
       new Text(
-        "Admission is Free",
+        "Admission is Free\n",
         style: new TextStyle(
             fontSize: headingThreeSize,
             color: const Color(0xFF080808),

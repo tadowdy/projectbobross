@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jacoby_arts/Auxiliary/uiComponents.dart';
+import 'package:jacoby_arts/globals.dart' as globals;
 
 class AccountPageBody extends StatelessWidget {
   AccountPageBody();
@@ -52,7 +53,9 @@ final membershipInfo = new Container(
           CrossAxisAlignment.start, // allow left alignment for the text
       children: <Widget>[
         Row(children: <Widget>[
-          new Text("Jane Doe", style: headingOneBold),
+          globals.user.fbuser == null
+          ? new Text("Jane Doe", style: headingOneBold)
+          : new Text('${globals.user.fbuser.email}', style: headingOneBold),
         ]),
         new Row(
           children: <Widget>[
