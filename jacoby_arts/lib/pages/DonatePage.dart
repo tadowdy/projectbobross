@@ -28,9 +28,11 @@ class DonatePage extends StatelessWidget {
                     child: new TextField(
                       inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
                       keyboardType: TextInputType.number,
+                      textAlign: TextAlign.right,
                       decoration: new InputDecoration(
+                        prefixText: '\$',
                         suffixText: '.00',
-                        hintText: 'Enter Donation Amount'),
+                        helperText: 'Enter Donation Amount'),
                         controller: donation_amount,
                     ),
                   ),
@@ -47,7 +49,7 @@ class DonatePage extends StatelessWidget {
                 Navigator.pop(context);
 
               },
-              child: Text('Give Us Your Money!'),
+              child: Text('Add to Cart'),
             )
           ],
         ),

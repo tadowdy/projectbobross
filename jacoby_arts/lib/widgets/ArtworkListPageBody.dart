@@ -7,6 +7,7 @@ import 'package:jacoby_arts/Auxiliary/uiComponents.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'dart:async';
+import 'package:jacoby_arts/auxiliary/CompareDates.dart';
 
 
 class ArtworkListPageBody extends StatelessWidget {
@@ -45,15 +46,32 @@ return ListView(
   children: snapshot.map((data) => makeCard(context,data)).toList(),
 );
 }
-displayArtwork(BuildContext context, DocumentSnapshot data){
-  
-}
 
+    Widget marketStatus(context, _artwork) {
+  if (_artwork.market_status == "For Sale") {
+    return Text(
+      "\$" + _artwork.price.toString() + ".00",
+      style: TextStyle(color: Colors.white),
+    );
+  } else if (_artwork.market_status == "Not For Sale") {
+    return Text(
+      "Not For Sale",
+      style: TextStyle(color: Colors.white),
+    );
+  } else {
+    return Text(
+      "Sold",
+     style: TextStyle(color: Colors.white),
+    );
+  }
+}
+var i = 0;
 InkWell makeCard(BuildContext context, DocumentSnapshot data){
   final _artwork =  Artwork.fromSnapshot(data);
+
   final _artist =_artwork.artist_id;
-  var one = 1;
-  if (one == 1){
+  //compareDate(_artwork.reveal_date);
+  bool visible = compareDate(_artwork.reveal_date);
     return new InkWell(
         // make it clickable
         onTap: () {
@@ -65,7 +83,7 @@ InkWell makeCard(BuildContext context, DocumentSnapshot data){
             )
             );
         },
-        child: Card(
+        child: Visibility(visible: visible, child: Card(
           elevation: 8.0,
           margin: new EdgeInsets.symmetric(horizontal: horizontalPadding, vertical: cardPadding),
           child: Container(
@@ -78,7 +96,8 @@ InkWell makeCard(BuildContext context, DocumentSnapshot data){
                   // create a inset for the image
                   border: new Border(
                   right: new BorderSide(width: 1.0, color: Colors.white))),
-                  child: new Image.network(_artwork.image_url, height: 75, width: 75,), //url here
+                  child: new Image.network(_artwork.image_url),
+                  //child: new Image.network(x, height: 75, width: 75,), //url here
               ),
                 title: Text(
                   _artwork.title,
@@ -88,13 +107,14 @@ InkWell makeCard(BuildContext context, DocumentSnapshot data){
                   children: <Widget>[
                     
                     Text(_artist, style: TextStyle(color: Colors.white)),
-                    Text("\$" + _artwork.price.toString() + ".00 ", style: TextStyle(color: Colors.white)),
+                    marketStatus(context, _artwork),
                   ],
                 ),
                 trailing:
                   Icon(Icons.keyboard_arrow_right, color: Colors.white, size: 30.0)),
           ),
-    ));
-  }
+    ))
+  
+    );
   
 }
