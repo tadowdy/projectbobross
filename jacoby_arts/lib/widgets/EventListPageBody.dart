@@ -33,6 +33,7 @@ makeBody(BuildContext context, List<DocumentSnapshot> snapshot){
 }
 InkWell makeCard(BuildContext context, DocumentSnapshot data){
   final eventData = Events.fromSnapshot(data);
+ //print(eventData.reference.documentID);
   bool visible = compareDate(eventData.reveal_date);
   var time = eventData.date.replaceAll(new RegExp(r'-'), '');
   var time1 = time.replaceAll(new RegExp(r':'), '');

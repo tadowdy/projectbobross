@@ -6,15 +6,6 @@ import 'package:jacoby_arts/pages/TicketPage.dart';
 class EventDetailsPage extends StatelessWidget {
   var eventData;
   EventDetailsPage({ this.eventData});
-  void _addEventToCart(/*Event event*/) {
-    // TODO: add the event to the cart.
-    // TODO: notify the user whether the event was added to the cart using a popup.
-  }
-
-  void _signUpForEvent(/*Event event*/) {
-    // TODO: sign up the user for the event.
-    // TODO: notify the user whether the event sign up was successful using a popup.
-  }
 
   @override
   Widget build(BuildContext context) {

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Events{
   final String title;
+  final int tickets_sold;
   final String reveal_date;
   final int price;
   final String location;
@@ -19,6 +20,7 @@ class Events{
       assert(map['location'] != null),
       assert(map['price'] != null),
       assert(map['reveal_date'] != null),
+      assert(map['tickets_sold'] != null),
       assert(map['title'] != null),
       capacity = map['capacity'],
       date = map['date'],
@@ -27,6 +29,7 @@ class Events{
       location = map['location'],
       reveal_date = map['reveal_date'],
       price = map['price'],
+      tickets_sold = map['tickets_sold'],
       title = map['title'];
   
   Events.fromSnapshot(DocumentSnapshot snapshot)
@@ -34,6 +37,6 @@ class Events{
 
   @override
   String toString() => 
-  'Events<$capacity:$description:$date:$image_url:$location:$price:$reveal_date:$title>';
+  'Events<$capacity:$description:$date:$image_url:$location:$price:$reveal_date:$tickets_sold:$title>';
 
 }

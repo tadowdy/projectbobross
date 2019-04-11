@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:jacoby_arts/auxiliary/uiComponents.dart';
 import 'package:intl/intl.dart';
 import 'package:jacoby_arts/auxiliary/CartClasses.dart';
+import 'package:jacoby_arts/auxiliary/EventClass.dart';
 
 class TicketPage extends StatefulWidget {
   var eventData;
@@ -12,12 +14,14 @@ class TicketPage extends StatefulWidget {
 }
 
 
+
 //List<String> allDropdownValues = new List<String>();
 class _TicketPage extends State<TicketPage>{
   String dropdownValue = '1';
   //var ddlist = makeList(maxNumberOfTickets);
   var eventData;
   _TicketPage({this.eventData});
+
   //int maxNumberOfTickets = eventData.capacity;
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,9 +55,8 @@ class _TicketPage extends State<TicketPage>{
                       dropdownValue = newValue;
                     });
                   },
-
-                  items: makeList(getEventCapacity(eventData)).map<DropdownMenuItem<String>>((String value){
-                    return DropdownMenuItem<String>(
+                  items: makeList(getRemainingCapacity(eventData)).map<DropdownMenuItem<String>>(
+                    (String value){return DropdownMenuItem<String>(
                       value: value,
                       child: new Text(value),
                     );
@@ -72,8 +75,22 @@ class _TicketPage extends State<TicketPage>{
                   child: RaisedButton(
                     onPressed: () {
                       int cartPrice = int.parse(dropdownValue) * eventData.price;
-                      CartItemInfo eventItem = new CartItemInfo(eventData.title, "Ticket (" + dropdownValue + ")", cartPrice, " ");
+                      CartItemInfo eventItem = new CartItemInfo(eventData.title, 
+                      "Ticket (" + dropdownValue + ")", cartPrice, eventData.image_url);
                       addCartItem(eventItem);
+                      var docID = eventData.reference.documentID;
+                      print(docID);
+                        setState(() {
+                      Firestore.instance.runTransaction((transaction) async {
+                          // var record = Firestore.instance.collection('Events').reference(docID)
+                          final freshSnapshot = await transaction.get(eventData.reference);
+                          final fresh = Events.fromSnapshot(freshSnapshot);
+
+                          await transaction
+                              .update(eventData.reference, {'tickets_sold': fresh.tickets_sold + int.parse(dropdownValue)});
+                        });
+                         
+                        });                  
                     },
                     child: Text('Add to cart'),
                   ),
@@ -95,7 +112,8 @@ makeList(int maxNumberOfTicket){
   return allDropdownValues;
   
 }
-getEventCapacity(eventData){
-  return eventData.capacity;
+getRemainingCapacity(eventData){
+  int remainingCapacity = eventData.capacity - eventData.tickets_sold;
+  return remainingCapacity;
 
 }
