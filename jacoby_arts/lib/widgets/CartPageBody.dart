@@ -31,13 +31,14 @@ class _CartPageBody extends State<CartPageBody> {
       children: <Widget>[
         _cartHeader(context, _cartItems),
         _buildCartItems(_cartItems),
-        // _checkoutButton(context),
+        _checkoutButton(context),
       ],
     );
   }
 
   Widget _buildCartItems(List<CartItemInfo> _cartItems) {
     return new ListView.builder(
+      physics: ClampingScrollPhysics(),
       padding: EdgeInsets.only(
           left: horizontalPadding,
           right: horizontalPadding,
@@ -213,9 +214,7 @@ class _CartPageBody extends State<CartPageBody> {
   }
 
   Widget _checkoutButton(context) {
-    return new SliverList(
-      delegate: SliverChildListDelegate([
-        new ButtonTheme(
+    return new ButtonTheme(
           child: new Container(
             width: largeButtonWidth,
             height: buttonHeight,
@@ -229,8 +228,6 @@ class _CartPageBody extends State<CartPageBody> {
               onPressed: _onStartCardEntry,
             ),
           ),
-        ),
-      ]),
     );
   }
 }
