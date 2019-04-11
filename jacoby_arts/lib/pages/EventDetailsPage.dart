@@ -154,7 +154,7 @@ buildBody(BuildContext context, eventData){
           appBar: new AppBar(
           title: new Text(eventData.title)
           ),
-    body: Column(
+    body: ListView(
       children: <Widget>[topContent, bottomContent]
     ),
   );
