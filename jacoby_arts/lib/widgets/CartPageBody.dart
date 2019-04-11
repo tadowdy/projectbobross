@@ -27,10 +27,9 @@ class _CartPageBody extends State<CartPageBody> {
   }
 
   Widget makeBody(BuildContext context, List<CartItemInfo> _cartItems) {
-    return new CustomScrollView(
-      // child: CustomScrollView(
-      slivers: <Widget>[
-        // _cartHeader(context, _cartItems),
+    return new ListView(
+      children: <Widget>[
+        _cartHeader(context, _cartItems),
         _buildCartItems(_cartItems),
         // _checkoutButton(context),
       ],
@@ -38,20 +37,17 @@ class _CartPageBody extends State<CartPageBody> {
   }
 
   Widget _buildCartItems(List<CartItemInfo> _cartItems) {
-    return SliverList(
-        delegate: SliverChildListDelegate([
-      ListView.builder(
-        padding: EdgeInsets.only(
-            left: horizontalPadding,
-            right: horizontalPadding,
-            top: verticalWidgetPadding),
-        shrinkWrap: true,
-        itemCount: _cartItems.length,
-        itemBuilder: (context, i) {
-          return _itemRow(_cartItems[i]);
-        },
-      )
-    ]));
+    return new ListView.builder(
+      padding: EdgeInsets.only(
+          left: horizontalPadding,
+          right: horizontalPadding,
+          top: verticalWidgetPadding),
+      shrinkWrap: true,
+      itemCount: _cartItems.length,
+      itemBuilder: (context, i) {
+        return _itemRow(_cartItems[i]);
+      },
+    );
   }
 
   //TODO: ArtInfo will actually have to be CartItems as not every cart item will be art
@@ -98,10 +94,14 @@ class _CartPageBody extends State<CartPageBody> {
 
               subtitle: Row(
                 children: <Widget>[
-                  Text(item.artistName + "     ",
+                  Text(
+                      item.artistName +
+                          " " +
+                          "\n\$ " +
+                          item.price.toStringAsFixed(2),
                       style: TextStyle(color: Colors.white)),
-                  Text(r"$" + item.price.toStringAsFixed(2),
-                      style: TextStyle(color: Colors.white)),
+                  // Text(r"$" + item.price.toStringAsFixed(2),
+                  //     style: TextStyle(color: Colors.white)),
                 ],
               ),
               trailing: Icon(Icons.keyboard_arrow_right,
@@ -116,27 +116,27 @@ class _CartPageBody extends State<CartPageBody> {
       total += item.price;
     }
     roundedTotal = total.toStringAsFixed(2);
-    return new SliverList(
-      delegate: SliverChildListDelegate(
-        [
-          new Container(width: horizontalPadding),
-          Text(
-            "Current Total: " + r"$" + "$roundedTotal",
-            style: headingThreeBold,
+    return new Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          new Column(
+            children: <Widget>[
+              Text(
+                "Current Total: " + r"$" + "$roundedTotal",
+                style: headingThreeBold,
+              ),
+              new RaisedButton(
+                child: const Text("Add Donation"),
+                elevation: 4.0,
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (__) => new DonatePage()));
+                },
+              )
+            ],
           ),
-          new Container(width: 20.0),
-          new RaisedButton(
-            child: const Text("Add Donation!"),
-            elevation: 4.0,
-            onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (__) => new DonatePage()));
-              //_switchViewToDonatePage(context);
-            },
-          ),
-        ],
-      ),
-    );
+        ]);
   }
 
   // void _switchViewToDonatePage(BuildContext context) {
