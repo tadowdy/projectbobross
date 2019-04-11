@@ -11,18 +11,16 @@ import 'package:square_in_app_payments/in_app_payments.dart';
 // Put and alias due to name conflict
 import 'package:square_in_app_payments/models.dart' as IAPModels;
 
-class CartPageBody extends StatefulWidget{
+class CartPageBody extends StatefulWidget {
   @override
   _CartPageBody createState() => _CartPageBody();
-
 }
 
 class _CartPageBody extends State<CartPageBody> {
   @override
   Widget build(BuildContext context) {
+    List _cartItems = getCartItems();
 
-      List _cartItems = getCartItems();
-    
     return Container(
       child: makeBody(context, _cartItems),
     );
@@ -31,7 +29,6 @@ class _CartPageBody extends State<CartPageBody> {
   Widget makeBody(BuildContext context, List<CartItemInfo> _cartItems) {
     return new ListView(
       children: <Widget>[
-
         _cartHeader(context, _cartItems),
         _buildCartItems(_cartItems),
         _checkoutButton(context),
@@ -40,7 +37,8 @@ class _CartPageBody extends State<CartPageBody> {
   }
 
   Widget _buildCartItems(List<CartItemInfo> _cartItems) {
-    return ListView.builder(
+    return new ListView.builder(
+      physics: ClampingScrollPhysics(),
       padding: EdgeInsets.only(
           left: horizontalPadding,
           right: horizontalPadding,
@@ -73,35 +71,42 @@ class _CartPageBody extends State<CartPageBody> {
       child: Container(
           decoration: BoxDecoration(color: Colors.blueGrey),
           child: ListTile(
-            contentPadding:
-                EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-            leading: Container(
-              padding: EdgeInsets.only(right: 12.0),
-              decoration: new BoxDecoration(
-                  // create a inset for the image
-                  border: new Border(
-                      right: new BorderSide(width: 1.0, color: Colors.white))),
-              child: new Image.network(item.url, height: 200, width: 100,),
-            ),
-            title: Text(
-              item.artworkName,
-              style:
-                  TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-            ),
-            // subtitle: Text("Intermediate", style: TextStyle(color: Colors.white)),
+              contentPadding:
+                  EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+              leading: Container(
+                padding: EdgeInsets.only(right: 12.0),
+                decoration: new BoxDecoration(
+                    // create a inset for the image
+                    border: new Border(
+                        right:
+                            new BorderSide(width: 1.0, color: Colors.white))),
+                child: new Image.network(
+                  item.url,
+                  height: 200,
+                  width: 100,
+                ),
+              ),
+              title: Text(
+                item.artworkName,
+                style:
+                    TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+              ),
+              // subtitle: Text("Intermediate", style: TextStyle(color: Colors.white)),
 
-            subtitle: Row(
-              children: <Widget>[
-                Text(item.artistName + " " + "\n\$ " + item.price.toStringAsFixed(2),
-                    style: TextStyle(color: Colors.white)),
-                // Text(r"$" + item.price.toStringAsFixed(2),
-                //     style: TextStyle(color: Colors.white)),
-              ],
-            ),
-                trailing:
-                  Icon(Icons.keyboard_arrow_right, color: Colors.white, size: 30.0)
-          )
-        ),
+              subtitle: Row(
+                children: <Widget>[
+                  Text(
+                      item.artistName +
+                          " " +
+                          "\n\$ " +
+                          item.price.toStringAsFixed(2),
+                      style: TextStyle(color: Colors.white)),
+                  // Text(r"$" + item.price.toStringAsFixed(2),
+                  //     style: TextStyle(color: Colors.white)),
+                ],
+              ),
+              trailing: Icon(Icons.keyboard_arrow_right,
+                  color: Colors.white, size: 30.0))),
     );
   }
 
@@ -113,29 +118,27 @@ class _CartPageBody extends State<CartPageBody> {
     }
     roundedTotal = total.toStringAsFixed(2);
     return new Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        new Column(
-          children: <Widget>[
-            Text("Current Total: " + r"$" +"$roundedTotal",
-            style: headingThreeBold,
-            ),
-            new RaisedButton(
-              child: const Text("Add Donation"),
-              elevation: 4.0,
-              onPressed: (){
-                Navigator.push(context, 
-                MaterialPageRoute(
-                  builder: (__) => new DonatePage()
-                ));
-              },
-            )
-          ],
-        ),
-      ]);
-    
-}
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          new Column(
+            children: <Widget>[
+              Text(
+                "Current Total: " + r"$" + "$roundedTotal",
+                style: headingThreeBold,
+              ),
+              new RaisedButton(
+                child: const Text("Add Donation"),
+                elevation: 4.0,
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (__) => new DonatePage()));
+                },
+              )
+            ],
+          ),
+        ]);
+  }
 
   // void _switchViewToDonatePage(BuildContext context) {
   //   Navigator.push(
@@ -146,15 +149,15 @@ class _CartPageBody extends State<CartPageBody> {
 
   void addDonationToCart(CartItemInfo cartItem) {
     addCartItem(cartItem);
-  
   }
 
   Future<void> chargeCard(IAPModels.CardDetails cardDetails) async {
     // charge card by call to server charge endpoint
     // set a easy charge endpoint by following this example:
     // https://github.com/square/in-app-payments-server-quickstart
-    
-    print("charge doesn't actually happen, please set up charge endpiont server.");
+
+    print(
+        "charge doesn't actually happen, please set up charge endpiont server.");
     //// An example code to call your server api to charge
     // var chargeUrl = "REPLACE_ME";
     // var body = jsonEncode({"nonce": cardDetails.nonce});
@@ -208,25 +211,23 @@ class _CartPageBody extends State<CartPageBody> {
         onCardNonceRequestSuccess: _onCardEntryCardNonceRequestSuccess,
         onCardEntryCancel: _onCancelCardEntryFlow,
         collectPostalCode: true);
-  } 
+  }
 
   Widget _checkoutButton(context) {
     return new ButtonTheme(
-      child: new Container(
-        width: largeButtonWidth,
-        height: buttonHeight,
-        child: new RaisedButton(
-          color: brightButton,
-          child: new Text(
-            "Checkout",
-            style: new TextStyle(fontSize: buttonTextSize),
+          child: new Container(
+            width: largeButtonWidth,
+            height: buttonHeight,
+            child: new RaisedButton(
+              color: brightButton,
+              child: new Text(
+                "Checkout",
+                style: new TextStyle(fontSize: buttonTextSize),
+              ),
+              elevation: 4.0,
+              onPressed: _onStartCardEntry,
+            ),
           ),
-          elevation: 4.0,
-          onPressed: _onStartCardEntry,
-        ),
-      ),
     );
   }
 }
-
-
