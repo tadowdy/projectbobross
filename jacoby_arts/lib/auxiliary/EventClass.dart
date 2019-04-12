@@ -40,3 +40,13 @@ class Events{
   'Events<$capacity:$description:$date:$image_url:$location:$price:$reveal_date:$tickets_sold:$title>';
 
 }
+
+getEventData(eventData){
+Firestore.instance.runTransaction((transaction) async {
+    // var record = Firestore.instance.collection('Events').reference(docID)
+    final freshSnapshot = await transaction.get(eventData.reference);
+    final fresh = Events.fromSnapshot(freshSnapshot);
+    await transaction;
+    eventData = fresh;
+  });
+}

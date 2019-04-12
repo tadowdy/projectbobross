@@ -9,7 +9,7 @@ class TicketPage extends StatefulWidget {
   var eventData;
   TicketPage({this.eventData});
   @override
-  _TicketPage createState() => _TicketPage(eventData: eventData);
+  _TicketPage createState() => new _TicketPage(eventData: eventData);
   
 }
 
@@ -21,9 +21,10 @@ class _TicketPage extends State<TicketPage>{
   //var ddlist = makeList(maxNumberOfTickets);
   var eventData;
   _TicketPage({this.eventData});
-
+  var remainingCapacity;
   //int maxNumberOfTickets = eventData.capacity;
   Widget build(BuildContext context) {
+  //eventData = getEventData(eventData);
     return Scaffold(
       appBar: topAppBar ,
       body: Center(
@@ -78,19 +79,25 @@ class _TicketPage extends State<TicketPage>{
                       CartItemInfo eventItem = new CartItemInfo(eventData.title, 
                       "Ticket (" + dropdownValue + ")", cartPrice, eventData.image_url);
                       addCartItem(eventItem);
-                      var docID = eventData.reference.documentID;
-                      print(docID);
-                        setState(() {
+                      //var docID = eventData.reference.documentID;
                       Firestore.instance.runTransaction((transaction) async {
-                          // var record = Firestore.instance.collection('Events').reference(docID)
+                          
                           final freshSnapshot = await transaction.get(eventData.reference);
                           final fresh = Events.fromSnapshot(freshSnapshot);
-
                           await transaction
                               .update(eventData.reference, {'tickets_sold': fresh.tickets_sold + int.parse(dropdownValue)});
+                         // eventData = fresh;
                         });
-                         
-                        });                  
+                        setState(() {
+                          // refresh()async{
+                          // var docID = eventData.reference.documentID;
+                          // var record = await Firestore.instance.document(docID).get();
+                          // var refresh = Events.fromSnapshot(record);
+                          // print('hello');
+                          //   print(refresh);
+                          // }
+                          // refresh();
+                        });
                     },
                     child: Text('Add to cart'),
                   ),
