@@ -10,6 +10,7 @@ import 'package:http/http.dart' as http;
 import 'package:square_in_app_payments/in_app_payments.dart';
 // Put and alias due to name conflict
 import 'package:square_in_app_payments/models.dart' as IAPModels;
+import 'package:cloud_functions/cloud_functions.dart';
 
 class CartPageBody extends StatefulWidget{
   @override
