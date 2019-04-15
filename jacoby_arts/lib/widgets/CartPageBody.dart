@@ -155,19 +155,22 @@ class _CartPageBody extends State<CartPageBody> {
     // set a easy charge endpoint by following this example:
     // https://github.com/square/in-app-payments-server-quickstart
     
-    print("charge doesn't actually happen, please set up charge endpiont server.");
+    
+    // print("charge doesn't actually happen, please set up charge endpiont server.");
     //// An example code to call your server api to charge
     // var chargeUrl = "REPLACE_ME";
     // var body = jsonEncode({"nonce": cardDetails.nonce});
     // http.Response response;
-    // try {
+    try {
     //   response = await http.post(chargeUrl, body: body, headers: {
     //     "Accept": "application/json",
     //     "content-type": "application/json"
-    //   });
-    // } on SocketException catch (ex) {
-    //   throw ex;
-    // }
+      final dynamic resp = await CloudFunctions.instance.call(
+functionName: 
+      );
+    }on CloudFunctionsException catch (ex) {
+      throw ex;
+    }
 
     // var responseBody = json.decode(response.body);
     // if (response.statusCode == 200) {
