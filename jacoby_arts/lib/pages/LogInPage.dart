@@ -35,7 +35,8 @@ class _LoginPageState extends State<LoginPage> {
       formState.save();
       try{
         globals.user.fbuser = await _auth.signInWithEmailAndPassword(email: _email, password: _password);
-        Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
+        //Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
+        Navigator.pop(context);
       }catch(e){
         print(e.message);
       }
@@ -49,7 +50,9 @@ class _LoginPageState extends State<LoginPage> {
         globals.user.fbuser = await _auth.createUserWithEmailAndPassword(email: _email, password: _password);
         globals.user.fbuser.sendEmailVerification();
         _showPasswordVerifyInput();
-        Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
+        globals.user.createUser(_firstName, _lastName, _email, globals.user.fbuser.uid);
+        //Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
+        Navigator.pop(context);
       }catch(e){
         print(e.message);
       }

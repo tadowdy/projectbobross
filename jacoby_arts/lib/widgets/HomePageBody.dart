@@ -133,8 +133,8 @@ Column mainColumn(context) {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget> [
       newsletterButton(context),
-      //surveyButton(context),
-      loginButton(context),
+      //surveyButton(context),  no longer using survey, will stay for future implementation
+      //loginButton(context),   being moved to AccountPageBody
         ]
       )
     ],
@@ -190,27 +190,5 @@ ButtonTheme newsletterButton(context) {
 //     ),
 //   );
 // }
-  ButtonTheme loginButton(context) {
-    return new ButtonTheme(
-    minWidth: medButtonWidth,
-    height: buttonHeight,
-    child: RaisedButton(
-      onPressed: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => LoginPage()));
-      },
-      child: new Row(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(right: 6.0),
-            child: Text(
-              'Sign In',
-              style: TextStyle(fontSize: buttonTextSize),
-            ),
-          ),
-        ],
-      ),
-    ),
-    );
-}
+
+
