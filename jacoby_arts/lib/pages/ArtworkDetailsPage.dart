@@ -48,6 +48,10 @@ Scaffold detailsScaffold(context, artData) {
               priceInfoContainer(context, artData),
               descriptionHeader(context, artData),
               description(context, artData),
+              Divider(
+                color: const Color(0xFAFAFA),
+                height: 48,
+              ),
               // questionHeader(context),
               // questionBox(context),
               // questionSubmit(context),
