@@ -1,6 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:jacoby_arts/auxiliary/ArtworkClass.dart';
-
 class CartItemInfo {
   String artworkName;
   String artistName;
@@ -17,34 +14,28 @@ class CartItemInfo {
 
 List _cartItems = <CartItemInfo>[];
 
-void addCartItem(CartItemInfo item){
+void addCartItem(CartItemInfo item) {
   bool hasItem = false;
 
   print(_cartItems.length.toString());
 
-    for(var incart in _cartItems){
-
-      if(incart.artistName == item.artistName && 
-          incart.artworkName == item.artworkName &&
-          incart.price == item.price){
-
-            hasItem = true;
-          }else{
-
-          }
-    }
-  
-  if(hasItem == false){
-    _cartItems.add(item);
+  for (var inCart in _cartItems) {
+    if (inCart.artistName == item.artistName &&
+        inCart.artworkName == item.artworkName &&
+        inCart.price == item.price) {
+      hasItem = true;
+    } else {}
   }
 
+  if (hasItem == false) {
+    _cartItems.add(item);
+  }
 }
 
-void removeCartItem(CartItemInfo item){
+void removeCartItem(CartItemInfo item) {
   _cartItems.remove(item);
-
 }
 
-List getCartItems(){
+List getCartItems() {
   return _cartItems;
 }

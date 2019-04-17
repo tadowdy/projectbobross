@@ -63,7 +63,8 @@ final contentText = new TextStyle(
 
 // static components
 final topAppBar = new AppBar(
-  title: new Image(image: new AssetImage('images/full_logo.png')),
+  title: new Image(
+    image: new AssetImage('images/full_logo.png'),
+  ),
   backgroundColor: themeColor,
-
 );

@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:intl/intl.dart';
 import 'package:jacoby_arts/auxiliary/uiComponents.dart';
-import 'package:jacoby_arts/widgets/CartPageBody.dart';
 import 'package:jacoby_arts/auxiliary/CartClasses.dart';
-import 'package:jacoby_arts/auxiliary/ArtworkClass.dart';
 
-
-// TODO: can't return a scaffold, will need to be refactored to container
 class DonatePage extends StatelessWidget {
-  TextEditingController donation_amount = TextEditingController();
+  TextEditingController donationAmount = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -23,31 +18,37 @@ class DonatePage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 new Container(
-                    //height: double.infinity, //This is extra
-                    width: MediaQuery.of(context).size.width - 100.0, // Subtract sums of paddings and margins from actual width 
-                    child: new TextField(
-                      inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
-                      keyboardType: TextInputType.number,
-                      textAlign: TextAlign.right,
-                      decoration: new InputDecoration(
-                        prefixText: '\$',
-                        suffixText: '.00',
-                        helperText: 'Enter Donation Amount'),
-                        controller: donation_amount,
+                  width: MediaQuery.of(context).size.width -
+                      100.0, // Subtract sums of padding and margins from actual width
+                  child: new TextField(
+                    inputFormatters: [
+                      WhitelistingTextInputFormatter.digitsOnly
+                    ],
+                    keyboardType: TextInputType.number,
+                    textAlign: TextAlign.right,
+                    controller: donationAmount,
+                    decoration: new InputDecoration(
+                      prefixText: '\$',
+                      suffixText: '.00',
+                      helperText: 'Enter Donation Amount',
                     ),
                   ),
+                ),
               ],
             ),
             new Container(height: 90.0),
             RaisedButton(
               onPressed: () {
-                
-                String amount = donation_amount.text;
-                int last_amount = int.parse(amount);
-                CartItemInfo donation = new CartItemInfo("Donation", "for JAC", last_amount, 'url');
+                String amount = donationAmount.text;
+                int lastAmount = int.parse(amount);
+                CartItemInfo donation = new CartItemInfo(
+                  "Donation",
+                  "for JAC",
+                  lastAmount,
+                  'url',
+                );
                 addCartItem(donation);
                 Navigator.pop(context);
-
               },
               child: Text('Add to Cart'),
             )

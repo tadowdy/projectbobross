@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'AppLanding.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:jacoby_arts/Auxiliary/uiComponents.dart';
 
 void main() {
