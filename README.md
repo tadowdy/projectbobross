@@ -16,6 +16,6 @@
 - [x] create modular application from functional wireframe (/jacoby_arts)
 - [x] add artwork to the cart
 - [] checkout using Square
-- [] add events to the cart
+- [x] add events to the cart
 - [x] user login
 - [] maintain user state
