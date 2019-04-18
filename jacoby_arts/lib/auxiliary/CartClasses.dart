@@ -20,7 +20,6 @@ List _cartItems = <CartItemInfo>[];
 void addCartItem(CartItemInfo item){
   bool hasItem = false;
 
-  print(_cartItems.length.toString());
 
     for(var incart in _cartItems){
 

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:jacoby_arts/auxiliary/uiComponents.dart';
@@ -10,26 +12,38 @@ class TicketPage extends StatefulWidget {
   TicketPage({this.eventData});
   @override
   _TicketPage createState() => new _TicketPage(eventData: eventData);
-  
 }
 
-
-
 //List<String> allDropdownValues = new List<String>();
-class _TicketPage extends State<TicketPage>{
+class _TicketPage extends State<TicketPage> {
   String dropdownValue = '1';
   //var ddlist = makeList(maxNumberOfTickets);
-  var eventData;
+  Events eventData;
   _TicketPage({this.eventData});
-  var remainingCapacity;
   //int maxNumberOfTickets = eventData.capacity;
+    update() {
+      setState(() {
+        Firestore.instance.runTransaction((transaction) async {
+          final DocumentSnapshot freshSnapshot = await transaction.get(eventData.reference);
+          final fresh = Events.fromSnapshot(freshSnapshot);
+          await transaction.update(eventData.reference,
+              {'tickets_sold': fresh.tickets_sold + int.parse(dropdownValue)});
+          final newfresh = Events.fromSnapshot(freshSnapshot);
+          print("new" + newfresh.tickets_sold.toString());
+          print("SS" + eventData.tickets_sold.toString());
+          //remainingCapacity = getRemainingCapacity(newfresh);
+        });
+      });
+    }
   Widget build(BuildContext context) {
-  //eventData = getEventData(eventData);
+    var remainingCapacity = getRemainingCapacity(eventData);
+
+    print(eventData.tickets_sold);
+    //eventData = getEventData(eventData);
     return Scaffold(
-      appBar: topAppBar ,
+      appBar: topAppBar,
       body: Center(
         child: Column(
-          
           children: <Widget>[
             new Row(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -38,10 +52,10 @@ class _TicketPage extends State<TicketPage>{
                 new Text(
                   'Number of tickets:',
                   style: new TextStyle(
-                    fontSize: headingOneSize,
-                    color: const Color(0xFF080808),
-                    fontWeight: FontWeight.w600,
-                    fontFamily: "Roboto"),
+                      fontSize: headingOneSize,
+                      color: const Color(0xFF080808),
+                      fontWeight: FontWeight.w600,
+                      fontFamily: "Roboto"),
                 ),
               ],
             ),
@@ -51,76 +65,62 @@ class _TicketPage extends State<TicketPage>{
               children: <Widget>[
                 DropdownButton<String>(
                   value: dropdownValue,
-                  onChanged: (String newValue){
-                    setState((){
+                  onChanged: (String newValue) {
+                    setState(() {
                       dropdownValue = newValue;
                     });
                   },
-                  items: makeList(getRemainingCapacity(eventData)).map<DropdownMenuItem<String>>(
-                    (String value){return DropdownMenuItem<String>(
+                  items: makeList(remainingCapacity)
+                      .map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
                       value: value,
                       child: new Text(value),
                     );
                   }).toList(),
-                  ),
-
+                ),
               ],
             ),
             new Row(
               crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,              
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 new ButtonTheme(
                   minWidth: medButtonWidth,
                   height: buttonHeight,
                   child: RaisedButton(
                     onPressed: () {
-                      int cartPrice = int.parse(dropdownValue) * eventData.price;
-                      CartItemInfo eventItem = new CartItemInfo(eventData.title, 
-                      "Ticket (" + dropdownValue + ")", cartPrice, eventData.image_url);
+                      int cartPrice =
+                          int.parse(dropdownValue) * eventData.price;
+                      CartItemInfo eventItem = new CartItemInfo(
+                          eventData.title,
+                          "Ticket (" + dropdownValue + ")",
+                          cartPrice,
+                          eventData.image_url);
                       addCartItem(eventItem);
-                      //var docID = eventData.reference.documentID;
-                      Firestore.instance.runTransaction((transaction) async {
-                          
-                          final freshSnapshot = await transaction.get(eventData.reference);
-                          final fresh = Events.fromSnapshot(freshSnapshot);
-                          await transaction
-                              .update(eventData.reference, {'tickets_sold': fresh.tickets_sold + int.parse(dropdownValue)});
-                         // eventData = fresh;
-                        });
-                        setState(() {
-                          // refresh()async{
-                          // var docID = eventData.reference.documentID;
-                          // var record = await Firestore.instance.document(docID).get();
-                          // var refresh = Events.fromSnapshot(record);
-                          // print('hello');
-                          //   print(refresh);
-                          // }
-                          // refresh();
-                        });
+                      update();
                     },
                     child: Text('Add to cart'),
                   ),
                 )
-
               ],
             )
           ],
         ),
-      ),);
+      ),
+    );
   }
 }
-makeList(int maxNumberOfTicket){
+
+makeList(int maxNumberOfTicket) {
   List<String> allDropdownValues = new List<String>();
-  for(int i = 0; i <= maxNumberOfTicket; i++){
+  for (int i = 0; i <= maxNumberOfTicket; i++) {
     allDropdownValues.add(i.toString());
   }
-  print(allDropdownValues);
   return allDropdownValues;
-  
 }
-getRemainingCapacity(eventData){
-  int remainingCapacity = eventData.capacity - eventData.tickets_sold;
-  return remainingCapacity;
 
+getRemainingCapacity(eventData) {
+  int remainingCapacity = eventData.capacity - eventData.tickets_sold;
+
+  return remainingCapacity;
 }
