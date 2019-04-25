@@ -117,7 +117,7 @@ InkWell makeCard(BuildContext context, DocumentSnapshot data) {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            subtitle: Row(
+            subtitle: Column(
               children: <Widget>[
                 Text(
                   _artist,
