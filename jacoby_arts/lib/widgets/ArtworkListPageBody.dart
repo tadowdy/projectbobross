@@ -118,6 +118,7 @@ InkWell makeCard(BuildContext context, DocumentSnapshot data) {
               ),
             ),
             subtitle: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
                   _artist,
