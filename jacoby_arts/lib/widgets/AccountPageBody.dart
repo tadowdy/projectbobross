@@ -43,6 +43,7 @@ class _AccountPageBody extends State<AccountPageBody> {
              loginButton(context)
            ]
            :  <Widget>[
+            _signOutBtn(),
             membershipInfo,
             membershipDesc,
           ]),
@@ -74,6 +75,23 @@ class _AccountPageBody extends State<AccountPageBody> {
     ),
     );
   }
+    
+  Widget _signOutBtn() {
+      return new MaterialButton(
+      elevation: 5.0,
+      minWidth: 200.0,
+      height: 42.0,
+      color: Colors.amberAccent,
+      child: 
+          new Text('Sign Out', style: new TextStyle(fontSize: buttonTextSize)),
+              onPressed: signOut
+    );
+  }
+
+    void signOut() async {
+    globals.user.signOut();
+    
+      }
 
 final profileBackground = new Container(
   margin: const EdgeInsets.only(
@@ -101,7 +119,7 @@ final membershipInfo = new Container(
         Row(children: <Widget>[
           globals.user.fbuser == null
           ? new Text("Jane Doe", style: headingOneBold)
-          : new Text('${globals.user.fbuser.email}', style: headingOneBold),
+          : new Text('${globals.user.firstName}'+' '+'${globals.user.lastName}', style: headingOneBold),
         ]),
         new Row(
           children: <Widget>[

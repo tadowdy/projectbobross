@@ -35,6 +35,7 @@ class _LoginPageState extends State<LoginPage> {
       formState.save();
       try{
         globals.user.fbuser = await _auth.signInWithEmailAndPassword(email: _email, password: _password);
+        globals.user.getUser(globals.user.fbuser.uid);
         //Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
         Navigator.pop(context);
       }catch(e){
@@ -51,6 +52,7 @@ class _LoginPageState extends State<LoginPage> {
         globals.user.fbuser.sendEmailVerification();
         _showPasswordVerifyInput();
         globals.user.createUser(_firstName, _lastName, _email, globals.user.fbuser.uid);
+        globals.user.getUser(globals.user.fbuser.uid);
         //Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
         Navigator.pop(context);
       }catch(e){
@@ -60,10 +62,8 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void signOut() async {
-    
-    
-       await _auth.signOut();
-       Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));    
+    globals.user.signOut();
+    Navigator.pop(context);
       }
   
 
