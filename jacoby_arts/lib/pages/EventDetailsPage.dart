@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:jacoby_arts/pages/TicketPage.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class EventDetailsPage extends StatelessWidget {
   var eventData;
@@ -114,14 +115,8 @@ buildBody(BuildContext context, eventData) {
   final readButton = Padding(
     padding: EdgeInsets.symmetric(vertical: 16.0),
     child: RaisedButton(
-      onPressed: () => {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (__) => new TicketPage(eventData: eventData),
-              ),
-            ),
-          },
+      // todo navigate user to JAC-event-page url (from event document)
+      onPressed: () => launch("https://www.jacobyartscenter.org/tickets"),
       color: Color.fromRGBO(58, 66, 86, 1.0),
       child: Text(
         "BUY TICKETS",

@@ -104,7 +104,8 @@ Widget mainColumn(context) {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             newsletterButton(context),
-            loginButton(context),
+//// THE FOLLOWING PAGE IS NOT COMPLETE, HIDE IT BUT DO NOT REMOVE IT
+//            loginButton(context),
           ],
         ),
         Divider(

@@ -165,12 +165,13 @@ Container priceInfoContainer(context, artData) {
             artData,
           ),
         ),
-        artData.marketStatus == 'For Sale'
-            ? purchaseContainer(
-                context,
-                artData,
-              )
-            : emptyContainer()
+//// THE FOLLOWING PAGE IS NOT COMPLETE, HIDE IT BUT DO NOT REMOVE IT
+//        artData.marketStatus == 'For Sale'
+//            ? purchaseContainer(
+//                context,
+//                artData,
+//              )
+//            : emptyContainer()
       ],
     ),
   );

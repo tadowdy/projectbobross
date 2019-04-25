@@ -64,8 +64,10 @@ class _HomeState extends State<Home> {
     HomePageBody(),
     ArtworkListPageBody(),
     EventListPageBody(),
-    CartPageBody(),
-    AccountPageBody(),
+//// THE FOLLOWING PAGE IS NOT COMPLETE, HIDE IT BUT DO NOT REMOVE IT
+//    CartPageBody(),
+//// THE FOLLOWING PAGE IS NOT COMPLETE, HIDE IT BUT DO NOT REMOVE IT
+//    AccountPageBody(),
   ];
 
   @override
@@ -96,15 +98,17 @@ class _HomeState extends State<Home> {
             BottomNavigationBarItem(
               icon: new Icon(Icons.today),
               title: new Text('Events'),
-            ),
-            BottomNavigationBarItem(
-              icon: new Icon(Icons.shopping_cart),
-              title: new Text('Cart'),
-            ),
-            BottomNavigationBarItem(
-              icon: new Icon(Icons.account_circle),
-              title: new Text('Account'),
             )
+//// THE FOLLOWING PAGE IS NOT COMPLETE, HIDE IT BUT DO NOT REMOVE IT
+//            BottomNavigationBarItem(
+//              icon: new Icon(Icons.shopping_cart),
+//              title: new Text('Cart'),
+//            ),
+//// THE FOLLOWING PAGE IS NOT COMPLETE, HIDE IT BUT DO NOT REMOVE IT
+//            BottomNavigationBarItem(
+//              icon: new Icon(Icons.account_circle),
+//              title: new Text('Account'),
+//            )
           ],
           type: BottomNavigationBarType.fixed,
           iconSize: 30.0,

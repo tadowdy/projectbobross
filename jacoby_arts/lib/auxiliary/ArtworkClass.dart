@@ -24,7 +24,7 @@ class Artwork {
         assert(map['price'] != null),
         assert(map['title'] != null),
         assert(map['reveal_date'] != null),
-        artistId = map['artist_id'],
+        artistId = map['artist_name'], // todo this should be artist_id, and we should be getting the artist_name using artist_id
         //artwork_id = map['artwork_id'],
         cartId = map['cart_id'],
         description = map['description'],
