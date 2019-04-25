@@ -2,28 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:jacoby_arts/Auxiliary/uiComponents.dart';
 
 class AccountPageBody extends StatelessWidget {
-  AccountPageBody();
-
-  void _updateAccountDetails() {
-    // TODO: update the account details using a DAO.
-  }
-
-  void _switchViewToAccountSettingsPage(/*Account account*/) {
-    // TODO: create new AccountSettingsPage w. account..
-    // TODO: build and push AccountSettingsPage onto the nav stack..
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
       //This is where the code for the body of your page will go
       child: new Column(
- 
-          children: <Widget>[
-            Center(child: profileBackground),
-            membershipInfo,
-            membershipDesc,
-          ]),
+        children: <Widget>[
+          Center(child: profileBackground),
+          membershipInfo,
+          membershipDesc,
+        ],
+      ),
     );
   }
 }
@@ -42,48 +31,53 @@ final profileBackground = new Container(
 );
 
 final membershipInfo = new Container(
-    margin: const EdgeInsets.only(
-      top: verticalWidgetPadding,
-      left: horizontalPadding,
-      right: horizontalPadding,
-    ),
-    child: Column(
-      crossAxisAlignment:
-          CrossAxisAlignment.start, // allow left alignment for the text
-      children: <Widget>[
-        Row(children: <Widget>[
-          new Text("Jane Doe", style: headingOneBold),
-        ]),
-        new Row(
-          children: <Widget>[
-            new Text(
-              "Membership Level: ",
-              style: headingTwoBold,
-              textAlign: TextAlign.left,
-            ),
-            new Text(
-              "Gold",
-              style: headingTwo,
-              textAlign: TextAlign.left,
-            ),
-          ],
-        ),
-        new Row(
-          children: <Widget>[
-            new Text(
-              "Expiriation Date: ",
-              style: headingTwoBold,
-              textAlign: TextAlign.left,
-            ),
-            new Text(
-              "10/10/2019",
-              style: headingTwo,
-              textAlign: TextAlign.left,
-            ),
-          ],
-        ),
-      ],
-    ));
+  margin: const EdgeInsets.only(
+    top: verticalWidgetPadding,
+    left: horizontalPadding,
+    right: horizontalPadding,
+  ),
+  child: Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: <Widget>[
+      Row(
+        children: <Widget>[
+          new Text(
+            "Jane Doe",
+            style: headingOneBold,
+          ),
+        ],
+      ),
+      new Row(
+        children: <Widget>[
+          new Text(
+            "Membership Level: ",
+            style: headingTwoBold,
+            textAlign: TextAlign.left,
+          ),
+          new Text(
+            "Gold",
+            style: headingTwo,
+            textAlign: TextAlign.left,
+          ),
+        ],
+      ),
+      new Row(
+        children: <Widget>[
+          new Text(
+            "Expiriation Date: ",
+            style: headingTwoBold,
+            textAlign: TextAlign.left,
+          ),
+          new Text(
+            "10/10/2019",
+            style: headingTwo,
+            textAlign: TextAlign.left,
+          ),
+        ],
+      ),
+    ],
+  ),
+);
 
 final membershipDesc = new Container(
   margin: const EdgeInsets.only(
