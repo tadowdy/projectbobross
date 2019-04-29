@@ -40,11 +40,11 @@ class Events {
       'Events<$capacity:$description:$date:$image_url:$location:$price:$reveal_date:$tickets_sold:$title>';
 }
 
-// Future<Events> getEventData(eventData) async {
-//   var docID = eventData.reference.documentID;
-//   DocumentSnapshot freshSnapshot =
-//       await Firestore.instance.collection('Events').document(docID).get();
-//   Events freshEvent = Events.fromSnapshot(freshSnapshot);
-//   print(freshEvent.toString());
-//   return freshEvent;
-// }
+Future<Events> getEventData(Events eventData) async {
+          final DocumentReference ref = eventData.reference;
+          final DocumentSnapshot newSnapShot = await ref.get();
+          final newfresh = Events.fromSnapshot(newSnapShot);
+          print("new" + newfresh.tickets_sold.toString());
+          eventData = newfresh;
+          return eventData;
+}

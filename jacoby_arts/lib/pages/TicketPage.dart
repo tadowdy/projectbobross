@@ -28,16 +28,20 @@ class _TicketPage extends State<TicketPage> {
           final fresh = Events.fromSnapshot(freshSnapshot);
           await transaction.update(eventData.reference,
               {'tickets_sold': fresh.tickets_sold + int.parse(dropdownValue)});
-          final newfresh = Events.fromSnapshot(freshSnapshot);
-          print("new" + newfresh.tickets_sold.toString());
-          print("SS" + eventData.tickets_sold.toString());
           //remainingCapacity = getRemainingCapacity(newfresh);
+          // final DocumentReference ref = eventData.reference;
+          // final DocumentSnapshot newSnapShot = await ref.get();
+          // final newfresh = Events.fromSnapshot(newSnapShot);
+          // print("new" + newfresh.tickets_sold.toString());
+          // eventData = newfresh;
+          eventData = await getEventData(eventData);
         });
+        Navigator.pop(context);
       });
     }
   Widget build(BuildContext context) {
+    print("here" + eventData.tickets_sold.toString());
     var remainingCapacity = getRemainingCapacity(eventData);
-
     print(eventData.tickets_sold);
     //eventData = getEventData(eventData);
     return Scaffold(
